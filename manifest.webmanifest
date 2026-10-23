@@ -1,0 +1,16 @@
+{
+  "name": "Ajuda em Casa",
+  "short_name": "Ajuda em Casa",
+  "description": "Protótipo do Ajuda em Casa: quem procura trabalho e quem precisa contratar, em Petrolina.",
+  "lang": "pt-BR",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#FAF5EE",
+  "theme_color": "#B0472F",
+  "icons": [
+    { "src": "icone-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "icone-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "icone.svg", "sizes": "any", "type": "image/svg+xml" }
+  ]
+}

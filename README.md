@@ -5,7 +5,8 @@ doméstico ou de reparos e quem precisa contratar, em Petrolina/PE.
 
 **Site:** https://aquinogr.github.io/ajuda-em-casa-prototipo/
 
-As pessoas e os números são de exemplo, e nada é salvo. No topo das telas, o
+No celular, dá para adicionar o site à tela inicial, e ele abre como um
+aplicativo. As pessoas e os números são de exemplo, e nada é salvo. No topo das telas, o
 seletor "Modo" mostra como o app fica no modo gratuito e no pago. Todas as
 telas estão em [telas.html](https://aquinogr.github.io/ajuda-em-casa-prototipo/telas.html).
 
