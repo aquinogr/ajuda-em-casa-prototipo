@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Ajuda em Casa · Profissionais</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#B0472F}a:hover{color:#8A3522}
+</style>
+<link rel="stylesheet" href="prototipo.css">
+</head>
+<body>
+<div class="faixa">
+<span>Protótipo · dados de exemplo</span>
+<span class="faixa-acoes"><label>Modo <select id="faixa-modo"><option value="gratuito">Gratuito</option><option value="gratuito até data">Gratuito até data</option><option value="pago">Pago</option></select></label><a href="telas.html">Todas as telas</a></span>
+</div>
+<div id="app"></div>
+<template id="tpl">
+<div style="width: 390px; height: 1700px; box-sizing: border-box; background: #FAF5EE; font-family: 'Nunito', system-ui, sans-serif; color: #2B2B2B; display: flex; flex-direction: column">
+<header style="display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 16px 20px 12px">
+<div style="display: flex; flex-direction: column; min-width: 0">
+<a href="Morador-Condominio.html" style="display: inline-flex; align-items: center; gap: 6px; min-height: 44px; font-size: 14px; font-weight: 800; text-decoration: none">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true" style="flex-shrink: 0; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"></path><circle cx="12" cy="10" r="2.5"></circle></svg>
+Buona Vita · Trocar</a>
+<h1 style="margin: 0; font-size: 26px; font-weight: 800; line-height: 1.15">Profissionais</h1>
+</div>
+<template data-if="{{pago}}">
+<a href="Morador-Pacotes.html" style="flex-shrink: 0; display: flex; align-items: center; min-height: 44px; padding: 0 14px; border-radius: 999px; background: #E3EDE1; color: #3D5F39; font-size: 15px; font-weight: 800; text-decoration: none">3 créditos</a>
+</template>
+<template data-if="{{gratis}}">
+<span style="flex-shrink: 0; display: flex; align-items: center; min-height: 36px; padding: 0 14px; border-radius: 999px; background: #E3EDE1; color: #3D5F39; font-size: 15px; font-weight: 800">Grátis</span>
+</template>
+</header>
+<div style="padding: 4px 20px 0; display: flex; flex-direction: column; gap: 14px">
+<template data-if="{{periodo}}">
+<p role="status" style="margin: 0; padding: 12px 14px; border-radius: 14px; background: #F6E3DC; color: #6E2A1B; font-size: 15px; font-weight: 800; line-height: 1.4">O Ajuda em Casa será pago a partir de [data].</p>
+</template>
+<div role="group" aria-label="Tipo de serviço" style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 4px; padding: 4px; border-radius: 14px; background: #EFE6DB">
+<template data-for="{{tabs}}" data-as="t">
+<button type="button" onClick="{{t.pick}}" aria-pressed="{{t.pressed}}" style="min-height: 44px; border: 0; border-radius: 10px; font-family: inherit; font-size: 15px; font-weight: 800; cursor: pointer; background: {{t.bg}}; color: {{t.fg}}; box-shadow: {{t.shadow}}">{{t.label}}</button>
+</template>
+</div>
+<div role="group" aria-label="Categoria" style="display: flex; flex-wrap: wrap; gap: 8px">
+<template data-for="{{chips}}" data-as="c">
+<button type="button" onClick="{{c.pick}}" aria-pressed="{{c.pressed}}" style="min-height: 44px; padding: 0 16px; border-radius: 999px; font-family: inherit; font-size: 15px; font-weight: 700; cursor: pointer; background: {{c.bg}}; color: {{c.fg}}; border: 2px solid {{c.border}}">{{c.label}}</button>
+</template>
+</div>
+<div style="display: flex; flex-direction: column; gap: 2px; padding-top: 6px">
+<h2 style="margin: 0; font-size: 20px; font-weight: 800">{{resultsTitle}}</h2>
+<p style="margin: 0; font-size: 14px; color: #6B625A">{{listNote}}</p>
+</div>
+<template data-if="{{empty}}">
+<div style="padding: 20px; border-radius: 20px; background: #FFFFFF; border: 1px dashed #D9CBBB; font-size: 16px; line-height: 1.5; color: #4A433D">Ninguém disponível nesta categoria agora. Novos profissionais se cadastram toda semana.</div>
+</template>
+<template data-for="{{people}}" data-as="p">
+<article style="background: #FFFFFF; border: 1px solid #E8DED3; border-radius: 20px; padding: 16px; display: flex; flex-direction: column; gap: 12px">
+<div style="display: flex; gap: 12px; align-items: center">
+<div aria-hidden="true" style="flex-shrink: 0; width: 64px; height: 64px; border-radius: 50%; background: #F6E3DC; color: #8A3522; font-size: 22px; font-weight: 800; display: flex; align-items: center; justify-content: center">{{p.initials}}</div>
+<div style="display: flex; flex-direction: column; gap: 2px; min-width: 0">
+<h3 style="margin: 0; font-size: 21px; font-weight: 800">{{p.name}}</h3>
+<span style="font-size: 15px; font-weight: 700; color: #4A433D">{{p.catsText}}</span>
+<span style="font-size: 13px; font-weight: 700; color: #3D5F39">{{p.status}}</span>
+</div>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 6px">
+<span style="display: inline-flex; align-items: center; gap: 5px; padding: 4px 10px; border-radius: 999px; background: #E3EDE1; color: #3D5F39; font-size: 13px; font-weight: 800">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true" style="stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6l7-3z"></path><path d="M9 12l2 2 4-4"></path></svg>
+Identidade conferida</span>
+<template data-if="{{p.antecedentes}}">
+<span style="display: inline-flex; align-items: center; padding: 4px 10px; border-radius: 999px; background: #E3EDE1; color: #3D5F39; font-size: 13px; font-weight: 800">Antecedentes conferidos</span>
+</template>
+</div>
+<div style="display: flex; flex-direction: column; gap: 6px; font-size: 15px; color: #2B2B2B">
+<div style="display: flex; align-items: center; gap: 8px">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6B625A" aria-hidden="true" style="flex-shrink: 0; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round"><rect x="3" y="7" width="18" height="13" rx="2"></rect><path d="M9 7V5h6v2"></path></svg>
+<span>{{p.formas}}</span>
+</div>
+<div style="display: flex; align-items: center; gap: 8px">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6B625A" aria-hidden="true" style="flex-shrink: 0; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"></path><circle cx="12" cy="10" r="2.5"></circle></svg>
+<span>Mora em {{p.bairro}}</span>
+</div>
+<div style="display: flex; align-items: center; gap: 8px">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6B625A" aria-hidden="true" style="flex-shrink: 0; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round"><rect x="3.5" y="5" width="17" height="15" rx="2"></rect><path d="M3.5 10h17M8 3v4M16 3v4"></path></svg>
+<span>{{p.dias}}</span>
+</div>
+<div style="display: flex; align-items: center; gap: 8px">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#B0472F" aria-hidden="true" style="flex-shrink: 0; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round"><path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.9l-5.2 2.7 1-5.8L3.5 9.7l5.9-.9L12 3.5z"></path></svg>
+<span>{{p.rating}}</span>
+</div>
+</div>
+<a href="Morador-Perfil.html" style="display: flex; align-items: center; justify-content: center; min-height: 48px; border-radius: 14px; border: 2px solid #B0472F; color: #B0472F; font-size: 16px; font-weight: 800; text-decoration: none; box-sizing: border-box">Ver perfil</a>
+</article>
+</template>
+<section style="padding: 18px; border-radius: 20px; background: #FFFFFF; border: 2px dashed #C9B8A6; display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px">
+<h3 style="margin: 0; font-size: 19px; font-weight: 800">Não achou quem precisa?</h3>
+<p style="margin: 0; font-size: 15px; line-height: 1.45; color: #4A433D">Publique uma vaga de {{vagaCat}} com os critérios desta busca. Os profissionais recebem um aviso e mostram interesse. Publicar é grátis.</p>
+<a href="Morador-Vaga.html" style="display: flex; align-items: center; justify-content: center; min-height: 52px; border-radius: 14px; background: #B0472F; color: #FFFFFF; font-size: 17px; font-weight: 800; text-decoration: none">Publicar vaga</a>
+</section>
+</div>
+<nav aria-label="Menu principal" style="margin-top: auto; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); background: #FFFFFF; border-top: 1px solid #E8DED3; padding: 8px 4px 22px">
+<a href="Inicio.html" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; min-height: 56px; font-size: 13px; font-weight: 700; color: #6B625A; text-decoration: none">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true" style="stroke-width: 2; stroke-linecap: round; stroke-linejoin: round"><path d="M3 11l9-7 9 7"></path><path d="M5 10v10h14V10"></path></svg>
+Início</a>
+<a href="Morador-Lista.html" aria-current="page" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; min-height: 56px; font-size: 13px; font-weight: 800; color: #B0472F; text-decoration: none">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true" style="stroke-width: 2; stroke-linecap: round; stroke-linejoin: round"><circle cx="9" cy="8" r="3.5"></circle><path d="M2.5 20c.8-3.6 3.4-5.5 6.5-5.5s5.7 1.9 6.5 5.5"></path><path d="M16 4.5a3.5 3.5 0 0 1 0 7"></path><path d="M18 14.8c1.9.7 3.1 2.4 3.5 5.2"></path></svg>
+Profissionais</a>
+<a href="Morador-MinhasVagas.html" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; min-height: 56px; font-size: 13px; font-weight: 700; color: #6B625A; text-decoration: none">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true" style="stroke-width: 2; stroke-linecap: round; stroke-linejoin: round"><rect x="5" y="4" width="14" height="17" rx="2"></rect><path d="M9 4V3h6v1M9 10h6M9 14h6M9 18h3"></path></svg>
+Minhas vagas</a>
+<a href="Morador-Contato.html" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; min-height: 56px; font-size: 13px; font-weight: 700; color: #6B625A; text-decoration: none">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true" style="stroke-width: 2; stroke-linecap: round; stroke-linejoin: round"><path d="M21 12a8.5 8.5 0 0 1-12.6 7.4L3 21l1.6-5.2A8.5 8.5 0 1 1 21 12z"></path></svg>
+Contatos</a>
+</nav>
+</div>
+</template>
+<script type="application/json" id="props">{"modo":{"editor":"enum","options":["gratuito","gratuito até data","pago"],"default":"gratuito","section":"Modo do app"},"$preview":{"width":390,"height":1700}}</script>
+<script type="text/x-dc-logic" id="logic">
+class Component extends DCLogic {
+  renderVals() {
+    const self = this;
+    const s = this.state || {};
+    const pago = (this.props.modo ?? "gratuito") === "pago";
+    const group = s.group || "dom";
+    const domestico = ["Diarista", "Empregada doméstica", "Babá", "Cozinheira", "Passadeira", "Cuidador(a) de idosos", "Caseiro"];
+    const reparos = ["Jardineiro", "Piscineiro", "Pintor", "Pedreiro", "Encanador", "Eletricista", "Técnico de bombas e piscinas", "Limpeza de caixa de gordura", "Limpeza de caixa d'água"];
+    const cat = s.cat || (group === "dom" ? "Diarista" : "Eletricista");
+    const pessoas = [
+      { initials: "JO", name: "Joana", cats: ["Diarista", "Empregada doméstica"], formas: "Diária · Mensal", bairro: "Vila Eduardo", dias: "Seg, Qua e Sex", rating: "4,8 · 12 avaliações", antecedentes: true, confirmed: "Confirmou disponibilidade há 3 dias" },
+      { initials: "CI", name: "Cida", cats: ["Diarista", "Passadeira"], formas: "Diária", bairro: "José e Maria", dias: "Ter e Qui", rating: "4,6 · 7 avaliações", antecedentes: false, confirmed: "Confirmou disponibilidade ontem" },
+      { initials: "LU", name: "Lúcia", cats: ["Diarista", "Cozinheira", "Empregada doméstica"], formas: "Diária · Mensal", bairro: "Rio Corrente", dias: "Seg a Sex", rating: "Ainda sem avaliações", antecedentes: false, confirmed: "Confirmou disponibilidade hoje" },
+      { initials: "MA", name: "Marta", cats: ["Babá", "Cuidador(a) de idosos"], formas: "Mensal", bairro: "Jardim Maravilha", dias: "Seg a Sáb", rating: "4,9 · 9 avaliações", antecedentes: true, confirmed: "Confirmou disponibilidade há 5 dias" },
+      { initials: "RA", name: "Rafael", cats: ["Eletricista", "Encanador"], formas: "Por serviço", bairro: "João de Deus", dias: "Todos os dias", rating: "4,7 · 15 avaliações", antecedentes: false, confirmed: "Confirmou disponibilidade há 2 dias" },
+      { initials: "SE", name: "Severino", cats: ["Pedreiro", "Pintor"], formas: "Por serviço", bairro: "Vila Eduardo", dias: "Seg a Sáb", rating: "4,5 · 6 avaliações", antecedentes: false, confirmed: "Confirmou disponibilidade há 6 dias" }
+    ];
+    const lista = group === "dom" ? domestico : reparos;
+    const chips = lista.map(function (n) {
+      const sel = n === cat;
+      return {
+        label: n,
+        pressed: sel ? "true" : "false",
+        bg: sel ? "#B0472F" : "#FFFFFF",
+        fg: sel ? "#FFFFFF" : "#2B2B2B",
+        border: sel ? "#B0472F" : "#E8DED3",
+        pick: function () { self.setState({ cat: n }); }
+      };
+    });
+    const tabs = [
+      { id: "dom", label: "Trabalho doméstico", first: "Diarista" },
+      { id: "rep", label: "Serviços e reparos", first: "Eletricista" }
+    ].map(function (t) {
+      const sel = t.id === group;
+      return {
+        label: t.label,
+        pressed: sel ? "true" : "false",
+        bg: sel ? "#FFFFFF" : "transparent",
+        fg: sel ? "#2B2B2B" : "#5E554D",
+        shadow: sel ? "0 1px 3px rgba(43, 43, 43, 0.14)" : "none",
+        pick: function () { self.setState({ group: t.id, cat: t.first }); }
+      };
+    });
+    const people = pessoas
+      .filter(function (p) { return p.cats.indexOf(cat) !== -1; })
+      .map(function (p) { return Object.assign({}, p, { catsText: p.cats.join(" · "), status: pago ? p.confirmed : "Disponível" }); });
+    const n = people.length;
+    return {
+      pago: pago,
+      gratis: !pago,
+      periodo: (this.props.modo ?? "gratuito") === "gratuito até data",
+      tabs: tabs,
+      chips: chips,
+      people: people,
+      empty: n === 0,
+      resultsTitle: n === 1 ? cat + ": 1 disponível" : cat + ": " + n + " disponíveis",
+      listNote: pago
+        ? "Só aparece quem confirmou disponibilidade nos últimos 14 dias."
+        : "Profissionais de toda Petrolina, com identidade conferida.",
+      vagaCat: cat.toLowerCase()
+    };
+  }
+}
+</script>
+<script src="runtime.js"></script>
+</body>
+</html>

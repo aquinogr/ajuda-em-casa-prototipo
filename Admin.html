@@ -1,0 +1,407 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Ajuda em Casa · Administração</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#B0472F}a:hover{color:#8A3522}
+</style>
+<link rel="stylesheet" href="prototipo.css">
+</head>
+<body>
+<div class="faixa">
+<span>Protótipo · dados de exemplo</span>
+<span class="faixa-acoes"><a href="telas.html">Todas as telas</a></span>
+</div>
+<div id="app"></div>
+<template id="tpl">
+<div style="box-sizing: border-box; min-height: 100vh; background: #FAF5EE; font-family: 'Nunito', system-ui, sans-serif; color: #2B2B2B">
+<header style="background: #FFFFFF; border-bottom: 1px solid #E8DED3">
+<div style="max-width: 1200px; margin: 0 auto; padding: 14px 24px; box-sizing: border-box; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px">
+<div style="display: flex; align-items: center; gap: 10px">
+<div style="width: 40px; height: 40px; border-radius: 12px; background: #C8553D; color: #FFFFFF; display: flex; align-items: center; justify-content: center">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true" style="stroke-width: 2; stroke-linecap: round; stroke-linejoin: round"><path d="M3 11l9-7 9 7"></path><path d="M5 10v10h14V10"></path><path d="M10 20v-5h4v5"></path></svg>
+</div>
+<span style="font-size: 19px; font-weight: 800">Ajuda em Casa</span>
+<span style="font-size: 15px; font-weight: 700; color: #6B625A">· Administração</span>
+</div>
+<div style="display: flex; align-items: center; gap: 16px; font-size: 15px">
+<span style="display: inline-flex; align-items: center; gap: 6px; padding: 4px 12px; border-radius: 999px; font-size: 14px; font-weight: 800; background: {{badgeBg}}; color: {{badgeFg}}">{{modoAtual}}</span>
+<span style="font-weight: 700">Administradora</span>
+<a href="index.html" style="display: inline-flex; align-items: center; min-height: 44px; font-weight: 800">Sair</a>
+</div>
+</div>
+</header>
+<main style="max-width: 1200px; margin: 0 auto; padding: 28px 24px 48px; box-sizing: border-box; display: flex; flex-direction: column; gap: 24px">
+<template data-if="{{showAlert}}">
+<section role="status" style="padding: 22px 24px; border-radius: 22px; background: #B0472F; color: #FFFFFF; display: flex; flex-wrap: wrap; align-items: center; gap: 18px; box-shadow: 0 8px 24px rgba(176, 71, 47, 0.30)">
+<div aria-hidden="true" style="flex-shrink: 0; width: 60px; height: 60px; border-radius: 50%; background: #FFFFFF; color: #B0472F; display: flex; align-items: center; justify-content: center">
+<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" style="stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round"><path d="M8 21h8M12 17v4"></path><path d="M7 4h10v5a5 5 0 0 1-10 0V4z"></path><path d="M7 6H4v1a3 3 0 0 0 3 3M17 6h3v1a3 3 0 0 1-3 3"></path></svg>
+</div>
+<div style="flex: 1 1 380px; min-width: 0; display: flex; flex-direction: column; gap: 6px">
+<h2 style="margin: 0; font-size: 26px; font-weight: 800; line-height: 1.2">Meta atingida: {{meta}} moradores cadastrados!</h2>
+<p style="margin: 0; font-size: 17px; line-height: 1.45">O Ajuda em Casa pegou. É uma boa hora para ativar o modo pago e começar a vender pacotes aos moradores.</p>
+<p style="margin: 0; font-size: 15px; line-height: 1.45">Dica: com "Gratuito até uma data", os moradores são avisados 7 dias antes.</p>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 10px">
+<button type="button" onClick="{{ativarPago}}" style="min-height: 52px; padding: 0 22px; border: 0; border-radius: 14px; background: #FFFFFF; color: #8A3522; font-family: inherit; font-size: 17px; font-weight: 800; cursor: pointer">Ativar modo pago</button>
+<button type="button" onClick="{{fecharAlerta}}" style="min-height: 52px; padding: 0 18px; border: 2px solid #FFFFFF; border-radius: 14px; background: transparent; color: #FFFFFF; font-family: inherit; font-size: 16px; font-weight: 800; cursor: pointer">Lembrar depois</button>
+</div>
+</section>
+</template>
+<h1 style="margin: 0; font-size: 30px; font-weight: 800">Painel</h1>
+<section style="padding: 22px; background: #FFFFFF; border: 2px solid #E8DED3; border-radius: 22px; display: flex; flex-direction: column; gap: 16px">
+<div style="display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 10px">
+<h2 style="margin: 0; font-size: 22px; font-weight: 800">Modo do app</h2>
+<span style="font-size: 14px; font-weight: 700; color: #6B625A">Vale para todos os condomínios e bairros</span>
+</div>
+<fieldset style="margin: 0; padding: 0; border: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px">
+<legend style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Modo do app</legend>
+<template data-for="{{modos}}" data-as="m">
+<label style="display: flex; flex-direction: column; gap: 8px; padding: 16px; border-radius: 16px; cursor: pointer; background: {{m.bg}}; border: 2px solid {{m.border}}">
+<span style="display: flex; align-items: center; gap: 10px">
+<input type="radio" name="modo" checked="{{m.checked}}" onChange="{{m.pick}}" style="width: 22px; height: 22px; margin: 0; flex-shrink: 0; accent-color: #B0472F">
+<span style="font-size: 17px; font-weight: 800">{{m.titulo}}</span>
+</span>
+<span style="font-size: 14px; line-height: 1.45; color: #4A433D">{{m.texto}}</span>
+</label>
+</template>
+</fieldset>
+<template data-if="{{isPeriodo}}">
+<div style="display: flex; flex-wrap: wrap; align-items: flex-end; gap: 12px">
+<div style="display: flex; flex-direction: column; gap: 6px">
+<label for="ate" style="font-size: 15px; font-weight: 800">Gratuito até</label>
+<input id="ate" type="date" value="{{ate}}" onChange="{{onAte}}" style="min-height: 48px; padding: 0 12px; border: 2px solid #E8DED3; border-radius: 12px; background: #FFFFFF; font-family: inherit; font-size: 16px; color: #2B2B2B">
+</div>
+<div style="flex: 1 1 320px; display: flex; flex-direction: column; gap: 6px; padding: 12px 14px; border-radius: 14px; background: #F6E3DC; color: #6E2A1B; font-size: 14px; line-height: 1.45">
+<strong style="font-size: 15px">Os moradores vão ver: "O Ajuda em Casa será pago a partir de {{dataBR}}."</strong>
+<span>Quem já está cadastrado vê o aviso nos 7 dias antes da data. Quem se cadastrar depois que a data for marcada vê o aviso ao entrar. Na data, o app passa sozinho para o pago e o WhatsApp dos profissionais só aparece com crédito.</span>
+</div>
+</div>
+</template>
+<div style="display: flex; flex-wrap: wrap; align-items: flex-end; gap: 12px; padding-top: 14px; border-top: 1px solid #F0E8DE">
+<div style="display: flex; flex-direction: column; gap: 6px">
+<label for="meta" style="font-size: 15px; font-weight: 800">Avisar quando este número de moradores estiver cadastrado</label>
+<input id="meta" type="number" min="10" step="10" value="{{meta}}" onChange="{{onMeta}}" style="width: 140px; min-height: 48px; padding: 0 12px; border: 2px solid #E8DED3; border-radius: 12px; background: #FFFFFF; font-family: inherit; font-size: 16px; color: #2B2B2B">
+</div>
+<span style="font-size: 14px; line-height: 1.45; color: #6B625A; padding-bottom: 12px">Conta cada morador que entrou com Google e escolheu o condomínio ou bairro para ver os profissionais.</span>
+</div>
+</section>
+<section aria-label="Números" style="display: flex; flex-wrap: wrap; gap: 14px">
+<template data-for="{{tiles}}" data-as="t">
+<div style="flex: 1 1 220px; padding: 18px; background: #FFFFFF; border: 1px solid #E8DED3; border-radius: 18px; display: flex; flex-direction: column; gap: 4px">
+<span style="font-size: 14px; font-weight: 800; color: #6B625A">{{t.label}}</span>
+<span style="font-size: 34px; font-weight: 800; line-height: 1.1">{{t.value}}</span>
+<span style="font-size: 14px; color: #6B625A">{{t.note}}</span>
+</div>
+</template>
+</section>
+<div style="display: flex; flex-wrap: wrap; gap: 20px; align-items: flex-start">
+<div style="flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column; gap: 20px">
+<section style="padding: 20px; background: #FFFFFF; border: 1px solid #E8DED3; border-radius: 20px; display: flex; flex-direction: column; gap: 14px">
+<div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px">
+<h2 style="margin: 0; font-size: 21px; font-weight: 800">Condomínios</h2>
+<div style="display: flex; flex-wrap: wrap; gap: 8px">
+<button type="button" style="min-height: 44px; padding: 0 14px; border: 2px solid #E8DED3; border-radius: 12px; background: #FFFFFF; color: #2B2B2B; font-family: inherit; font-size: 15px; font-weight: 800; cursor: pointer">Importar lista (CSV)</button>
+<button type="button" style="min-height: 44px; padding: 0 16px; border: 0; border-radius: 12px; background: #B0472F; color: #FFFFFF; font-family: inherit; font-size: 15px; font-weight: 800; cursor: pointer">Adicionar condomínio</button>
+</div>
+</div>
+<p style="margin: 0; font-size: 15px; line-height: 1.45; color: #4A433D">206 condomínios de Petrolina na lista (pesquisa de 23/10/2026). O morador escolhe o dele ao entrar; quem não mora em condomínio informa o bairro. Os em destaque aparecem primeiro.</p>
+<div style="display: flex; flex-direction: column; gap: 6px">
+<label for="buscaCondo" style="font-size: 14px; font-weight: 800">Buscar</label>
+<input id="buscaCondo" type="search" placeholder="Nome ou bairro" style="max-width: 360px; min-height: 44px; padding: 0 12px; border: 2px solid #E8DED3; border-radius: 12px; background: #FFFFFF; font-family: inherit; font-size: 16px; color: #2B2B2B; box-sizing: border-box">
+</div>
+<div style="overflow-x: auto">
+<table style="width: 100%; min-width: 560px; border-collapse: collapse; font-size: 15px">
+<thead>
+<tr style="text-align: left; color: #6B625A; font-size: 13px; text-transform: uppercase; letter-spacing: 0.04em">
+<th scope="col" style="padding: 8px 10px 8px 0; font-weight: 800">Condomínio</th>
+<th scope="col" style="padding: 8px 10px; font-weight: 800">Bairro</th>
+<th scope="col" style="padding: 8px 10px; font-weight: 800; text-align: right">Moradores</th>
+<th scope="col" style="padding: 8px 0 8px 10px; font-weight: 800">Destaque</th>
+</tr>
+</thead>
+<tbody>
+<template data-for="{{condos}}" data-as="c">
+<tr style="border-top: 1px solid #F0E8DE">
+<td style="padding: 10px 10px 10px 0; font-weight: 800">{{c.nome}}</td>
+<td style="padding: 10px">{{c.bairro}}</td>
+<td style="padding: 10px; text-align: right">[nº]</td>
+<td style="padding: 10px 0 10px 10px">
+<button type="button" onClick="{{c.toggle}}" aria-pressed="{{c.pressed}}" style="min-height: 40px; padding: 0 12px; border-radius: 999px; font-family: inherit; font-size: 14px; font-weight: 800; cursor: pointer; white-space: nowrap; background: {{c.bg}}; color: {{c.fg}}; border: 2px solid {{c.border}}">{{c.label}}</button>
+</td>
+</tr>
+</template>
+</tbody>
+</table>
+</div>
+</section>
+<section style="padding: 20px; background: #FFFFFF; border: 1px solid #E8DED3; border-radius: 20px; display: flex; flex-direction: column; gap: 12px">
+<div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px; flex-wrap: wrap">
+<h2 style="margin: 0; font-size: 21px; font-weight: 800">Conferência de identidade</h2>
+<span style="font-size: 14px; font-weight: 700; color: #6B625A">{{pendingText}}</span>
+</div>
+<template data-for="{{queue}}" data-as="q">
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px; padding: 14px 0; border-top: 1px solid #F0E8DE">
+<div aria-hidden="true" style="flex-shrink: 0; width: 48px; height: 48px; border-radius: 50%; background: #F6E3DC; color: #8A3522; font-size: 17px; font-weight: 800; display: flex; align-items: center; justify-content: center">{{q.initials}}</div>
+<div style="flex: 1 1 180px; min-width: 0; display: flex; flex-direction: column; gap: 2px">
+<span style="font-size: 17px; font-weight: 800">{{q.name}}</span>
+<span style="font-size: 14px; color: #4A433D">{{q.cat}}</span>
+<span style="font-size: 13px; color: #6B625A">Enviado {{q.sent}}</span>
+</div>
+<template data-if="{{q.pending}}">
+<div style="display: flex; flex-wrap: wrap; gap: 8px">
+<button type="button" style="min-height: 44px; padding: 0 14px; border: 2px solid #E8DED3; border-radius: 12px; background: #FFFFFF; color: #2B2B2B; font-family: inherit; font-size: 15px; font-weight: 800; cursor: pointer">Ver foto e documento</button>
+<button type="button" onClick="{{q.approve}}" style="min-height: 44px; padding: 0 16px; border: 0; border-radius: 12px; background: #4F7A4A; color: #FFFFFF; font-family: inherit; font-size: 15px; font-weight: 800; cursor: pointer">Aprovar</button>
+<button type="button" onClick="{{q.reject}}" style="min-height: 44px; padding: 0 16px; border: 2px solid #B0472F; border-radius: 12px; background: #FFFFFF; color: #B0472F; font-family: inherit; font-size: 15px; font-weight: 800; cursor: pointer">Recusar</button>
+</div>
+</template>
+<template data-if="{{q.done}}">
+<span style="padding: 6px 12px; border-radius: 999px; font-size: 14px; font-weight: 800; background: {{q.doneBg}}; color: {{q.doneFg}}">{{q.doneText}}</span>
+</template>
+</div>
+</template>
+<p style="margin: 0; font-size: 14px; color: #6B625A">Ao aprovar, a foto do documento é apagada e fica registrada só a data da conferência.</p>
+</section>
+<section style="padding: 20px; background: #FFFFFF; border: 1px solid #E8DED3; border-radius: 20px; display: flex; flex-direction: column; gap: 12px">
+<h2 style="margin: 0; font-size: 21px; font-weight: 800">Pagamentos</h2>
+<template data-if="{{gratis}}">
+<p style="margin: 0; font-size: 15px; line-height: 1.45; color: #4A433D">O app está no modo gratuito. Os pagamentos aparecem aqui quando o modo pago for ativado.</p>
+</template>
+<template data-if="{{pago}}">
+<div style="overflow-x: auto">
+<table style="width: 100%; min-width: 560px; border-collapse: collapse; font-size: 15px">
+<thead>
+<tr style="text-align: left; color: #6B625A; font-size: 13px; text-transform: uppercase; letter-spacing: 0.04em">
+<th scope="col" style="padding: 8px 10px 8px 0; font-weight: 800">Data</th>
+<th scope="col" style="padding: 8px 10px; font-weight: 800">Morador</th>
+<th scope="col" style="padding: 8px 10px; font-weight: 800">Pacote</th>
+<th scope="col" style="padding: 8px 10px; font-weight: 800; text-align: right">Valor</th>
+<th scope="col" style="padding: 8px 0 8px 10px; font-weight: 800">Situação</th>
+</tr>
+</thead>
+<tbody>
+<template data-for="{{payments}}" data-as="p">
+<tr style="border-top: 1px solid #F0E8DE">
+<td style="padding: 12px 10px 12px 0; white-space: nowrap">{{p.date}}</td>
+<td style="padding: 12px 10px">{{p.who}}</td>
+<td style="padding: 12px 10px">{{p.pack}}</td>
+<td style="padding: 12px 10px; text-align: right; font-weight: 800; white-space: nowrap">{{p.value}}</td>
+<td style="padding: 12px 0 12px 10px"><span style="padding: 4px 10px; border-radius: 999px; font-size: 13px; font-weight: 800; white-space: nowrap; background: {{p.bg}}; color: {{p.fg}}">{{p.status}}</span></td>
+</tr>
+</template>
+</tbody>
+</table>
+</div>
+</template>
+</section>
+</div>
+<div style="flex: 1 1 320px; min-width: 0; display: flex; flex-direction: column; gap: 20px">
+<section style="padding: 20px; background: #FFFFFF; border: 1px solid #E8DED3; border-radius: 20px; display: flex; flex-direction: column; gap: 8px">
+<h2 style="margin: 0; font-size: 21px; font-weight: 800">Disponibilidade</h2>
+<p style="margin: 0; font-size: 15px; line-height: 1.45; color: #4A433D">{{dispText}}</p>
+</section>
+<section style="padding: 20px; background: #FFFFFF; border: 1px solid #E8DED3; border-radius: 20px; display: flex; flex-direction: column; gap: 12px">
+<h2 style="margin: 0; font-size: 21px; font-weight: 800">Vagas publicadas</h2>
+<p style="margin: 0; font-size: 14px; line-height: 1.45; color: #4A433D">As vagas entram no ar na hora. Remova as que fugirem das regras, como salário mensal abaixo do mínimo.</p>
+<template data-for="{{vagas}}" data-as="v">
+<div style="padding: 14px; border-radius: 14px; background: #FAF5EE; display: flex; flex-direction: column; gap: 6px">
+<span style="font-size: 16px; font-weight: 800">{{v.titulo}}</span>
+<span style="font-size: 14px; color: #4A433D">{{v.info}}</span>
+<span style="font-size: 13px; color: #6B625A">{{v.quem}}</span>
+<template data-if="{{v.ativa}}">
+<button type="button" onClick="{{v.remover}}" style="align-self: flex-start; min-height: 44px; padding: 0 14px; border: 2px solid #B0472F; border-radius: 12px; background: #FFFFFF; color: #B0472F; font-family: inherit; font-size: 15px; font-weight: 800; cursor: pointer">Remover vaga</button>
+</template>
+<template data-if="{{v.removida}}">
+<span style="align-self: flex-start; padding: 4px 10px; border-radius: 999px; font-size: 13px; font-weight: 800; background: #EFE6DB; color: #5E554D">Removida</span>
+</template>
+</div>
+</template>
+</section>
+<section style="padding: 20px; background: #FFFFFF; border: 1px solid #E8DED3; border-radius: 20px; display: flex; flex-direction: column; gap: 12px">
+<h2 style="margin: 0; font-size: 21px; font-weight: 800">Avaliações para moderar</h2>
+<template data-for="{{reviews}}" data-as="r">
+<div style="padding: 14px; border-radius: 14px; background: #FAF5EE; display: flex; flex-direction: column; gap: 8px">
+<div style="display: flex; justify-content: space-between; gap: 8px; font-size: 14px">
+<span style="font-weight: 800">Sobre {{r.target}}</span>
+<span style="font-weight: 800; color: #8A3522">Nota {{r.stars}}</span>
+</div>
+<p style="margin: 0; font-size: 15px; line-height: 1.45">{{r.text}}</p>
+<span style="font-size: 13px; color: #6B625A">{{r.author}}</span>
+<template data-if="{{r.pending}}">
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px">
+<button type="button" onClick="{{r.publish}}" style="min-height: 44px; border: 0; border-radius: 12px; background: #4F7A4A; color: #FFFFFF; font-family: inherit; font-size: 15px; font-weight: 800; cursor: pointer">Publicar</button>
+<button type="button" onClick="{{r.hide}}" style="min-height: 44px; border: 2px solid #E8DED3; border-radius: 12px; background: #FFFFFF; color: #2B2B2B; font-family: inherit; font-size: 15px; font-weight: 800; cursor: pointer">Não publicar</button>
+</div>
+</template>
+<template data-if="{{r.done}}">
+<span style="align-self: flex-start; padding: 4px 10px; border-radius: 999px; font-size: 13px; font-weight: 800; background: {{r.doneBg}}; color: {{r.doneFg}}">{{r.doneText}}</span>
+</template>
+</div>
+</template>
+</section>
+<section style="padding: 20px; background: #FFFFFF; border: 1px solid #E8DED3; border-radius: 20px; display: flex; flex-direction: column; gap: 12px">
+<h2 style="margin: 0; font-size: 21px; font-weight: 800">Cadastro assistido</h2>
+<p style="margin: 0; font-size: 15px; line-height: 1.45; color: #4A433D">Cadastre um profissional pelo WhatsApp ou pessoalmente. Ele recebe um link para conferir os dados e aceitar os termos antes de aparecer na lista.</p>
+<button type="button" style="min-height: 48px; border: 0; border-radius: 14px; background: #B0472F; color: #FFFFFF; font-family: inherit; font-size: 16px; font-weight: 800; cursor: pointer">Novo cadastro assistido</button>
+</section>
+</div>
+</div>
+</main>
+</div>
+</template>
+<script type="application/json" id="props">{"alertaMeta":{"editor":"boolean","default":true,"section":"Prévia"},"$preview":{"width":1280,"height":2200}}</script>
+<script type="text/x-dc-logic" id="logic">
+class Component extends DCLogic {
+  setMark(key, id, value) {
+    const s = this.state || {};
+    const cur = Object.assign({}, s[key] || {});
+    cur[id] = value;
+    const patch = {};
+    patch[key] = cur;
+    this.setState(patch);
+  }
+  renderVals() {
+    const self = this;
+    const s = this.state || {};
+    const modo = s.modo || "gratuito";
+    const pago = modo === "pago";
+    const meta = s.meta || "100";
+    const ate = s.ate || "";
+    const dataBR = ate ? ate.split("-").reverse().join("/") : "[data]";
+    const modoAtual = { gratuito: "Gratuito por tempo indeterminado", periodo: "Gratuito até " + dataBR, pago: "Modo pago" }[modo];
+    const modos = [
+      { id: "gratuito", titulo: "Gratuito por tempo indeterminado", texto: "Todo morador vê o WhatsApp dos profissionais sem pagar. O cadastro do profissional fica ativo até ele pedir para sair." },
+      { id: "periodo", titulo: "Gratuito até uma data", texto: "Funciona como o gratuito. Os moradores veem o aviso \"será pago a partir de\" antes da data. Na data, o app passa sozinho para o modo pago." },
+      { id: "pago", titulo: "Pago", texto: "Sem outro aviso: o morador entra e só vê o WhatsApp comprando pacotes (3 contatos por R$ 19,90 ou 8 por R$ 39,90). Profissionais confirmam disponibilidade a cada 14 dias, contados do dia em que o pago começa." }
+    ].map(function (m) {
+      const on = m.id === modo;
+      return Object.assign({}, m, {
+        checked: on,
+        bg: on ? "#FFFFFF" : "#FAF5EE",
+        border: on ? "#B0472F" : "#E8DED3",
+        pick: function () { self.setState({ modo: m.id }); }
+      });
+    });
+    const tiles = pago ? [
+      { label: "Pacotes vendidos no mês", value: "[nº]", note: "Meta do 1º mês de vendas: 20" },
+      { label: "Contatos que responderam em 48 h", value: "[nº]%", note: "Meta: 80%" },
+      { label: "Profissionais disponíveis", value: "[nº]", note: "Confirmaram nos últimos 14 dias" },
+      { label: "Vagas abertas", value: "[nº]", note: "Publicadas por moradores" },
+      { label: "Moradores cadastrados", value: "[nº]", note: "Desde o lançamento" }
+    ] : [
+      { label: "Moradores cadastrados", value: "[nº]", note: "O aviso da meta aparece em " + meta },
+      { label: "Profissionais cadastrados", value: "[nº]", note: "Aparecem para toda Petrolina" },
+      { label: "Contatos vistos no mês", value: "[nº]", note: "WhatsApp aberto por moradores" },
+      { label: "Vagas abertas", value: "[nº]", note: "Publicadas por moradores" },
+      { label: "Condomínios com moradores", value: "[nº]", note: "De 206 na lista" }
+    ];
+    const dest = s.dest || { buona: true };
+    const condos = [
+      { id: "buona", nome: "Buona Vita", bairro: "Loteamento Buona Vita (Boa Esperança)" },
+      { id: "alpha", nome: "Terras Alphaville Petrolina", bairro: "Boa Esperança" },
+      { id: "horto", nome: "Horto Condomínio Club", bairro: "Boa Esperança" },
+      { id: "portal", nome: "Portal das Águas", bairro: "Pedra do Bode" },
+      { id: "ecospa", nome: "Eco Spa Condominium Club", bairro: "Carneiros" },
+      { id: "valle", nome: "Valle Petrolina", bairro: "Cohab VI" }
+    ].map(function (c) {
+      const on = !!dest[c.id];
+      return Object.assign({}, c, {
+        pressed: on ? "true" : "false",
+        label: on ? "Em destaque" : "Destacar",
+        bg: on ? "#4F7A4A" : "#FFFFFF",
+        fg: on ? "#FFFFFF" : "#2B2B2B",
+        border: on ? "#4F7A4A" : "#E8DED3",
+        toggle: function () { self.setMark("dest", c.id, !on); }
+      });
+    });
+    const qs = s.queue || {};
+    const queue = [
+      { id: "rafael", initials: "RA", name: "Rafael", cat: "Eletricista · Encanador", sent: "hoje, 09:12" },
+      { id: "marta", initials: "MA", name: "Marta", cat: "Babá · Cuidador(a) de idosos", sent: "ontem, 16:40" },
+      { id: "severino", initials: "SE", name: "Severino", cat: "Pedreiro · Pintor", sent: "ontem, 08:05" }
+    ].map(function (q) {
+      const st = qs[q.id] || "pending";
+      return Object.assign({}, q, {
+        pending: st === "pending",
+        done: st !== "pending",
+        doneText: st === "ok" ? "Aprovado: identidade conferida" : "Recusado: pedido de nova foto enviado",
+        doneBg: st === "ok" ? "#E3EDE1" : "#F6E3DC",
+        doneFg: st === "ok" ? "#3D5F39" : "#8A3522",
+        approve: function () { self.setMark("queue", q.id, "ok"); },
+        reject: function () { self.setMark("queue", q.id, "no"); }
+      });
+    });
+    const pending = queue.filter(function (q) { return q.pending; }).length;
+    const rs = s.reviews || {};
+    const reviews = [
+      { id: "r1", target: "Joana", stars: "5", text: "[Comentário enviado por um morador]", author: "Morador · Buona Vita" },
+      { id: "r2", target: "Rafael", stars: "2", text: "[Comentário enviado por um morador]", author: "Morador · [condomínio ou bairro]" }
+    ].map(function (r) {
+      const st = rs[r.id] || "pending";
+      return Object.assign({}, r, {
+        pending: st === "pending",
+        done: st !== "pending",
+        doneText: st === "pub" ? "Publicado" : "Não publicado",
+        doneBg: st === "pub" ? "#E3EDE1" : "#EFE6DB",
+        doneFg: st === "pub" ? "#3D5F39" : "#5E554D",
+        publish: function () { self.setMark("reviews", r.id, "pub"); },
+        hide: function () { self.setMark("reviews", r.id, "hid"); }
+      });
+    });
+    const vs = s.vagas || {};
+    const vagas = [
+      { id: "v1", titulo: "Diarista · Diária", info: "Buona Vita · Seg e Qui · 8h às 17h", quem: "Ana · publicada há 2 dias · 3 interessados" },
+      { id: "v2", titulo: "Empregada doméstica · Mensal", info: "Terras Alphaville Petrolina · Seg a Sex · valor a combinar", quem: "Carla · publicada ontem · 1 interessado" }
+    ].map(function (v) {
+      const removida = vs[v.id] === "removida";
+      return Object.assign({}, v, {
+        ativa: !removida,
+        removida: removida,
+        remover: function () { self.setMark("vagas", v.id, "removida"); }
+      });
+    });
+    const paid = { bg: "#E3EDE1", fg: "#3D5F39" };
+    const wait = { bg: "#F6E3DC", fg: "#8A3522" };
+    const payments = [
+      { date: "[data]", who: "Buona Vita · lote [nº]", pack: "8 contatos", value: "R$ 39,90", status: "Pago · Pix", c: paid },
+      { date: "[data]", who: "[condomínio] · [nº]", pack: "3 contatos", value: "R$ 19,90", status: "Pago · cartão", c: paid },
+      { date: "[data]", who: "[bairro]", pack: "3 contatos", value: "R$ 19,90", status: "Aguardando Pix", c: wait }
+    ].map(function (p) { return Object.assign({}, p, { bg: p.c.bg, fg: p.c.fg }); });
+    return {
+      showAlert: (this.props.alertaMeta ?? true) && !pago && !s.alertaFechado,
+      meta: meta,
+      onMeta: function (e) { self.setState({ meta: e.target.value }); },
+      ativarPago: function () { self.setState({ modo: "pago" }); },
+      fecharAlerta: function () { self.setState({ alertaFechado: true }); },
+      modoAtual: modoAtual,
+      badgeBg: pago ? "#F6E3DC" : "#E3EDE1",
+      badgeFg: pago ? "#8A3522" : "#3D5F39",
+      modos: modos,
+      isPeriodo: modo === "periodo",
+      ate: ate,
+      dataBR: dataBR,
+      onAte: function (e) { self.setState({ ate: e.target.value }); },
+      tiles: tiles,
+      condos: condos,
+      queue: queue,
+      pendingText: pending === 0 ? "Fila vazia" : (pending === 1 ? "1 na fila" : pending + " na fila"),
+      gratis: !pago,
+      pago: pago,
+      payments: payments,
+      dispText: pago
+        ? "[nº] profissionais saem da lista em até 2 dias se não confirmarem. O app já mandou o lembrete."
+        : "No modo gratuito não há prazo: o cadastro do profissional fica ativo até ele pedir para sair.",
+      reviews: reviews,
+      vagas: vagas
+    };
+  }
+}
+</script>
+<script src="runtime.js"></script>
+</body>
+</html>

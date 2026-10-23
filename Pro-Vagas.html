@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Ajuda em Casa · Vagas para você</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#B0472F}a:hover{color:#8A3522}
+</style>
+<link rel="stylesheet" href="prototipo.css">
+</head>
+<body>
+<div class="faixa">
+<span>Protótipo · dados de exemplo</span>
+<span class="faixa-acoes"><a href="telas.html">Todas as telas</a></span>
+</div>
+<div id="app"></div>
+<template id="tpl">
+<div style="width: 390px; height: 1500px; box-sizing: border-box; background: #FAF5EE; font-family: 'Nunito', system-ui, sans-serif; color: #2B2B2B; display: flex; flex-direction: column">
+<div style="padding: 16px 12px 0">
+<a href="Inicio.html" style="display: inline-flex; align-items: center; gap: 4px; min-height: 44px; padding: 0 8px; font-size: 16px; font-weight: 800; text-decoration: none">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true" style="stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round"><path d="M15 18l-6-6 6-6"></path></svg>
+Início</a>
+</div>
+<section style="padding: 8px 20px 0; display: flex; flex-direction: column; gap: 6px">
+<h1 style="margin: 0; font-size: 28px; font-weight: 800; line-height: 1.15">Vagas para você</h1>
+<p style="margin: 0; font-size: 16px; line-height: 1.45; color: #4A433D">Das categorias do seu perfil, em toda Petrolina.</p>
+<p style="margin: 6px 0 0; padding: 12px 14px; border-radius: 14px; background: #E3EDE1; color: #2E4A2B; font-size: 15px; font-weight: 800">Ver vagas e mostrar interesse é grátis, sempre.</p>
+</section>
+<div role="group" aria-label="Filtrar vagas" style="padding: 16px 20px 0; display: flex; flex-wrap: wrap; gap: 8px">
+<template data-for="{{filtros}}" data-as="f">
+<button type="button" onClick="{{f.pick}}" aria-pressed="{{f.pressed}}" style="min-height: 44px; padding: 0 16px; border-radius: 999px; font-family: inherit; font-size: 15px; font-weight: 700; cursor: pointer; background: {{f.bg}}; color: {{f.fg}}; border: 2px solid {{f.border}}">{{f.label}}</button>
+</template>
+</div>
+<div style="padding: 16px 20px 0; display: flex; flex-direction: column; gap: 14px">
+<template data-if="{{vazio}}">
+<p style="margin: 0; padding: 18px; border-radius: 18px; background: #FFFFFF; border: 1px dashed #D9CBBB; font-size: 16px; line-height: 1.45; color: #4A433D">Nenhuma vaga aberta nesta categoria agora. Você recebe um aviso quando sair uma.</p>
+</template>
+<template data-for="{{vagas}}" data-as="v">
+<article style="background: #FFFFFF; border: 1px solid #E8DED3; border-radius: 20px; padding: 16px; display: flex; flex-direction: column; gap: 10px">
+<div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 10px">
+<h2 style="margin: 0; font-size: 20px; font-weight: 800; line-height: 1.2">{{v.titulo}}</h2>
+<span style="flex-shrink: 0; font-size: 13px; font-weight: 700; color: #6B625A">{{v.quando}}</span>
+</div>
+<div style="display: flex; flex-direction: column; gap: 6px; font-size: 15px">
+<div style="display: flex; align-items: center; gap: 8px">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6B625A" aria-hidden="true" style="flex-shrink: 0; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"></path><circle cx="12" cy="10" r="2.5"></circle></svg>
+<span>{{v.local}}</span>
+</div>
+<div style="display: flex; align-items: center; gap: 8px">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6B625A" aria-hidden="true" style="flex-shrink: 0; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round"><rect x="3.5" y="5" width="17" height="15" rx="2"></rect><path d="M3.5 10h17M8 3v4M16 3v4"></path></svg>
+<span>{{v.dias}}</span>
+</div>
+<div style="display: flex; align-items: center; gap: 8px">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6B625A" aria-hidden="true" style="flex-shrink: 0; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round"><rect x="3" y="6" width="18" height="13" rx="2"></rect><circle cx="12" cy="12.5" r="2.5"></circle></svg>
+<span>{{v.valor}}</span>
+</div>
+</div>
+<template data-if="{{v.temReqs}}">
+<div style="display: flex; flex-wrap: wrap; gap: 6px">
+<template data-for="{{v.reqs}}" data-as="r">
+<span style="padding: 4px 10px; border-radius: 999px; background: #F6E3DC; color: #8A3522; font-size: 13px; font-weight: 800">{{r.label}}</span>
+</template>
+</div>
+</template>
+<template data-if="{{v.semReqs}}">
+<span style="font-size: 14px; color: #6B625A">Sem requisitos extras</span>
+</template>
+<template data-if="{{v.notSent}}">
+<button type="button" onClick="{{v.interesse}}" style="min-height: 52px; border: 0; border-radius: 14px; background: #4F7A4A; color: #FFFFFF; font-family: inherit; font-size: 17px; font-weight: 800; cursor: pointer">Tenho interesse</button>
+</template>
+<template data-if="{{v.sent}}">
+<div style="padding: 12px 14px; border-radius: 14px; background: #E3EDE1; color: #2E4A2B; display: flex; flex-direction: column; gap: 6px">
+<span style="font-size: 15px; font-weight: 800; line-height: 1.4">Interesse enviado. O morador recebe o seu perfil e, se quiser, chama você no WhatsApp.</span>
+<button type="button" onClick="{{v.desfazer}}" style="align-self: flex-start; min-height: 44px; padding: 0; border: 0; background: transparent; color: #2E4A2B; font-family: inherit; font-size: 14px; font-weight: 800; text-decoration: underline; cursor: pointer">Desfazer</button>
+</div>
+</template>
+</article>
+</template>
+<p style="margin: 0; font-size: 14px; line-height: 1.45; color: #6B625A">Você recebe um aviso no celular quando sair uma vaga nas suas categorias.</p>
+</div>
+<nav aria-label="Menu do profissional" style="margin-top: auto; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); background: #FFFFFF; border-top: 1px solid #E8DED3; padding: 8px 8px 22px">
+<a href="Inicio.html" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; min-height: 56px; font-size: 13px; font-weight: 700; color: #6B625A; text-decoration: none">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true" style="stroke-width: 2; stroke-linecap: round; stroke-linejoin: round"><path d="M3 11l9-7 9 7"></path><path d="M5 10v10h14V10"></path></svg>
+Início</a>
+<a href="Pro-Vagas.html" aria-current="page" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; min-height: 56px; font-size: 13px; font-weight: 800; color: #3D5F39; text-decoration: none">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true" style="stroke-width: 2; stroke-linecap: round; stroke-linejoin: round"><rect x="3" y="7" width="18" height="13" rx="2"></rect><path d="M9 7V5h6v2"></path></svg>
+Vagas</a>
+<a href="Pro-Painel.html" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; min-height: 56px; font-size: 13px; font-weight: 700; color: #6B625A; text-decoration: none">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true" style="stroke-width: 2; stroke-linecap: round; stroke-linejoin: round"><circle cx="12" cy="8" r="4"></circle><path d="M4 21c1-4 4.2-6 8-6s7 2 8 6"></path></svg>
+Meu perfil</a>
+</nav>
+</div>
+</template>
+<script type="application/json" id="props">{"$preview":{"width":390,"height":1500}}</script>
+<script type="text/x-dc-logic" id="logic">
+class Component extends DCLogic {
+  renderVals() {
+    const self = this;
+    const s = this.state || {};
+    const filtro = s.filtro || "Todas";
+    const enviados = s.enviados || {};
+    const todas = [
+      { id: "v1", cat: "Diarista", forma: "Diária", local: "Buona Vita", dias: "Seg e Qui · 8h às 17h", valor: "R$ [valor] por dia", reqs: ["Pelo menos 1 ano de experiência"], quem: "Ana", quando: "há 2 dias" },
+      { id: "v2", cat: "Empregada doméstica", forma: "Mensal, com carteira", local: "Terras Alphaville Petrolina", dias: "Seg a Sex · 7h às 16h", valor: "Valor a combinar", reqs: ["Antecedentes conferidos", "Referências de outras casas"], quem: "Carla", quando: "ontem" },
+      { id: "v3", cat: "Diarista", forma: "Diária", local: "Bairro Areia Branca", dias: "Sáb · 8h às 14h", valor: "R$ [valor] por dia", reqs: [], quem: "Paulo", quando: "hoje" }
+    ];
+    const filtros = ["Todas", "Diarista", "Empregada doméstica"].map(function (f) {
+      const on = f === filtro;
+      return {
+        label: f,
+        pressed: on ? "true" : "false",
+        bg: on ? "#4F7A4A" : "#FFFFFF",
+        fg: on ? "#FFFFFF" : "#2B2B2B",
+        border: on ? "#4F7A4A" : "#E8DED3",
+        pick: function () { self.setState({ filtro: f }); }
+      };
+    });
+    const marcar = function (id, valor) {
+      const e = Object.assign({}, enviados);
+      e[id] = valor;
+      self.setState({ enviados: e });
+    };
+    const vagas = todas
+      .filter(function (v) { return filtro === "Todas" || v.cat === filtro; })
+      .map(function (v) {
+        const sent = !!enviados[v.id];
+        return Object.assign({}, v, {
+          titulo: v.cat + " · " + v.forma,
+          reqs: v.reqs.map(function (r) { return { label: r }; }),
+          temReqs: v.reqs.length > 0,
+          semReqs: v.reqs.length === 0,
+          sent: sent,
+          notSent: !sent,
+          interesse: function () { marcar(v.id, true); },
+          desfazer: function () { marcar(v.id, false); }
+        });
+      });
+    return {
+      filtros: filtros,
+      vagas: vagas,
+      vazio: vagas.length === 0
+    };
+  }
+}
+</script>
+<script src="runtime.js"></script>
+</body>
+</html>

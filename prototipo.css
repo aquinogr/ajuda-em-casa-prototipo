@@ -1,0 +1,110 @@
+body {
+  margin: 0;
+  background: #EFE6DB;
+  font-family: 'Nunito', system-ui, sans-serif;
+}
+
+.faixa {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4px 12px;
+  min-height: 34px;
+  box-sizing: border-box;
+  padding: 6px 12px;
+  background: #2B2B2B;
+  color: #FFFFFF;
+  font: 700 13px/1.3 'Nunito', system-ui, sans-serif;
+}
+
+.faixa a {
+  color: #FFFFFF;
+}
+
+.faixa-acoes {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.faixa select {
+  font: inherit;
+  padding: 2px 6px;
+  border: 0;
+  border-radius: 6px;
+}
+
+.telas {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 24px 20px 48px;
+  color: #2B2B2B;
+}
+
+.telas h1 {
+  margin: 0 0 8px;
+  font-size: 28px;
+}
+
+.telas h2 {
+  margin: 28px 0 10px;
+  font-size: 20px;
+}
+
+.telas p {
+  font-size: 16px;
+  line-height: 1.5;
+  color: #4A433D;
+}
+
+.telas ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 8px;
+}
+
+.doc {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 24px 20px 56px;
+  background: #FAF5EE;
+  color: #2B2B2B;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.doc h1 {
+  font-size: 28px;
+  line-height: 1.2;
+}
+
+.doc h2 {
+  margin-top: 28px;
+  font-size: 20px;
+}
+
+.doc ul {
+  padding-left: 22px;
+}
+
+.doc li {
+  margin: 4px 0;
+}
+
+.telas li a {
+  display: block;
+  padding: 14px 16px;
+  border-radius: 14px;
+  background: #FFFFFF;
+  border: 1px solid #E8DED3;
+  color: #8A3522;
+  font-size: 17px;
+  font-weight: 800;
+  text-decoration: none;
+}

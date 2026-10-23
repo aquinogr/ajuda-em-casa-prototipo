@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Ajuda em Casa · Minhas vagas</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#B0472F}a:hover{color:#8A3522}
+</style>
+<link rel="stylesheet" href="prototipo.css">
+</head>
+<body>
+<div class="faixa">
+<span>Protótipo · dados de exemplo</span>
+<span class="faixa-acoes"><label>Modo <select id="faixa-modo"><option value="gratuito">Gratuito</option><option value="pago">Pago</option></select></label><a href="telas.html">Todas as telas</a></span>
+</div>
+<div id="app"></div>
+<template id="tpl">
+<div style="width: 390px; height: 1500px; box-sizing: border-box; background: #FAF5EE; font-family: 'Nunito', system-ui, sans-serif; color: #2B2B2B; display: flex; flex-direction: column">
+<header style="display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 24px 20px 12px">
+<h1 style="margin: 0; font-size: 26px; font-weight: 800; line-height: 1.15">Minhas vagas</h1>
+<a href="Morador-Vaga.html" style="flex-shrink: 0; display: flex; align-items: center; min-height: 44px; padding: 0 16px; border-radius: 999px; background: #B0472F; color: #FFFFFF; font-size: 15px; font-weight: 800; text-decoration: none">Nova vaga</a>
+</header>
+<div style="padding: 4px 20px 0; display: flex; flex-direction: column; gap: 14px">
+<article style="background: #FFFFFF; border: 1px solid #E8DED3; border-radius: 20px; padding: 18px; display: flex; flex-direction: column; gap: 10px">
+<div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 10px">
+<h2 style="margin: 0; font-size: 21px; font-weight: 800">Diarista · Diária</h2>
+<span style="flex-shrink: 0; padding: 4px 12px; border-radius: 999px; font-size: 13px; font-weight: 800; background: {{statusBg}}; color: {{statusFg}}">{{statusLabel}}</span>
+</div>
+<span style="font-size: 15px; color: #4A433D">Seg e Qui · 8h às 17h · R$ [valor] por dia</span>
+<span style="font-size: 14px; color: #6B625A">Publicada há 2 dias · fica aberta por mais 28 dias</span>
+<template data-if="{{aberta}}">
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; margin-top: 4px">
+<button type="button" onClick="{{preencher}}" style="min-height: 48px; border: 0; border-radius: 12px; background: #4F7A4A; color: #FFFFFF; font-family: inherit; font-size: 15px; font-weight: 800; cursor: pointer">Já contratei</button>
+<button type="button" onClick="{{encerrar}}" style="min-height: 48px; border: 2px solid #E8DED3; border-radius: 12px; background: #FFFFFF; color: #2B2B2B; font-family: inherit; font-size: 15px; font-weight: 800; cursor: pointer">Encerrar vaga</button>
+</div>
+</template>
+<template data-if="{{fechada}}">
+<div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px; padding: 12px 14px; border-radius: 12px; background: #FAF5EE; font-size: 15px">
+<span>{{fechadaText}}</span>
+<button type="button" onClick="{{reabrir}}" style="min-height: 44px; padding: 0; border: 0; background: transparent; color: #8A3522; font-family: inherit; font-size: 15px; font-weight: 800; text-decoration: underline; cursor: pointer">Reabrir</button>
+</div>
+</template>
+</article>
+<h2 style="margin: 8px 0 0; font-size: 20px; font-weight: 800">3 interessados</h2>
+<template data-for="{{interessados}}" data-as="p">
+<article style="background: #FFFFFF; border: 1px solid #E8DED3; border-radius: 18px; padding: 14px; display: flex; flex-direction: column; gap: 10px">
+<div style="display: flex; gap: 12px; align-items: center">
+<div aria-hidden="true" style="flex-shrink: 0; width: 52px; height: 52px; border-radius: 50%; background: #F6E3DC; color: #8A3522; font-size: 18px; font-weight: 800; display: flex; align-items: center; justify-content: center">{{p.initials}}</div>
+<div style="display: flex; flex-direction: column; gap: 1px; min-width: 0; flex: 1">
+<span style="font-size: 18px; font-weight: 800">{{p.name}}</span>
+<span style="font-size: 14px; color: #4A433D">{{p.cats}} · {{p.bairro}}</span>
+<span style="font-size: 13px; color: #6B625A">Interesse em {{p.quando}}</span>
+</div>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 6px">
+<span style="padding: 3px 10px; border-radius: 999px; background: #E3EDE1; color: #3D5F39; font-size: 13px; font-weight: 800">Identidade conferida</span>
+<template data-if="{{p.antecedentes}}">
+<span style="padding: 3px 10px; border-radius: 999px; background: #E3EDE1; color: #3D5F39; font-size: 13px; font-weight: 800">Antecedentes conferidos</span>
+</template>
+</div>
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px">
+<a href="Morador-Perfil.html" style="display: flex; align-items: center; justify-content: center; min-height: 46px; border-radius: 12px; border: 2px solid #B0472F; color: #B0472F; font-size: 15px; font-weight: 800; text-decoration: none; box-sizing: border-box">Ver perfil</a>
+<a href="Morador-Contato.html" style="display: flex; align-items: center; justify-content: center; min-height: 46px; border-radius: 12px; background: #B0472F; color: #FFFFFF; font-size: 15px; font-weight: 800; text-decoration: none">{{ctaLabel}}</a>
+</div>
+</article>
+</template>
+</div>
+<nav aria-label="Menu principal" style="margin-top: auto; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); background: #FFFFFF; border-top: 1px solid #E8DED3; padding: 8px 4px 22px">
+<a href="Inicio.html" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; min-height: 56px; font-size: 13px; font-weight: 700; color: #6B625A; text-decoration: none">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true" style="stroke-width: 2; stroke-linecap: round; stroke-linejoin: round"><path d="M3 11l9-7 9 7"></path><path d="M5 10v10h14V10"></path></svg>
+Início</a>
+<a href="Morador-Lista.html" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; min-height: 56px; font-size: 13px; font-weight: 700; color: #6B625A; text-decoration: none">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true" style="stroke-width: 2; stroke-linecap: round; stroke-linejoin: round"><circle cx="9" cy="8" r="3.5"></circle><path d="M2.5 20c.8-3.6 3.4-5.5 6.5-5.5s5.7 1.9 6.5 5.5"></path><path d="M16 4.5a3.5 3.5 0 0 1 0 7"></path><path d="M18 14.8c1.9.7 3.1 2.4 3.5 5.2"></path></svg>
+Profissionais</a>
+<a href="Morador-MinhasVagas.html" aria-current="page" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; min-height: 56px; font-size: 13px; font-weight: 800; color: #B0472F; text-decoration: none">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true" style="stroke-width: 2; stroke-linecap: round; stroke-linejoin: round"><rect x="5" y="4" width="14" height="17" rx="2"></rect><path d="M9 4V3h6v1M9 10h6M9 14h6M9 18h3"></path></svg>
+Minhas vagas</a>
+<a href="Morador-Contato.html" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; min-height: 56px; font-size: 13px; font-weight: 700; color: #6B625A; text-decoration: none">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true" style="stroke-width: 2; stroke-linecap: round; stroke-linejoin: round"><path d="M21 12a8.5 8.5 0 0 1-12.6 7.4L3 21l1.6-5.2A8.5 8.5 0 1 1 21 12z"></path></svg>
+Contatos</a>
+</nav>
+</div>
+</template>
+<script type="application/json" id="props">{"modo":{"editor":"enum","options":["gratuito","pago"],"default":"gratuito","section":"Modo do app"},"$preview":{"width":390,"height":1500}}</script>
+<script type="text/x-dc-logic" id="logic">
+class Component extends DCLogic {
+  renderVals() {
+    const self = this;
+    const s = this.state || {};
+    const pago = (this.props.modo ?? "gratuito") === "pago";
+    const status = s.status || "aberta";
+    const visual = {
+      aberta: { label: "Aberta", bg: "#E3EDE1", fg: "#3D5F39" },
+      preenchida: { label: "Preenchida", bg: "#EFE6DB", fg: "#5E554D" },
+      encerrada: { label: "Encerrada", bg: "#EFE6DB", fg: "#5E554D" }
+    }[status];
+    return {
+      aberta: status === "aberta",
+      fechada: status !== "aberta",
+      statusLabel: visual.label,
+      statusBg: visual.bg,
+      statusFg: visual.fg,
+      fechadaText: status === "preenchida" ? "Vaga preenchida. Ela saiu da lista de vagas." : "Vaga encerrada. Ela saiu da lista de vagas.",
+      ctaLabel: pago ? "Liberar · 1 crédito" : "Ver WhatsApp",
+      interessados: [
+        { initials: "JO", name: "Joana", cats: "Diarista · Empregada doméstica", bairro: "Vila Eduardo", antecedentes: true, quando: "hoje, 09:20" },
+        { initials: "CI", name: "Cida", cats: "Diarista · Passadeira", bairro: "José e Maria", antecedentes: false, quando: "ontem, 17:45" },
+        { initials: "LU", name: "Lúcia", cats: "Diarista · Cozinheira", bairro: "Rio Corrente", antecedentes: false, quando: "ontem, 11:02" }
+      ],
+      preencher: function () { self.setState({ status: "preenchida" }); },
+      encerrar: function () { self.setState({ status: "encerrada" }); },
+      reabrir: function () { self.setState({ status: "aberta" }); }
+    };
+  }
+}
+</script>
+<script src="runtime.js"></script>
+</body>
+</html>

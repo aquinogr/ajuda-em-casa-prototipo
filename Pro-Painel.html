@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Ajuda em Casa · Meu perfil</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#B0472F}a:hover{color:#8A3522}
+</style>
+<link rel="stylesheet" href="prototipo.css">
+</head>
+<body>
+<div class="faixa">
+<span>Protótipo · dados de exemplo</span>
+<span class="faixa-acoes"><label>Modo <select id="faixa-modo"><option value="gratuito">Gratuito</option><option value="pago">Pago</option></select></label><a href="telas.html">Todas as telas</a></span>
+</div>
+<div id="app"></div>
+<template id="tpl">
+<div style="width: 390px; height: 1460px; box-sizing: border-box; background: #FAF5EE; font-family: 'Nunito', system-ui, sans-serif; color: #2B2B2B; display: flex; flex-direction: column">
+<div style="padding: 16px 12px 0; display: flex; justify-content: space-between; align-items: center; gap: 8px">
+<a href="Inicio.html" style="display: inline-flex; align-items: center; gap: 4px; min-height: 44px; padding: 0 8px; font-size: 16px; font-weight: 800; text-decoration: none">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true" style="stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round"><path d="M15 18l-6-6 6-6"></path></svg>
+Início</a>
+<a href="Pro-Vagas.html" style="display: inline-flex; align-items: center; min-height: 44px; padding: 0 14px; border-radius: 999px; background: #E3EDE1; color: #3D5F39; font-size: 15px; font-weight: 800; text-decoration: none">Vagas para você</a>
+</div>
+<header style="display: flex; align-items: center; gap: 12px; padding: 8px 20px 16px">
+<div aria-hidden="true" style="flex-shrink: 0; width: 56px; height: 56px; border-radius: 50%; background: #F6E3DC; color: #8A3522; font-size: 20px; font-weight: 800; display: flex; align-items: center; justify-content: center">JO</div>
+<div style="display: flex; flex-direction: column; gap: 4px; min-width: 0">
+<h1 style="margin: 0; font-size: 26px; font-weight: 800; line-height: 1.1">Olá, Joana</h1>
+<span style="align-self: flex-start; display: inline-flex; align-items: center; gap: 6px; padding: 3px 10px; border-radius: 999px; font-size: 13px; font-weight: 800; background: {{statusBg}}; color: {{statusFg}}">
+<span aria-hidden="true" style="width: 8px; height: 8px; border-radius: 50%; background: {{statusDot}}"></span>
+{{statusText}}</span>
+</div>
+</header>
+<template data-if="{{left}}">
+<section style="margin: 0 20px; padding: 22px 18px; background: #FFFFFF; border: 1px solid #E8DED3; border-radius: 20px; display: flex; flex-direction: column; gap: 10px">
+<h2 style="margin: 0; font-size: 20px; font-weight: 800">Cadastro apagado</h2>
+<p style="margin: 0; font-size: 16px; line-height: 1.45; color: #4A433D">Seus dados foram apagados do Ajuda em Casa. Se quiser voltar, é só fazer um novo cadastro.</p>
+<a href="Pro-Cadastro.html" style="display: inline-flex; align-items: center; min-height: 44px; font-size: 16px; font-weight: 800">Fazer novo cadastro</a>
+</section>
+</template>
+<template data-if="{{notLeft}}">
+<div style="display: flex; flex-direction: column; gap: 16px">
+<section style="margin: 0 20px; padding: 18px; background: #FFFFFF; border: 1px solid #E8DED3; border-radius: 20px; display: flex; flex-direction: column; gap: 12px">
+<h2 style="margin: 0; font-size: 20px; font-weight: 800">Seu cadastro</h2>
+<p style="margin: 0; font-size: 16px; line-height: 1.45; color: #4A433D">{{availText}}</p>
+<template data-if="{{showConfirm}}">
+<button type="button" onClick="{{confirm}}" style="display: flex; align-items: center; justify-content: center; gap: 10px; min-height: 56px; border: 0; border-radius: 16px; background: #4F7A4A; color: #FFFFFF; font-family: inherit; font-size: 18px; font-weight: 800; cursor: pointer">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true" style="stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round"><path d="M5 12l5 5 9-10"></path></svg>
+Continuo disponível</button>
+</template>
+<template data-if="{{active}}">
+<button type="button" onClick="{{pause}}" style="display: flex; align-items: center; justify-content: center; gap: 10px; min-height: 52px; border: 2px solid #E8DED3; border-radius: 16px; background: #FFFFFF; color: #2B2B2B; font-family: inherit; font-size: 16px; font-weight: 800; cursor: pointer">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true" style="stroke-width: 2; stroke-linecap: round; stroke-linejoin: round"><rect x="6" y="5" width="4" height="14" rx="1"></rect><rect x="14" y="5" width="4" height="14" rx="1"></rect></svg>
+Consegui trabalho / pausar</button>
+</template>
+<template data-if="{{paused}}">
+<button type="button" onClick="{{resume}}" style="display: flex; align-items: center; justify-content: center; min-height: 56px; border: 0; border-radius: 16px; background: #B0472F; color: #FFFFFF; font-family: inherit; font-size: 18px; font-weight: 800; cursor: pointer">Voltar a aparecer</button>
+</template>
+<template data-if="{{pago}}">
+<p style="margin: 0; display: flex; align-items: center; gap: 8px; font-size: 14px; color: #6B625A">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true" style="flex-shrink: 0; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round"><path d="M6 16V11a6 6 0 0 1 12 0v5l1.5 2h-15L6 16z"></path><path d="M10 20a2 2 0 0 0 4 0"></path></svg>
+A cada 14 dias o app lembra você no celular.</p>
+</template>
+<p style="margin: 0; font-size: 14px; color: #6B625A">Você aparece para moradores de toda Petrolina.</p>
+</section>
+<section style="margin: 0 20px; padding: 18px; background: #FFFFFF; border: 1px solid #E8DED3; border-radius: 20px; display: flex; flex-direction: column; gap: 12px">
+<h2 style="margin: 0; font-size: 20px; font-weight: 800">Quem pegou seu contato</h2>
+<ul style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column">
+<li style="display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: 12px 0; border-bottom: 1px solid #F0E8DE">
+<span style="font-size: 16px; font-weight: 800">Morador do Buona Vita</span>
+<span style="font-size: 13px; font-weight: 700; color: #6B625A">hoje, 10:42</span>
+</li>
+<li style="display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: 12px 0">
+<span style="font-size: 16px; font-weight: 800">Morador de [condomínio ou bairro]</span>
+<span style="font-size: 13px; font-weight: 700; color: #6B625A">ontem, 18:05</span>
+</li>
+</ul>
+<p style="margin: 0; font-size: 14px; line-height: 1.45; color: #6B625A">Você é avisado(a) sempre que um morador vê o seu WhatsApp, com o condomínio ou bairro dele. O nome e o endereço do morador não aparecem.</p>
+</section>
+<section style="margin: 0 20px; padding: 18px; background: #FFFFFF; border: 1px solid #E8DED3; border-radius: 20px; display: flex; flex-direction: column; gap: 12px">
+<h2 style="margin: 0; font-size: 20px; font-weight: 800">Seus selos</h2>
+<div style="display: flex; align-items: center; gap: 10px; font-size: 16px; font-weight: 700">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#3D5F39" aria-hidden="true" style="flex-shrink: 0; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6l7-3z"></path><path d="M9 12l2 2 4-4"></path></svg>
+<span>Identidade conferida</span>
+</div>
+<div style="display: flex; align-items: center; justify-content: space-between; gap: 10px; font-size: 16px">
+<span style="font-weight: 700; color: #6B625A">Antecedentes: não enviado</span>
+<a href="Pro-Cadastro.html" style="display: inline-flex; align-items: center; min-height: 44px; font-weight: 800">Enviar (opcional)</a>
+</div>
+</section>
+<section style="margin: 0 20px; padding: 18px; background: #FFFFFF; border: 1px solid #E8DED3; border-radius: 20px; display: flex; flex-direction: column; gap: 8px">
+<div style="display: flex; align-items: center; justify-content: space-between; gap: 8px">
+<h2 style="margin: 0; font-size: 20px; font-weight: 800">Suas avaliações</h2>
+<span style="display: inline-flex; align-items: center; gap: 5px; font-size: 16px; font-weight: 800">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="#B0472F" stroke="#B0472F" aria-hidden="true" style="stroke-width: 1.5; stroke-linejoin: round"><path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.9l-5.2 2.7 1-5.8L3.5 9.7l5.9-.9L12 3.5z"></path></svg>
+4,8 · 12</span>
+</div>
+<p style="margin: 0; font-size: 14px; line-height: 1.45; color: #6B625A">Os comentários aparecem depois da moderação.</p>
+</section>
+<div style="margin: 0 20px; display: flex; flex-direction: column; gap: 10px">
+<a href="Pro-Cadastro.html" style="display: flex; align-items: center; justify-content: center; min-height: 52px; border-radius: 16px; border: 2px solid #B0472F; color: #B0472F; font-size: 16px; font-weight: 800; text-decoration: none; box-sizing: border-box">Editar meu perfil</a>
+<template data-if="{{askLeave}}">
+<button type="button" onClick="{{startLeave}}" style="min-height: 48px; border: 0; background: transparent; color: #8A3522; font-family: inherit; font-size: 15px; font-weight: 800; text-decoration: underline; cursor: pointer">Sair do Ajuda em Casa</button>
+</template>
+<template data-if="{{leaving}}">
+<div style="padding: 16px; border-radius: 16px; background: #F6E3DC; color: #6E2A1B; display: flex; flex-direction: column; gap: 10px">
+<strong style="font-size: 16px">Apagar o seu cadastro?</strong>
+<span style="font-size: 15px; line-height: 1.45">Seus dados saem do Ajuda em Casa e os moradores deixam de ver o seu cartão. Para voltar, será preciso se cadastrar de novo.</span>
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px">
+<button type="button" onClick="{{confirmLeave}}" style="min-height: 48px; border: 0; border-radius: 12px; background: #8A3522; color: #FFFFFF; font-family: inherit; font-size: 15px; font-weight: 800; cursor: pointer">Sim, apagar</button>
+<button type="button" onClick="{{cancelLeave}}" style="min-height: 48px; border: 2px solid #E8DED3; border-radius: 12px; background: #FFFFFF; color: #2B2B2B; font-family: inherit; font-size: 15px; font-weight: 800; cursor: pointer">Cancelar</button>
+</div>
+</div>
+</template>
+</div>
+</div>
+</template>
+<footer style="margin-top: auto; padding: 18px 20px 28px; text-align: center; font-size: 16px; font-weight: 800; color: #3D5F39; background: #E3EDE1">Para quem procura trabalho, é de graça. Sempre.</footer>
+</div>
+</template>
+<script type="application/json" id="props">{"modo":{"editor":"enum","options":["gratuito","pago"],"default":"gratuito","section":"Modo do app"},"$preview":{"width":390,"height":1460}}</script>
+<script type="text/x-dc-logic" id="logic">
+class Component extends DCLogic {
+  renderVals() {
+    const self = this;
+    const s = this.state || {};
+    const pago = (this.props.modo ?? "gratuito") === "pago";
+    const paused = !!s.paused;
+    const confirmed = !!s.confirmed;
+    const leaving = !!s.leaving;
+    const left = !!s.left;
+    let availText = "Seu cadastro fica ativo até você pedir para sair. Não precisa confirmar nada.";
+    if (pago) availText = confirmed ? "Confirmado agora. O próximo lembrete chega em 14 dias." : "Confirme até [data] para continuar aparecendo para os moradores.";
+    if (paused) availText = "Seu cartão não aparece para os moradores. Seu cadastro continua salvo.";
+    let statusText = "Visível para moradores";
+    if (paused) statusText = "Pausado";
+    if (left) statusText = "Cadastro apagado";
+    const ativo = !paused && !left;
+    return {
+      pago: pago,
+      left: left,
+      notLeft: !left,
+      paused: paused,
+      active: !paused,
+      showConfirm: pago && !paused,
+      availText: availText,
+      statusText: statusText,
+      statusBg: ativo ? "#E3EDE1" : "#EFE6DB",
+      statusFg: ativo ? "#3D5F39" : "#5E554D",
+      statusDot: ativo ? "#4F7A4A" : "#8C8178",
+      askLeave: !leaving,
+      leaving: leaving,
+      confirm: function () { self.setState({ confirmed: true, paused: false }); },
+      pause: function () { self.setState({ paused: true }); },
+      resume: function () { self.setState({ paused: false, confirmed: true }); },
+      startLeave: function () { self.setState({ leaving: true }); },
+      cancelLeave: function () { self.setState({ leaving: false }); },
+      confirmLeave: function () { self.setState({ left: true, leaving: false }); }
+    };
+  }
+}
+</script>
+<script src="runtime.js"></script>
+</body>
+</html>
