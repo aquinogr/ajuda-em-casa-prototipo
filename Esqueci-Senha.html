@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Ajuda em Casa · Esqueci minha senha</title>
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#B0472F">
+<link rel="icon" href="icone.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icone-192.png">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#B0472F}a:hover{color:#8A3522}
+</style>
+<link rel="stylesheet" href="prototipo.css">
+</head>
+<body>
+<div class="faixa">
+<span>Protótipo · dados de exemplo</span>
+<span class="faixa-acoes"><a href="telas.html">Todas as telas</a></span>
+</div>
+<div id="app"></div>
+<template id="tpl">
+<div style="width: 390px; height: 760px; box-sizing: border-box; background: #FAF5EE; font-family: 'Nunito', system-ui, sans-serif; color: #2B2B2B; display: flex; flex-direction: column">
+<div style="padding: 16px 12px 0">
+<a href="index.html" style="display: inline-flex; align-items: center; gap: 4px; min-height: 44px; padding: 0 8px; font-size: 16px; font-weight: 800; text-decoration: none">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true" style="stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round"><path d="M15 18l-6-6 6-6"></path></svg>
+Entrar</a>
+</div>
+<section style="padding: 8px 20px 0; display: flex; flex-direction: column; gap: 14px">
+<h1 style="margin: 0; font-size: 28px; font-weight: 800; line-height: 1.15">Esqueci minha senha</h1>
+<p style="margin: 0; font-size: 17px; line-height: 1.45; color: #4A433D">Digite o e-mail do seu cadastro. Mandamos um link para você criar uma senha nova.</p>
+<div style="display: flex; flex-direction: column; gap: 6px">
+<label for="email" style="font-size: 15px; font-weight: 800">E-mail</label>
+<input id="email" type="email" autocomplete="email" style="min-height: 52px; padding: 0 14px; border: 2px solid #E8DED3; border-radius: 12px; background: #FFFFFF; font-family: inherit; font-size: 17px; color: #2B2B2B; box-sizing: border-box">
+</div>
+<template data-if="{{pedindo}}">
+<button type="button" onClick="{{enviar}}" style="min-height: 56px; border: 0; border-radius: 16px; background: #B0472F; color: #FFFFFF; font-family: inherit; font-size: 18px; font-weight: 800; cursor: pointer">Enviar link</button>
+</template>
+<template data-if="{{enviado}}">
+<p role="status" style="margin: 0; padding: 14px 16px; border-radius: 16px; background: #E3EDE1; color: #2E4A2B; font-size: 16px; font-weight: 700; line-height: 1.45">Pronto. Se esse e-mail tiver cadastro, o link chega em alguns minutos. Confira também a caixa de spam.</p>
+</template>
+<p style="margin: 0; font-size: 14px; line-height: 1.45; color: #6B625A">Entrou com o Google? Use "Entrar com Google", sem senha.</p>
+</section>
+</div>
+</template>
+<script type="application/json" id="props">{"$preview":{"width":390,"height":760}}</script>
+<script type="text/x-dc-logic" id="logic">
+class Component extends DCLogic {
+  renderVals() {
+    const self = this;
+    const enviado = !!(this.state || {}).enviado;
+    return {
+      pedindo: !enviado,
+      enviado: enviado,
+      enviar: function () { self.setState({ enviado: true }); }
+    };
+  }
+}
+</script>
+<script src="runtime.js"></script>
+</body>
+</html>

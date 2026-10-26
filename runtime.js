@@ -33,6 +33,12 @@
     });
   }
 
+  // Links calculados pelas telas apontam para .dc.html; no site, as páginas são .html.
+  function destinoLink(href) {
+    if (href === "Main.dc.html") return "index.html";
+    return href.replace(/\.dc\.html(#|$)/, ".html$1");
+  }
+
   function holeValue(text, scope) {
     var m = (text || "").match(WHOLE);
     return m ? lookup(m[1], scope) : text;
@@ -76,10 +82,11 @@
       if (whole) {
         var v = lookup(whole[1], scope);
         if (v === false || v == null) el.removeAttribute(name);
-        else el.setAttribute(name, String(v));
+        else el.setAttribute(name, name === "href" ? destinoLink(String(v)) : String(v));
         return;
       }
-      el.setAttribute(name, interp(value, scope));
+      var texto = interp(value, scope);
+      el.setAttribute(name, name === "href" ? destinoLink(texto) : texto);
     });
   }
 

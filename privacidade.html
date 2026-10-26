@@ -16,17 +16,17 @@
 <div class="faixa"><span>Protótipo · dados de exemplo</span><span class="faixa-acoes"><a href="index.html">Início</a><a href="telas.html">Todas as telas</a></span></div>
 <main class="doc">
 <h1>Política de privacidade do Ajuda em Casa</h1>
-<p>Versão de 23/10/2026. Rascunho redigido pelo Claude a partir das decisões do projeto, sem revisão de advogado.</p>
+<p>Versão de 26/10/2026. Rascunho redigido pelo Claude a partir das decisões do projeto, sem revisão de advogado.</p>
 <h2>1. Quem cuida dos seus dados</h2>
 <p>A controladora dos dados é a <strong>MCCR SERVIÇOS MÉDICOS LTDA</strong>, CNPJ 48.921.916/0001-00, Petrolina/PE.</p>
 <p>Canal para assuntos de dados pessoais: [e-mail do Ajuda em Casa].</p>
 <h2>2. Que dados guardamos</h2>
 <p><strong>De todos:</strong></p>
 <ul>
-<li>Nome e e-mail da conta Google usada para entrar.</li>
+<li>Nome e e-mail, e a senha guardada de forma cifrada, ou os dados da conta Google usada para entrar.</li>
 <li>Registros de acesso ao app (data, hora e endereço IP), exigidos pelo Marco Civil da Internet.</li>
 </ul>
-<p><strong>De quem quer contratar (morador):</strong></p>
+<p><strong>De quem quer contratar (empregador):</strong></p>
 <ul>
 <li>Condomínio, rua (ou alameda, ou bloco) e número declarados, ou só o bairro.</li>
 <li>Os profissionais cujo WhatsApp você viu, as vagas que publicou e as avaliações que escreveu.</li>
@@ -34,64 +34,93 @@
 </ul>
 <p><strong>De quem quer trabalhar (profissional):</strong></p>
 <ul>
-<li>Nome completo, o primeiro nome que aparece no app, WhatsApp e bairro.</li>
+<li>Nome completo, o primeiro nome que aparece no app, WhatsApp, bairro e endereço completo.</li>
+<li>CPF e data de nascimento.</li>
 <li>Categorias, formas de trabalho, dias livres, experiência e cursos.</li>
 <li>Foto do rosto, que aparece no seu cartão.</li>
 <li>Foto de um documento com foto, só para a conferência de identidade.</li>
 <li>Certidão de antecedentes, se você quiser enviar.</li>
-<li>As vagas em que mostrou interesse e as avaliações recebidas.</li>
+<li>As suas autorizações (foto na página inicial e indicação por agências), as vagas em que mostrou interesse e as avaliações recebidas.</li>
+</ul>
+<p><strong>De agências:</strong></p>
+<ul>
+<li>Nome da agência, nome do responsável, CPF ou CNPJ, WhatsApp, preço, garantia e regra de substituição.</li>
+<li>Foto do rosto e documento do responsável, só para a conferência.</li>
+<li>As indicações registradas e as exportações feitas.</li>
 </ul>
 <h2>3. Para que usamos os dados</h2>
 <ul>
-<li><strong>Para o app funcionar</strong> (execução do contrato, LGPD art. 7º, V): mostrar perfis e vagas, liberar contatos, avisar sobre interesse e contatos vistos, cuidar dos créditos.</li>
-<li><strong>Para a segurança de todos</strong> (legítimo interesse, art. 7º, IX): conferir a identidade dos profissionais, evitar perfis falsos e moderar avaliações e vagas. A conferência é feita por uma pessoa da administração, olhando a foto e o documento. Não usamos reconhecimento facial automático.</li>
-<li><strong>Certidão de antecedentes</strong> (consentimento, art. 7º, I): é opcional. Você pode retirar o consentimento, e o selo sai do seu perfil.</li>
+<li><strong>Para o app funcionar</strong> (execução do contrato, LGPD art. 7º, V): mostrar perfis e vagas, liberar contatos, avisar sobre interesses e contatos vistos, cuidar dos créditos e das indicações das agências.</li>
+<li><strong>Para a segurança de todos</strong> (legítimo interesse, art. 7º, IX): conferir a identidade de profissionais e agências, evitar perfis falsos e moderar avaliações e vagas.</li>
+<li><strong>Página inicial e agências</strong> (consentimento, art. 7º, I): a sua foto, o seu primeiro nome e a sua profissão só aparecem na página inicial se você autorizar, e as agências só veem os seus dados se você autorizar. Dá para retirar as autorizações a qualquer momento.</li>
+<li><strong>Certidão de antecedentes</strong> (consentimento): é opcional. Você pode retirar o consentimento, e o selo sai do seu perfil.</li>
 <li><strong>Obrigações legais</strong> (art. 7º, II): guardar os registros de acesso e, no modo pago, os dados fiscais das compras.</li>
 </ul>
 <p>Não vendemos dados e não os usamos para propaganda de terceiros.</p>
-<h2>4. Quem vê o quê</h2>
+<h2>4. Conferência com inteligência artificial</h2>
 <ul>
-<li><strong>Visitante sem login:</strong> só quantos profissionais há em cada categoria.</li>
-<li><strong>Morador com login:</strong> o cartão do profissional, com primeiro nome, foto, categorias, formas de trabalho, bairro onde mora, dias livres, experiência, cursos, selos e avaliações.</li>
-<li><strong>WhatsApp do profissional:</strong> aparece só quando o morador toca para ver. No modo pago, isso gasta 1 crédito.</li>
-<li><strong>O profissional:</strong> é avisado quando alguém vê o WhatsApp dele, com o condomínio ou bairro do morador, sem nome nem endereço.</li>
-<li><strong>Vagas:</strong> o profissional vê só o condomínio ou bairro, nunca o nome, o endereço ou o telefone do morador.</li>
-<li><strong>Administração da MCCR:</strong> vê o necessário para conferir identidades, moderar e dar suporte. CPF, endereço e documentos ficam só com ela.</li>
+<li>A foto do documento é enviada à OpenAI, empresa que fornece o modelo de inteligência artificial, só para ler o que está escrito nele: nome, CPF e data de nascimento.</li>
+<li>A comparação com o que você preencheu é feita no nosso sistema: os seus dados preenchidos não vão para a OpenAI. Pedimos que ela não guarde o pedido.</li>
+<li>A IA não compara o rosto e não usa reconhecimento facial. A foto do rosto é conferida por um administrador.</li>
+<li>Quando o documento confere, ele é aprovado. Quando não confere ou está ilegível, a IA pede uma nova foto. Na dúvida, um administrador decide.</li>
+<li>Você pode pedir que uma pessoa revise qualquer decisão da IA (LGPD, art. 20), pelo botão "Pedir revisão por uma pessoa" ou pelo canal do item 1.</li>
+<li>O resultado de cada conferência fica num registro interno (log), sem a imagem nem os números do documento.</li>
 </ul>
-<h2>5. Com quem compartilhamos</h2>
+<h2>5. Quem vê o quê</h2>
+<ul>
+<li><strong>Qualquer pessoa, na página inicial:</strong> foto, primeiro nome e profissão de quem autorizou, e as vagas abertas com profissão e condomínio ou bairro. Nunca telefone, nome completo ou endereço.</li>
+<li><strong>Empregador com login:</strong> o cartão do profissional, com primeiro nome, foto, categorias, formas de trabalho, bairro onde mora, dias livres, experiência, cursos, selos e avaliações.</li>
+<li><strong>WhatsApp do profissional:</strong> aparece só quando o empregador toca para ver. No modo pago, isso gasta 1 crédito.</li>
+<li><strong>Agência conferida:</strong> profissionais que ela cadastrou, com o aceite deles, e quem autorizou indicação por agências, com telefone, endereço e idade. Nunca o CPF. No modo pago, sem o Passe Agência, o telefone e o endereço de quem autorizou só aparecem depois de usar 1 crédito.</li>
+<li><strong>O profissional:</strong> é avisado quando alguém vê o WhatsApp dele. Se for um empregador, aparece o condomínio ou bairro, sem nome nem endereço. Se for uma agência, aparece o nome dela.</li>
+<li><strong>Vagas:</strong> na vaga de empregador, o profissional vê só o condomínio ou bairro, nunca o nome, o endereço ou o telefone do empregador. Na vaga de agência, aparece o nome da agência.</li>
+<li><strong>Administradores gerais da MCCR:</strong> veem e editam todos os cadastros para conferir, moderar, dar suporte e corrigir dados. Toda edição fica registrada no log, com o valor de antes e o de depois.</li>
+</ul>
+<h2>6. Exportação para Excel</h2>
+<ul>
+<li>Os administradores podem exportar a lista de contatos: nome, profissão, endereço, idade, telefone, bairro, categorias e situação.</li>
+<li>A agência pode exportar só os contatos a que tem acesso, nas mesmas condições do item 5.</li>
+<li>Toda exportação fica registrada no log, com quem exportou, quando e quantos contatos.</li>
+<li>Depois de exportados, os dados ficam sob a responsabilidade de quem exportou. As agências se comprometem, nos termos de uso, a usá-los só para indicar profissionais e a apagá-los quando não precisarem mais.</li>
+</ul>
+<h2>7. Com quem compartilhamos</h2>
 <p>Usamos empresas que tratam dados por nossa conta:</p>
 <ul>
 <li><strong>Supabase:</strong> banco de dados e arquivos, com servidor em São Paulo.</li>
 <li><strong>Cloudflare:</strong> hospedagem do site.</li>
-<li><strong>Google:</strong> login.</li>
+<li><strong>Google:</strong> login com a conta Google.</li>
+<li><strong>OpenAI:</strong> leitura do documento na conferência de identidade.</li>
 <li><strong>Mercado Pago:</strong> pagamentos, no modo pago.</li>
 </ul>
-<p>Algumas dessas empresas podem processar dados fora do Brasil, com as garantias previstas na LGPD (art. 33).</p>
-<h2>6. Quanto tempo guardamos</h2>
+<p>As agências recebem os dados de quem autorizou, como descrito no item 5. Algumas dessas empresas processam dados fora do Brasil, com as garantias previstas na LGPD (art. 33).</p>
+<h2>8. Quanto tempo guardamos</h2>
 <ul>
-<li><strong>Perfil, foto, telefone, bairro, dias, experiência e avaliações:</strong> enquanto você usar o app. São apagados na hora em que você sai.</li>
-<li><strong>Foto do documento e certidão de antecedentes:</strong> apagadas logo depois da conferência. Fica guardada só a data em que foram conferidas.</li>
+<li><strong>Perfil, foto, telefone, endereço, CPF, data de nascimento, bairro, dias, experiência e avaliações:</strong> enquanto você usar o app. São apagados na hora em que você sai.</li>
+<li><strong>Foto do documento e certidão de antecedentes:</strong> apagadas logo depois da conferência. Ficam guardados só a data e o resultado da conferência.</li>
 <li><strong>Registros de acesso:</strong> 6 meses, como exige o Marco Civil da Internet (Lei 12.965/2014, art. 15). Depois, são apagados.</li>
+<li><strong>Log dos administradores</strong> (conferências, edições e exportações): enquanto o app existir, para consultas e prova do que foi feito.</li>
 <li><strong>Compras e notas fiscais (modo pago):</strong> pelo prazo exigido pela lei fiscal.</li>
 <li><strong>Números do painel</strong> (cadastros, contatos vistos): guardados só como contagem, sem identificar ninguém.</li>
+<li><strong>Indicações das agências:</strong> ficam com a agência. Se você sair, o seu cadastro some da carteira dela, mas o registro da indicação, com o nome, continua com ela.</li>
 </ul>
-<h2>7. Seus direitos</h2>
+<h2>9. Seus direitos</h2>
 <p>Pela LGPD (art. 18), você pode:</p>
 <ul>
 <li>saber se tratamos seus dados e ter acesso a eles;</li>
 <li>corrigir dados errados, editando o perfil ou falando conosco;</li>
 <li>pedir a portabilidade dos seus dados;</li>
-<li>retirar o consentimento da certidão de antecedentes;</li>
+<li>retirar as autorizações (foto na página inicial, agências e certidão de antecedentes);</li>
+<li>pedir revisão humana de decisões da IA (art. 20);</li>
 <li><strong>apagar a sua conta</strong> pelo botão "Sair do Ajuda em Casa", sem custo.</li>
 </ul>
 <p>Para qualquer outro pedido, use o canal do item 1.</p>
-<h2>8. Segurança</h2>
-<p>O acesso aos dados é restrito por regras no próprio banco de dados, que só deixam cada pessoa ver o que pode ver. As conexões são criptografadas, e só a administração acessa documentos.</p>
-<h2>9. Idade</h2>
+<h2>10. Segurança</h2>
+<p>O acesso aos dados é restrito por regras no próprio banco de dados, que só deixam cada pessoa ver o que pode ver. As conexões são criptografadas, a senha é guardada cifrada, e só os administradores acessam documentos.</p>
+<h2>11. Idade</h2>
 <p>O Ajuda em Casa é para maiores de 18 anos. Não coletamos dados de crianças.</p>
-<h2>10. Armazenamento no aparelho</h2>
+<h2>12. Armazenamento no aparelho</h2>
 <p>Guardamos no seu celular só o necessário para manter você conectado e lembrar escolhas como o condomínio. Não usamos cookies de propaganda.</p>
-<h2>11. Mudanças nesta política</h2>
+<h2>13. Mudanças nesta política</h2>
 <p>Podemos atualizar esta política. Quando a mudança for importante, avisamos no app antes de ela valer.</p>
 </main>
 </body>

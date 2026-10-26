@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Ajuda em Casa · Log</title>
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#B0472F">
+<link rel="icon" href="icone.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icone-192.png">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#B0472F}a:hover{color:#8A3522}
+</style>
+<link rel="stylesheet" href="prototipo.css">
+</head>
+<body>
+<div class="faixa">
+<span>Protótipo · dados de exemplo</span>
+<span class="faixa-acoes"><a href="telas.html">Todas as telas</a></span>
+</div>
+<div id="app"></div>
+<template id="tpl">
+<div style="box-sizing: border-box; min-height: 100vh; background: #FAF5EE; font-family: 'Nunito', system-ui, sans-serif; color: #2B2B2B">
+<header style="background: #FFFFFF; border-bottom: 1px solid #E8DED3">
+<div style="max-width: 1200px; margin: 0 auto; padding: 14px 24px; box-sizing: border-box; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px">
+<div style="display: flex; align-items: center; gap: 10px">
+<div style="width: 40px; height: 40px; border-radius: 12px; background: #C8553D; color: #FFFFFF; display: flex; align-items: center; justify-content: center">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true" style="stroke-width: 2; stroke-linecap: round; stroke-linejoin: round"><path d="M3 11l9-7 9 7"></path><path d="M5 10v10h14V10"></path><path d="M10 20v-5h4v5"></path></svg>
+</div>
+<span style="font-size: 19px; font-weight: 800">Ajuda em Casa</span>
+<span style="font-size: 15px; font-weight: 700; color: #6B625A">· Administração</span>
+</div>
+<nav aria-label="Administração" style="display: flex; flex-wrap: wrap; align-items: center; gap: 4px 18px; font-size: 15px">
+<a href="Admin.html" style="display: inline-flex; align-items: center; min-height: 44px; font-weight: 700">Painel</a>
+<a href="Admin-Cadastros.html" style="display: inline-flex; align-items: center; min-height: 44px; font-weight: 700">Cadastros</a>
+<a href="Admin-Log.html" aria-current="page" style="display: inline-flex; align-items: center; min-height: 44px; font-weight: 800; color: #2B2B2B; text-decoration: none; border-bottom: 3px solid #B0472F">Log</a>
+<span style="font-weight: 700">Administrador</span>
+<a href="index.html" style="display: inline-flex; align-items: center; min-height: 44px; font-weight: 800">Sair</a>
+</nav>
+</div>
+</header>
+<main style="max-width: 1200px; margin: 0 auto; padding: 28px 24px 48px; box-sizing: border-box; display: flex; flex-direction: column; gap: 18px">
+<div style="display: flex; flex-direction: column; gap: 6px">
+<h1 style="margin: 0; font-size: 30px; font-weight: 800">Log</h1>
+<p style="margin: 0; font-size: 15px; line-height: 1.45; color: #4A433D">Tudo o que a IA e os administradores fizeram: conferências, edições, exportações e mudanças de modo. Só administradores veem. O log não guarda imagens nem números de documento.</p>
+</div>
+<div role="group" aria-label="Tipo" style="display: flex; flex-wrap: wrap; gap: 8px">
+<template data-for="{{filtros}}" data-as="f">
+<button type="button" onClick="{{f.pick}}" aria-pressed="{{f.pressed}}" style="min-height: 44px; padding: 0 16px; border-radius: 999px; font-family: inherit; font-size: 15px; font-weight: 800; cursor: pointer; background: {{f.bg}}; color: {{f.fg}}; border: 2px solid {{f.border}}">{{f.label}}</button>
+</template>
+</div>
+<section style="padding: 8px 20px 20px; background: #FFFFFF; border: 1px solid #E8DED3; border-radius: 20px">
+<div style="overflow-x: auto">
+<table style="width: 100%; min-width: 860px; border-collapse: collapse; font-size: 15px">
+<thead>
+<tr style="text-align: left; color: #6B625A; font-size: 13px; text-transform: uppercase; letter-spacing: 0.04em">
+<th scope="col" style="padding: 12px 10px 8px 0; font-weight: 800">Quando</th>
+<th scope="col" style="padding: 12px 10px 8px 0; font-weight: 800">Quem</th>
+<th scope="col" style="padding: 12px 10px 8px 0; font-weight: 800">Tipo</th>
+<th scope="col" style="padding: 12px 10px 8px 0; font-weight: 800">Cadastro</th>
+<th scope="col" style="padding: 12px 10px 8px 0; font-weight: 800">Resultado</th>
+<th scope="col" style="padding: 12px 0 8px; font-weight: 800">Detalhes</th>
+</tr>
+</thead>
+<tbody>
+<template data-for="{{linhas}}" data-as="l">
+<tr style="border-top: 1px solid #F0E8DE; vertical-align: top">
+<td style="padding: 12px 10px 12px 0; white-space: nowrap">{{l.quando}}</td>
+<td style="padding: 12px 10px 12px 0; font-weight: 800">{{l.quem}}</td>
+<td style="padding: 12px 10px 12px 0">{{l.tipoTexto}}</td>
+<td style="padding: 12px 10px 12px 0">{{l.alvo}}</td>
+<td style="padding: 12px 10px 12px 0"><span style="padding: 3px 10px; border-radius: 999px; font-size: 13px; font-weight: 800; white-space: nowrap; background: {{l.bg}}; color: {{l.fg}}">{{l.resultado}}</span></td>
+<td style="padding: 12px 0; color: #4A433D">{{l.detalhes}}</td>
+</tr>
+</template>
+</tbody>
+</table>
+</div>
+</section>
+</main>
+</div>
+</template>
+<script type="application/json" id="props">{"$preview":{"width":1280,"height":1150}}</script>
+<script type="text/x-dc-logic" id="logic">
+class Component extends DCLogic {
+  renderVals() {
+    const self = this;
+    const filtro = (this.state || {}).filtro || "todos";
+    const verde = ["#E3EDE1", "#3D5F39"];
+    const terracota = ["#F6E3DC", "#8A3522"];
+    const cinza = ["#EFE6DB", "#5E554D"];
+    const registros = [
+      { quando: "26/10 13:40", quem: "IA (gpt-5.6-luna)", tipo: "ia", alvo: "Lúcia Lima", resultado: "Reprovado", cor: terracota, detalhes: "Data de nascimento diferente do documento" },
+      { quando: "26/10 14:02", quem: "IA (gpt-5.6-luna)", tipo: "ia", alvo: "Rafael Souza", resultado: "Aprovado", cor: verde, detalhes: "Documento confere; falta o rosto" },
+      { quando: "26/10 14:05", quem: "IA (gpt-5.6-luna)", tipo: "ia", alvo: "Marta Alves", resultado: "Revisar", cor: cinza, detalhes: "Nome parecido, mas não igual ao do documento" },
+      { quando: "26/10 15:10", quem: "Administradora", tipo: "humana", alvo: "Marta Alves", resultado: "Aprovado", cor: verde, detalhes: "Rosto confere; nome de casada no documento" },
+      { quando: "26/10 16:40", quem: "Administrador", tipo: "edicao", alvo: "Joana Silva", resultado: "Alterado", cor: cinza, detalhes: "WhatsApp e endereço (antes e depois guardados)" },
+      { quando: "26/10 17:20", quem: "Agência Exemplo", tipo: "exportacao", alvo: "—", resultado: "3 contatos", cor: cinza, detalhes: "Exportação da agência: só contatos liberados" },
+      { quando: "26/10 18:00", quem: "Administradora", tipo: "exportacao", alvo: "—", resultado: "[nº] contatos", cor: cinza, detalhes: "Exportação de todos os profissionais" },
+      { quando: "25/10 09:00", quem: "Administrador", tipo: "modo", alvo: "—", resultado: "Gratuito", cor: verde, detalhes: "Modo do app: gratuito por tempo indeterminado" }
+    ];
+    const nomes = { ia: "Conferência por IA", humana: "Conferência humana", edicao: "Edição", exportacao: "Exportação", modo: "Modo do app" };
+    const filtros = [
+      { id: "todos", label: "Todos" },
+      { id: "ia", label: "Conferência por IA" },
+      { id: "humana", label: "Conferência humana" },
+      { id: "edicao", label: "Edição" },
+      { id: "exportacao", label: "Exportação" },
+      { id: "modo", label: "Modo do app" }
+    ].map(function (f) {
+      const on = f.id === filtro;
+      return {
+        label: f.label,
+        pressed: on ? "true" : "false",
+        bg: on ? "#B0472F" : "#FFFFFF",
+        fg: on ? "#FFFFFF" : "#2B2B2B",
+        border: on ? "#B0472F" : "#E8DED3",
+        pick: function () { self.setState({ filtro: f.id }); }
+      };
+    });
+    return {
+      filtros: filtros,
+      linhas: registros
+        .filter(function (r) { return filtro === "todos" || r.tipo === filtro; })
+        .map(function (r) { return Object.assign({}, r, { tipoTexto: nomes[r.tipo], bg: r.cor[0], fg: r.cor[1] }); })
+    };
+  }
+}
+</script>
+<script src="runtime.js"></script>
+</body>
+</html>

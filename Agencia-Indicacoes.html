@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Ajuda em Casa · Indicações e garantia</title>
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#B0472F">
+<link rel="icon" href="icone.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icone-192.png">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#B0472F}a:hover{color:#8A3522}
+</style>
+<link rel="stylesheet" href="prototipo.css">
+</head>
+<body>
+<div class="faixa">
+<span>Protótipo · dados de exemplo</span>
+<span class="faixa-acoes"><a href="telas.html">Todas as telas</a></span>
+</div>
+<div id="app"></div>
+<template id="tpl">
+<div style="width: 390px; height: 2000px; box-sizing: border-box; background: #FAF5EE; font-family: 'Nunito', system-ui, sans-serif; color: #2B2B2B; display: flex; flex-direction: column">
+<div style="padding: 16px 12px 0">
+<a href="Inicio.html" style="display: inline-flex; align-items: center; gap: 4px; min-height: 44px; padding: 0 8px; font-size: 16px; font-weight: 800; text-decoration: none">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true" style="stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round"><path d="M15 18l-6-6 6-6"></path></svg>
+Conta</a>
+</div>
+<section style="padding: 4px 20px 0; display: flex; flex-direction: column; gap: 12px">
+<div style="display: flex; align-items: center; justify-content: space-between; gap: 10px">
+<h1 style="margin: 0; font-size: 26px; font-weight: 800">Indicações</h1>
+<button type="button" onClick="{{alternarNova}}" style="min-height: 44px; padding: 0 16px; border: 0; border-radius: 999px; background: #B0472F; color: #FFFFFF; font-family: inherit; font-size: 15px; font-weight: 800; cursor: pointer">{{rotuloNova}}</button>
+</div>
+<p style="margin: 0; font-size: 14px; line-height: 1.45; color: #6B625A">Sua regra: a garantia continua contando da primeira contratação. <a href="Agencia-Cadastro.html" style="font-weight: 800">Mudar</a></p>
+</section>
+<template data-if="{{novaAberta}}">
+<form style="margin: 12px 20px 0; padding: 16px; border-radius: 18px; background: #FFFFFF; border: 1px solid #E8DED3; display: flex; flex-direction: column; gap: 10px">
+<template data-for="{{campos}}" data-as="c">
+<div style="display: flex; flex-direction: column; gap: 6px">
+<label for="{{c.id}}" style="font-size: 15px; font-weight: 800">{{c.rotulo}}</label>
+<input id="{{c.id}}" type="{{c.tipo}}" placeholder="{{c.exemplo}}" style="min-height: 48px; padding: 0 12px; border: 2px solid #E8DED3; border-radius: 12px; background: #FFFFFF; font-family: inherit; font-size: 16px; color: #2B2B2B; box-sizing: border-box">
+</div>
+</template>
+<p style="margin: 0; font-size: 13px; color: #6B625A">Valor e garantia já vêm com o padrão da agência: R$ 200 e 60 dias.</p>
+<button type="button" onClick="{{registrar}}" style="min-height: 50px; border: 0; border-radius: 14px; background: #B0472F; color: #FFFFFF; font-family: inherit; font-size: 16px; font-weight: 800; cursor: pointer">Registrar indicação</button>
+</form>
+</template>
+<template data-if="{{registrada}}">
+<p role="status" style="margin: 12px 20px 0; padding: 12px 14px; border-radius: 14px; background: #E3EDE1; color: #2E4A2B; font-size: 15px; font-weight: 700">Indicação registrada. A garantia começa a contar quando você marcar o início do trabalho.</p>
+</template>
+<div role="group" aria-label="Filtro" style="padding: 14px 20px 0; display: flex; flex-wrap: wrap; gap: 8px">
+<template data-for="{{filtros}}" data-as="f">
+<button type="button" onClick="{{f.pick}}" aria-pressed="{{f.pressed}}" style="min-height: 44px; padding: 0 14px; border-radius: 999px; font-family: inherit; font-size: 15px; font-weight: 700; cursor: pointer; background: {{f.bg}}; color: {{f.fg}}; border: 2px solid {{f.border}}">{{f.label}}</button>
+</template>
+</div>
+<div style="padding: 12px 20px 0; display: flex; flex-direction: column; gap: 12px">
+<template data-for="{{lista}}" data-as="i">
+<article style="background: #FFFFFF; border: 1px solid #E8DED3; border-radius: 20px; padding: 16px; display: flex; flex-direction: column; gap: 10px">
+<div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 10px">
+<div style="display: flex; flex-direction: column; gap: 2px">
+<span style="font-size: 18px; font-weight: 800">{{i.cliente}}</span>
+<span style="font-size: 14px; color: #4A433D">{{i.local}}</span>
+</div>
+<span style="flex-shrink: 0; padding: 3px 10px; border-radius: 999px; font-size: 13px; font-weight: 800; background: {{i.situacaoBg}}; color: {{i.situacaoFg}}">{{i.situacaoTexto}}</span>
+</div>
+<span style="font-size: 15px"><strong>{{i.profissional}}</strong> · {{i.valor}}</span>
+<span style="font-size: 14px; color: #6B625A">{{i.datas}}</span>
+<template data-if="{{i.temBarra}}">
+<div style="display: flex; flex-direction: column; gap: 4px">
+<div role="img" aria-label="{{i.garantiaTexto}}" style="height: 12px; border-radius: 999px; background: #EFE6DB; overflow: hidden">
+<div style="height: 12px; border-radius: 999px; width: {{i.pct}}%; background: {{i.barraCor}}"></div>
+</div>
+<span style="font-size: 14px; font-weight: 800; color: {{i.garantiaCor}}">{{i.garantiaTexto}}</span>
+</div>
+</template>
+<template data-if="{{i.ativa}}">
+<div style="display: flex; flex-wrap: wrap; gap: 8px">
+<template data-if="{{i.aguardando}}">
+<button type="button" onClick="{{i.iniciar}}" style="min-height: 44px; padding: 0 14px; border: 0; border-radius: 12px; background: #4F7A4A; color: #FFFFFF; font-family: inherit; font-size: 14px; font-weight: 800; cursor: pointer">Começou hoje</button>
+</template>
+<button type="button" onClick="{{i.substituir}}" style="min-height: 44px; padding: 0 14px; border: 2px solid #B0472F; border-radius: 12px; background: #FFFFFF; color: #B0472F; font-family: inherit; font-size: 14px; font-weight: 800; cursor: pointer">Substituir</button>
+<button type="button" onClick="{{i.encerrar}}" style="min-height: 44px; padding: 0 14px; border: 2px solid #E8DED3; border-radius: 12px; background: #FFFFFF; color: #2B2B2B; font-family: inherit; font-size: 14px; font-weight: 800; cursor: pointer">Encerrar</button>
+<a href="Agencia-Textos.html" style="display: inline-flex; align-items: center; min-height: 44px; padding: 0 6px; font-size: 14px; font-weight: 800">Texto da garantia</a>
+</div>
+</template>
+<template data-if="{{i.substituida}}">
+<p style="margin: 0; padding: 10px 12px; border-radius: 12px; background: #FAF5EE; font-size: 14px; line-height: 1.45">Substituição registrada. Escolha quem vai no lugar em "Nova indicação": a garantia continua contando da primeira contratação.</p>
+</template>
+</article>
+</template>
+</div>
+<nav aria-label="Menu da agência" style="margin-top: auto; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); background: #FFFFFF; border-top: 1px solid #E8DED3; padding: 8px 4px 22px">
+<a href="Agencia-Painel.html" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; min-height: 56px; font-size: 13px; font-weight: 700; color: #6B625A; text-decoration: none">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true" style="stroke-width: 2; stroke-linecap: round; stroke-linejoin: round"><rect x="3" y="3" width="7" height="7" rx="1.5"></rect><rect x="14" y="3" width="7" height="7" rx="1.5"></rect><rect x="3" y="14" width="7" height="7" rx="1.5"></rect><rect x="14" y="14" width="7" height="7" rx="1.5"></rect></svg>
+Painel</a>
+<a href="Agencia-Profissionais.html" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; min-height: 56px; font-size: 13px; font-weight: 700; color: #6B625A; text-decoration: none">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true" style="stroke-width: 2; stroke-linecap: round; stroke-linejoin: round"><circle cx="9" cy="8" r="3.5"></circle><path d="M2.5 20c.8-3.6 3.4-5.5 6.5-5.5s5.7 1.9 6.5 5.5"></path><path d="M16 4.5a3.5 3.5 0 0 1 0 7"></path><path d="M18 14.8c1.9.7 3.1 2.4 3.5 5.2"></path></svg>
+Profissionais</a>
+<a href="Agencia-Indicacoes.html" aria-current="page" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; min-height: 56px; font-size: 13px; font-weight: 800; color: #B0472F; text-decoration: none">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true" style="stroke-width: 2; stroke-linecap: round; stroke-linejoin: round"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg>
+Indicações</a>
+<a href="Agencia-Textos.html" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; min-height: 56px; font-size: 13px; font-weight: 700; color: #6B625A; text-decoration: none">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true" style="stroke-width: 2; stroke-linecap: round; stroke-linejoin: round"><path d="M21 12a8.5 8.5 0 0 1-12.6 7.4L3 21l1.6-5.2A8.5 8.5 0 1 1 21 12z"></path></svg>
+Textos</a>
+</nav>
+</div>
+</template>
+<script type="application/json" id="props">{"$preview":{"width":390,"height":2000}}</script>
+<script type="text/x-dc-logic" id="logic">
+class Component extends DCLogic {
+  renderVals() {
+    const self = this;
+    const s = this.state || {};
+    const filtro = s.filtro || "todas";
+    const mudancas = s.mudancas || {};
+    const marcar = function (id, valor) {
+      const m = Object.assign({}, mudancas);
+      m[id] = valor;
+      self.setState({ mudancas: m });
+    };
+    const base = [
+      { id: "i1", cliente: "Dona Célia", local: "Buona Vita", profissional: "Marta Alves (babá)", valor: "R$ 200", enviado: "20/08", inicio: "01/09", garantia: 60, passados: 55 },
+      { id: "i2", cliente: "Sr. Antônio", local: "Bairro Areia Branca", profissional: "Joana Silva (diarista)", valor: "R$ 200", enviado: "08/10", inicio: "10/10", garantia: 60, passados: 16 },
+      { id: "i3", cliente: "Família Souza", local: "Terras Alphaville Petrolina", profissional: "Edna Melo (cuidadora)", valor: "R$ 200", enviado: "22/10", inicio: null, garantia: 60, passados: 0 },
+      { id: "i4", cliente: "Dona Vera", local: "Portal das Águas", profissional: "Lúcia Lima (cozinheira, fora do app)", valor: "R$ 150", enviado: "25/06", inicio: "01/07", garantia: 60, passados: 117 }
+    ];
+    const lista = base.map(function (i) {
+      const extra = mudancas[i.id] || "";
+      const inicio = extra === "iniciada" ? "hoje" : i.inicio;
+      const passados = extra === "iniciada" ? 0 : i.passados;
+      let situacao = "garantia";
+      if (extra === "substituida") situacao = "substituida";
+      else if (extra === "encerrada") situacao = "encerrada";
+      else if (!inicio) situacao = "aguardando";
+      else if (passados > i.garantia) situacao = "vencida";
+      const faltam = Math.max(0, i.garantia - passados);
+      const acabando = situacao === "garantia" && faltam <= 7;
+      const visual = {
+        garantia: acabando ? ["Garantia acabando", "#F6E3DC", "#8A3522"] : ["Em garantia", "#E3EDE1", "#3D5F39"],
+        aguardando: ["Aguardando início", "#EFE6DB", "#5E554D"],
+        vencida: ["Garantia vencida", "#EFE6DB", "#5E554D"],
+        substituida: ["Substituída", "#EFE6DB", "#5E554D"],
+        encerrada: ["Encerrada", "#EFE6DB", "#5E554D"]
+      }[situacao];
+      return Object.assign({}, i, {
+        situacao: situacao,
+        acabando: acabando,
+        situacaoTexto: visual[0],
+        situacaoBg: visual[1],
+        situacaoFg: visual[2],
+        datas: "Contato enviado em " + i.enviado + (inicio ? " · começou " + (inicio === "hoje" ? "hoje" : "em " + inicio) : ""),
+        temBarra: situacao === "garantia" || situacao === "vencida",
+        pct: Math.min(100, Math.round(passados / i.garantia * 100)),
+        barraCor: acabando ? "#B0472F" : (situacao === "vencida" ? "#8C8178" : "#4F7A4A"),
+        garantiaCor: acabando ? "#8A3522" : "#4A433D",
+        garantiaTexto: situacao === "vencida" ? "Garantia de " + i.garantia + " dias encerrada" : "Faltam " + faltam + " de " + i.garantia + " dias de garantia",
+        ativa: situacao === "garantia" || situacao === "aguardando",
+        aguardando: situacao === "aguardando",
+        substituida: situacao === "substituida",
+        iniciar: function () { marcar(i.id, "iniciada"); },
+        substituir: function () { marcar(i.id, "substituida"); },
+        encerrar: function () { marcar(i.id, "encerrada"); }
+      });
+    });
+    const regras = {
+      todas: function () { return true; },
+      garantia: function (i) { return i.situacao === "garantia"; },
+      acabando: function (i) { return i.acabando; },
+      encerradas: function (i) { return ["vencida", "substituida", "encerrada"].indexOf(i.situacao) !== -1; }
+    };
+    const filtros = [
+      { id: "todas", label: "Todas" },
+      { id: "garantia", label: "Em garantia" },
+      { id: "acabando", label: "Acabando" },
+      { id: "encerradas", label: "Encerradas" }
+    ].map(function (f) {
+      const on = f.id === filtro;
+      return {
+        label: f.label,
+        pressed: on ? "true" : "false",
+        bg: on ? "#B0472F" : "#FFFFFF",
+        fg: on ? "#FFFFFF" : "#2B2B2B",
+        border: on ? "#B0472F" : "#E8DED3",
+        pick: function () { self.setState({ filtro: f.id }); }
+      };
+    });
+    return {
+      lista: lista.filter(regras[filtro]),
+      filtros: filtros,
+      novaAberta: !!s.nova,
+      rotuloNova: s.nova ? "Fechar" : "Nova indicação",
+      alternarNova: function () { self.setState({ nova: !s.nova, registrada: false }); },
+      registrada: !!s.registrada,
+      registrar: function () { self.setState({ nova: false, registrada: true }); },
+      campos: [
+        { id: "ind-prof", rotulo: "Profissional", tipo: "text", exemplo: "Nome, da sua lista ou de fora do app" },
+        { id: "ind-cliente", rotulo: "Nome do cliente", tipo: "text", exemplo: "" },
+        { id: "ind-whats", rotulo: "WhatsApp do cliente", tipo: "tel", exemplo: "" },
+        { id: "ind-local", rotulo: "Condomínio ou bairro", tipo: "text", exemplo: "" },
+        { id: "ind-valor", rotulo: "Valor cobrado (R$)", tipo: "number", exemplo: "200" },
+        { id: "ind-data", rotulo: "Dia em que mandou o contato", tipo: "date", exemplo: "" }
+      ]
+    };
+  }
+}
+</script>
+<script src="runtime.js"></script>
+</body>
+</html>

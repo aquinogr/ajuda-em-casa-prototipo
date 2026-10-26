@@ -23,11 +23,11 @@ a{color:#B0472F}a:hover{color:#8A3522}
 </div>
 <div id="app"></div>
 <template id="tpl">
-<div style="width: 390px; height: 1460px; box-sizing: border-box; background: #FAF5EE; font-family: 'Nunito', system-ui, sans-serif; color: #2B2B2B; display: flex; flex-direction: column">
+<div style="width: 390px; height: 1900px; box-sizing: border-box; background: #FAF5EE; font-family: 'Nunito', system-ui, sans-serif; color: #2B2B2B; display: flex; flex-direction: column">
 <div style="padding: 16px 12px 0; display: flex; justify-content: space-between; align-items: center; gap: 8px">
 <a href="Inicio.html" style="display: inline-flex; align-items: center; gap: 4px; min-height: 44px; padding: 0 8px; font-size: 16px; font-weight: 800; text-decoration: none">
 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true" style="stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round"><path d="M15 18l-6-6 6-6"></path></svg>
-Início</a>
+Conta</a>
 <a href="Pro-Vagas.html" style="display: inline-flex; align-items: center; min-height: 44px; padding: 0 14px; border-radius: 999px; background: #E3EDE1; color: #3D5F39; font-size: 15px; font-weight: 800; text-decoration: none">Vagas para você</a>
 </div>
 <header style="display: flex; align-items: center; gap: 12px; padding: 8px 20px 16px">
@@ -86,6 +86,33 @@ A cada 14 dias o app lembra você no celular.</p>
 <p style="margin: 0; font-size: 14px; line-height: 1.45; color: #6B625A">Você é avisado(a) sempre que um morador vê o seu WhatsApp, com o condomínio ou bairro dele. O nome e o endereço do morador não aparecem.</p>
 </section>
 <section style="margin: 0 20px; padding: 18px; background: #FFFFFF; border: 1px solid #E8DED3; border-radius: 20px; display: flex; flex-direction: column; gap: 12px">
+<h2 style="margin: 0; font-size: 20px; font-weight: 800">Autorizações</h2>
+<template data-for="{{autorizacoes}}" data-as="a">
+<div style="display: flex; align-items: center; justify-content: space-between; gap: 12px">
+<span style="font-size: 15px; line-height: 1.4">{{a.texto}}</span>
+<button type="button" onClick="{{a.mudar}}" aria-pressed="{{a.pressed}}" style="flex-shrink: 0; min-width: 96px; min-height: 44px; border-radius: 999px; font-family: inherit; font-size: 14px; font-weight: 800; cursor: pointer; background: {{a.bg}}; color: {{a.fg}}; border: 2px solid {{a.border}}">{{a.rotulo}}</button>
+</div>
+</template>
+<p style="margin: 0; font-size: 13px; line-height: 1.45; color: #6B625A">Agências que você autorizar veem seu telefone, endereço e idade para indicar você. Nenhuma agência pode cobrar nada de você.</p>
+</section>
+<section style="margin: 0 20px; padding: 18px; background: #FFFFFF; border: 1px solid #E8DED3; border-radius: 20px; display: flex; flex-direction: column; gap: 10px">
+<h2 style="margin: 0; font-size: 20px; font-weight: 800">Conferência</h2>
+<div style="display: flex; align-items: center; gap: 10px; font-size: 15px">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3D5F39" aria-hidden="true" style="flex-shrink: 0; stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round"><path d="M5 12l5 5 9-10"></path></svg>
+<span>Documento conferido pela IA em [data]</span>
+</div>
+<div style="display: flex; align-items: center; gap: 10px; font-size: 15px">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3D5F39" aria-hidden="true" style="flex-shrink: 0; stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round"><path d="M5 12l5 5 9-10"></path></svg>
+<span>Rosto conferido pela administração em [data]</span>
+</div>
+<template data-if="{{podeRevisar}}">
+<button type="button" onClick="{{pedirRevisao}}" style="align-self: flex-start; min-height: 44px; padding: 0; border: 0; background: transparent; color: #8A3522; font-family: inherit; font-size: 15px; font-weight: 800; text-decoration: underline; cursor: pointer">Pedir revisão por uma pessoa</button>
+</template>
+<template data-if="{{revisaoPedida}}">
+<p role="status" style="margin: 0; padding: 10px 12px; border-radius: 12px; background: #E3EDE1; color: #2E4A2B; font-size: 14px; font-weight: 700">Pedido enviado. Um administrador vai rever a sua conferência.</p>
+</template>
+</section>
+<section style="margin: 0 20px; padding: 18px; background: #FFFFFF; border: 1px solid #E8DED3; border-radius: 20px; display: flex; flex-direction: column; gap: 12px">
 <h2 style="margin: 0; font-size: 20px; font-weight: 800">Seus selos</h2>
 <div style="display: flex; align-items: center; gap: 10px; font-size: 16px; font-weight: 700">
 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#3D5F39" aria-hidden="true" style="flex-shrink: 0; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6l7-3z"></path><path d="M9 12l2 2 4-4"></path></svg>
@@ -126,7 +153,7 @@ A cada 14 dias o app lembra você no celular.</p>
 <footer style="margin-top: auto; padding: 18px 20px 28px; text-align: center; font-size: 16px; font-weight: 800; color: #3D5F39; background: #E3EDE1">Para quem procura trabalho, é de graça. Sempre.</footer>
 </div>
 </template>
-<script type="application/json" id="props">{"modo":{"editor":"enum","options":["gratuito","pago"],"default":"gratuito","section":"Modo do app"},"$preview":{"width":390,"height":1460}}</script>
+<script type="application/json" id="props">{"modo":{"editor":"enum","options":["gratuito","pago"],"default":"gratuito","section":"Modo do app"},"$preview":{"width":390,"height":1900}}</script>
 <script type="text/x-dc-logic" id="logic">
 class Component extends DCLogic {
   renderVals() {
@@ -163,7 +190,25 @@ class Component extends DCLogic {
       resume: function () { self.setState({ paused: false, confirmed: true }); },
       startLeave: function () { self.setState({ leaving: true }); },
       cancelLeave: function () { self.setState({ leaving: false }); },
-      confirmLeave: function () { self.setState({ left: true, leaving: false }); }
+      confirmLeave: function () { self.setState({ left: true, leaving: false }); },
+      autorizacoes: [
+        { id: "foto", texto: "Mostrar minha foto, primeiro nome e profissão na página inicial", padrao: true },
+        { id: "agencias", texto: "Aceito ser indicado por agências de empregos", padrao: false }
+      ].map(function (a) {
+        const ligado = s[a.id] === undefined ? a.padrao : s[a.id];
+        return {
+          texto: a.texto,
+          rotulo: ligado ? "Ligado" : "Desligado",
+          pressed: ligado ? "true" : "false",
+          bg: ligado ? "#4F7A4A" : "#FFFFFF",
+          fg: ligado ? "#FFFFFF" : "#2B2B2B",
+          border: ligado ? "#4F7A4A" : "#E8DED3",
+          mudar: function () { const p = {}; p[a.id] = !ligado; self.setState(p); }
+        };
+      }),
+      podeRevisar: !s.revisao,
+      revisaoPedida: !!s.revisao,
+      pedirRevisao: function () { self.setState({ revisao: true }); }
     };
   }
 }

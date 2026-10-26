@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Ajuda em Casa · Textos para WhatsApp</title>
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#B0472F">
+<link rel="icon" href="icone.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icone-192.png">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#B0472F}a:hover{color:#8A3522}
+</style>
+<link rel="stylesheet" href="prototipo.css">
+</head>
+<body>
+<div class="faixa">
+<span>Protótipo · dados de exemplo</span>
+<span class="faixa-acoes"><a href="telas.html">Todas as telas</a></span>
+</div>
+<div id="app"></div>
+<template id="tpl">
+<div style="width: 390px; height: 1450px; box-sizing: border-box; background: #FAF5EE; font-family: 'Nunito', system-ui, sans-serif; color: #2B2B2B; display: flex; flex-direction: column">
+<div style="padding: 16px 12px 0">
+<a href="Inicio.html" style="display: inline-flex; align-items: center; gap: 4px; min-height: 44px; padding: 0 8px; font-size: 16px; font-weight: 800; text-decoration: none">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true" style="stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round"><path d="M15 18l-6-6 6-6"></path></svg>
+Conta</a>
+</div>
+<section style="padding: 4px 20px 0; display: flex; flex-direction: column; gap: 12px">
+<h1 style="margin: 0; font-size: 26px; font-weight: 800">Textos para WhatsApp</h1>
+<p style="margin: 0; font-size: 15px; line-height: 1.45; color: #4A433D">Prontos com o seu preço, a sua garantia e a sua regra: R$ 200, 60 dias, a garantia continua da primeira contratação.</p>
+<div role="group" aria-label="Tipo de texto" style="display: flex; flex-wrap: wrap; gap: 8px">
+<template data-for="{{tipos}}" data-as="t">
+<button type="button" onClick="{{t.pick}}" aria-pressed="{{t.pressed}}" style="min-height: 44px; padding: 0 14px; border-radius: 999px; font-family: inherit; font-size: 15px; font-weight: 700; cursor: pointer; background: {{t.bg}}; color: {{t.fg}}; border: 2px solid {{t.border}}">{{t.label}}</button>
+</template>
+</div>
+</section>
+<section style="margin: 14px 20px 0; display: flex; flex-direction: column; gap: 12px">
+<div aria-label="Texto pronto" style="padding: 16px; border-radius: 18px; background: #FFFFFF; border: 1px solid #E8DED3; font-size: 16px; line-height: 1.55; white-space: pre-line">{{texto}}</div>
+<button type="button" onClick="{{copiar}}" style="min-height: 52px; border: 2px solid #B0472F; border-radius: 16px; background: #FFFFFF; color: #B0472F; font-family: inherit; font-size: 17px; font-weight: 800; cursor: pointer">{{rotuloCopiar}}</button>
+<a href="{{linkWhats}}" style="display: flex; align-items: center; justify-content: center; gap: 10px; min-height: 56px; border-radius: 16px; background: #4F7A4A; color: #FFFFFF; font-size: 18px; font-weight: 800; text-decoration: none">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true" style="stroke-width: 2; stroke-linecap: round; stroke-linejoin: round"><path d="M21 12a8.5 8.5 0 0 1-12.6 7.4L3 21l1.6-5.2A8.5 8.5 0 1 1 21 12z"></path></svg>
+Abrir no WhatsApp</a>
+<p style="margin: 0; font-size: 14px; line-height: 1.45; color: #6B625A">Complete o que está entre colchetes antes de enviar. Lembre: nunca cobre nada de quem procura trabalho.</p>
+</section>
+<nav aria-label="Menu da agência" style="margin-top: auto; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); background: #FFFFFF; border-top: 1px solid #E8DED3; padding: 8px 4px 22px">
+<a href="Agencia-Painel.html" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; min-height: 56px; font-size: 13px; font-weight: 700; color: #6B625A; text-decoration: none">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true" style="stroke-width: 2; stroke-linecap: round; stroke-linejoin: round"><rect x="3" y="3" width="7" height="7" rx="1.5"></rect><rect x="14" y="3" width="7" height="7" rx="1.5"></rect><rect x="3" y="14" width="7" height="7" rx="1.5"></rect><rect x="14" y="14" width="7" height="7" rx="1.5"></rect></svg>
+Painel</a>
+<a href="Agencia-Profissionais.html" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; min-height: 56px; font-size: 13px; font-weight: 700; color: #6B625A; text-decoration: none">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true" style="stroke-width: 2; stroke-linecap: round; stroke-linejoin: round"><circle cx="9" cy="8" r="3.5"></circle><path d="M2.5 20c.8-3.6 3.4-5.5 6.5-5.5s5.7 1.9 6.5 5.5"></path><path d="M16 4.5a3.5 3.5 0 0 1 0 7"></path><path d="M18 14.8c1.9.7 3.1 2.4 3.5 5.2"></path></svg>
+Profissionais</a>
+<a href="Agencia-Indicacoes.html" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; min-height: 56px; font-size: 13px; font-weight: 700; color: #6B625A; text-decoration: none">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true" style="stroke-width: 2; stroke-linecap: round; stroke-linejoin: round"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg>
+Indicações</a>
+<a href="Agencia-Textos.html" aria-current="page" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; min-height: 56px; font-size: 13px; font-weight: 800; color: #B0472F; text-decoration: none">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true" style="stroke-width: 2; stroke-linecap: round; stroke-linejoin: round"><path d="M21 12a8.5 8.5 0 0 1-12.6 7.4L3 21l1.6-5.2A8.5 8.5 0 1 1 21 12z"></path></svg>
+Textos</a>
+</nav>
+</div>
+</template>
+<script type="application/json" id="props">{"$preview":{"width":390,"height":1450}}</script>
+<script type="text/x-dc-logic" id="logic">
+class Component extends DCLogic {
+  renderVals() {
+    const self = this;
+    const s = this.state || {};
+    const tipo = s.tipo || "profissional";
+    const textos = {
+      profissional: "Olá! Tenho uma diarista de confiança disponível: Joana, 38 anos, mora em Vila Eduardo e trabalha de segunda, quarta e sexta. Identidade conferida pelo Ajuda em Casa.\n\nMeu serviço custa R$ 200 e tem garantia de 60 dias: se não der certo, eu indico outra pessoa sem custo nenhum.\n\nQuer que eu passe o contato?\n\nAgência Exemplo",
+      vaga: "Vaga de empregada doméstica, mensal, com carteira assinada, no Terras Alphaville Petrolina. Segunda a sexta, das 7h às 16h.\n\nInteressadas, me chamem no WhatsApp ou mostrem interesse no Ajuda em Casa. Não cobro nada de quem procura trabalho.\n\nAgência Exemplo",
+      garantia: "Combinado da garantia: a partir de [data de início], você tem 60 dias de garantia com a Marta. Se ela não se adaptar, eu indico outra profissional sem custo. A garantia continua contando da primeira contratação.\n\nHoje faltam 5 dias.\n\nAgência Exemplo"
+    };
+    const texto = textos[tipo];
+    const tipos = [
+      { id: "profissional", label: "Profissional disponível" },
+      { id: "vaga", label: "Vaga" },
+      { id: "garantia", label: "Garantia" }
+    ].map(function (t) {
+      const on = t.id === tipo;
+      return {
+        label: t.label,
+        pressed: on ? "true" : "false",
+        bg: on ? "#B0472F" : "#FFFFFF",
+        fg: on ? "#FFFFFF" : "#2B2B2B",
+        border: on ? "#B0472F" : "#E8DED3",
+        pick: function () { self.setState({ tipo: t.id, copiado: false }); }
+      };
+    });
+    return {
+      tipos: tipos,
+      texto: texto,
+      linkWhats: "https://wa.me/?text=" + encodeURIComponent(texto),
+      rotuloCopiar: s.copiado ? "Copiado!" : "Copiar texto",
+      copiar: function () {
+        try { navigator.clipboard.writeText(texto); } catch (e) { /* sem área de transferência na prévia */ }
+        self.setState({ copiado: true });
+      }
+    };
+  }
+}
+</script>
+<script src="runtime.js"></script>
+</body>
+</html>

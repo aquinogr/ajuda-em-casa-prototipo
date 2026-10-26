@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Ajuda em Casa · Painel da agência</title>
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#B0472F">
+<link rel="icon" href="icone.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icone-192.png">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#B0472F}a:hover{color:#8A3522}
+</style>
+<link rel="stylesheet" href="prototipo.css">
+</head>
+<body>
+<div class="faixa">
+<span>Protótipo · dados de exemplo</span>
+<span class="faixa-acoes"><label>Modo <select id="faixa-modo"><option value="gratuito">Gratuito</option><option value="pago">Pago</option></select></label><a href="telas.html">Todas as telas</a></span>
+</div>
+<div id="app"></div>
+<template id="tpl">
+<div style="width: 390px; height: 1500px; box-sizing: border-box; background: #FAF5EE; font-family: 'Nunito', system-ui, sans-serif; color: #2B2B2B; display: flex; flex-direction: column">
+<div style="padding: 16px 12px 0; display: flex; justify-content: space-between; align-items: center; gap: 8px">
+<a href="Inicio.html" style="display: inline-flex; align-items: center; gap: 4px; min-height: 44px; padding: 0 8px; font-size: 16px; font-weight: 800; text-decoration: none">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true" style="stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round"><path d="M15 18l-6-6 6-6"></path></svg>
+Conta</a>
+<span style="display: inline-flex; align-items: center; gap: 6px; padding: 4px 12px; border-radius: 999px; background: #E3EDE1; color: #3D5F39; font-size: 13px; font-weight: 800">
+<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true" style="stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round"><path d="M5 12l5 5 9-10"></path></svg>
+Agência conferida</span>
+</div>
+<section style="padding: 8px 20px 0; display: flex; flex-direction: column; gap: 6px">
+<h1 style="margin: 0; font-size: 28px; font-weight: 800; line-height: 1.15">Agência Exemplo</h1>
+<p style="margin: 0; font-size: 15px; line-height: 1.45; color: #4A433D">R$ 200 · garantia de 60 dias · a garantia continua da primeira contratação. <a href="Agencia-Cadastro.html" style="font-weight: 800">Mudar</a></p>
+</section>
+<section aria-label="Resumo" style="padding: 16px 20px 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px">
+<template data-for="{{numeros}}" data-as="n">
+<a href="{{n.link}}" style="display: flex; flex-direction: column; gap: 2px; padding: 14px; border-radius: 18px; background: #FFFFFF; border: 1px solid #E8DED3; text-decoration: none; color: #2B2B2B">
+<span style="font-size: 30px; font-weight: 800; line-height: 1.1; color: {{n.cor}}">{{n.valor}}</span>
+<span style="font-size: 14px; font-weight: 700; color: #4A433D">{{n.rotulo}}</span>
+</a>
+</template>
+</section>
+<section style="margin: 14px 20px 0; padding: 14px 16px; border-radius: 18px; background: #F6E3DC; color: #6E2A1B; display: flex; flex-direction: column; gap: 6px">
+<strong style="font-size: 16px">Garantia acabando</strong>
+<span style="font-size: 15px; line-height: 1.4">Dona Célia (Buona Vita) · babá Marta Alves · faltam 5 dias.</span>
+<a href="Agencia-Indicacoes.html" style="align-self: flex-start; display: inline-flex; align-items: center; min-height: 44px; font-size: 15px; font-weight: 800; color: #8A3522">Ver indicações</a>
+</section>
+<section style="padding: 16px 20px 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px">
+<a href="Agencia-Indicacoes.html" style="display: flex; align-items: center; justify-content: center; text-align: center; min-height: 64px; padding: 8px; border-radius: 16px; background: #B0472F; color: #FFFFFF; font-size: 16px; font-weight: 800; text-decoration: none">Nova indicação</a>
+<a href="Agencia-Profissionais.html" style="display: flex; align-items: center; justify-content: center; text-align: center; min-height: 64px; padding: 8px; border-radius: 16px; background: #FFFFFF; border: 2px solid #B0472F; color: #B0472F; font-size: 16px; font-weight: 800; text-decoration: none; box-sizing: border-box">Cadastrar profissional</a>
+<a href="Morador-Vaga.html" style="display: flex; align-items: center; justify-content: center; text-align: center; min-height: 64px; padding: 8px; border-radius: 16px; background: #FFFFFF; border: 2px solid #B0472F; color: #B0472F; font-size: 16px; font-weight: 800; text-decoration: none; box-sizing: border-box">Publicar vaga</a>
+<a href="Agencia-Textos.html" style="display: flex; align-items: center; justify-content: center; text-align: center; min-height: 64px; padding: 8px; border-radius: 16px; background: #FFFFFF; border: 2px solid #B0472F; color: #B0472F; font-size: 16px; font-weight: 800; text-decoration: none; box-sizing: border-box">Textos para WhatsApp</a>
+</section>
+<section style="margin: 16px 20px 0; padding: 16px; border-radius: 18px; background: #FFFFFF; border: 1px solid #E8DED3; display: flex; flex-direction: column; gap: 10px">
+<h2 style="margin: 0; font-size: 18px; font-weight: 800">Contatos de quem autorizou</h2>
+<template data-if="{{gratis}}">
+<p style="margin: 0; font-size: 15px; line-height: 1.45; color: #4A433D">Modo gratuito: os contatos estão liberados, sem custo.</p>
+</template>
+<template data-if="{{pago}}">
+<div style="display: flex; flex-direction: column; gap: 10px">
+<p style="margin: 0; font-size: 15px; line-height: 1.45; color: #4A433D">Modo pago. Escolha como liberar os contatos. A sua carteira é sempre grátis.</p>
+<button type="button" style="display: flex; flex-direction: column; align-items: flex-start; gap: 2px; min-height: 64px; padding: 10px 14px; border: 2px solid #4F7A4A; border-radius: 14px; background: #FFFFFF; font-family: inherit; text-align: left; cursor: pointer; color: #2B2B2B">
+<span style="font-size: 17px; font-weight: 800; color: #3D5F39">Passe Agência · R$ 100</span>
+<span style="font-size: 14px; color: #4A433D">30 dias, contatos ilimitados, sem renovação automática</span>
+</button>
+<a href="Morador-Pacotes.html" style="display: inline-flex; align-items: center; min-height: 44px; font-size: 15px; font-weight: 800">Ou comprar créditos avulsos</a>
+</div>
+</template>
+</section>
+<nav aria-label="Menu da agência" style="margin-top: auto; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); background: #FFFFFF; border-top: 1px solid #E8DED3; padding: 8px 4px 22px">
+<a href="Agencia-Painel.html" aria-current="page" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; min-height: 56px; font-size: 13px; font-weight: 800; color: #B0472F; text-decoration: none">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true" style="stroke-width: 2; stroke-linecap: round; stroke-linejoin: round"><rect x="3" y="3" width="7" height="7" rx="1.5"></rect><rect x="14" y="3" width="7" height="7" rx="1.5"></rect><rect x="3" y="14" width="7" height="7" rx="1.5"></rect><rect x="14" y="14" width="7" height="7" rx="1.5"></rect></svg>
+Painel</a>
+<a href="Agencia-Profissionais.html" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; min-height: 56px; font-size: 13px; font-weight: 700; color: #6B625A; text-decoration: none">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true" style="stroke-width: 2; stroke-linecap: round; stroke-linejoin: round"><circle cx="9" cy="8" r="3.5"></circle><path d="M2.5 20c.8-3.6 3.4-5.5 6.5-5.5s5.7 1.9 6.5 5.5"></path><path d="M16 4.5a3.5 3.5 0 0 1 0 7"></path><path d="M18 14.8c1.9.7 3.1 2.4 3.5 5.2"></path></svg>
+Profissionais</a>
+<a href="Agencia-Indicacoes.html" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; min-height: 56px; font-size: 13px; font-weight: 700; color: #6B625A; text-decoration: none">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true" style="stroke-width: 2; stroke-linecap: round; stroke-linejoin: round"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg>
+Indicações</a>
+<a href="Agencia-Textos.html" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; min-height: 56px; font-size: 13px; font-weight: 700; color: #6B625A; text-decoration: none">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true" style="stroke-width: 2; stroke-linecap: round; stroke-linejoin: round"><path d="M21 12a8.5 8.5 0 0 1-12.6 7.4L3 21l1.6-5.2A8.5 8.5 0 1 1 21 12z"></path></svg>
+Textos</a>
+</nav>
+</div>
+</template>
+<script type="application/json" id="props">{"modo":{"editor":"enum","options":["gratuito","pago"],"default":"gratuito","section":"Modo do app"},"$preview":{"width":390,"height":1500}}</script>
+<script type="text/x-dc-logic" id="logic">
+class Component extends DCLogic {
+  renderVals() {
+    const pago = (this.props.modo ?? "gratuito") === "pago";
+    return {
+      pago: pago,
+      gratis: !pago,
+      numeros: [
+        { valor: "3", rotulo: "Em garantia", cor: "#3D5F39", link: "Agencia-Indicacoes.dc.html" },
+        { valor: "1", rotulo: "Garantia acabando em 7 dias", cor: "#8A3522", link: "Agencia-Indicacoes.dc.html" },
+        { valor: "2", rotulo: "Vagas abertas", cor: "#2B2B2B", link: "Morador-MinhasVagas.dc.html" },
+        { valor: "2", rotulo: "Na sua carteira", cor: "#2B2B2B", link: "Agencia-Profissionais.dc.html" }
+      ]
+    };
+  }
+}
+</script>
+<script src="runtime.js"></script>
+</body>
+</html>

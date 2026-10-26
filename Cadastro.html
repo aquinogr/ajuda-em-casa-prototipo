@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Ajuda em Casa · Criar cadastro</title>
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#B0472F">
+<link rel="icon" href="icone.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icone-192.png">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#B0472F}a:hover{color:#8A3522}
+</style>
+<link rel="stylesheet" href="prototipo.css">
+</head>
+<body>
+<div class="faixa">
+<span>Protótipo · dados de exemplo</span>
+<span class="faixa-acoes"><a href="telas.html">Todas as telas</a></span>
+</div>
+<div id="app"></div>
+<template id="tpl">
+<div style="width: 390px; height: 1250px; box-sizing: border-box; background: #FAF5EE; font-family: 'Nunito', system-ui, sans-serif; color: #2B2B2B; display: flex; flex-direction: column">
+<div style="padding: 16px 12px 0">
+<a href="index.html" style="display: inline-flex; align-items: center; gap: 4px; min-height: 44px; padding: 0 8px; font-size: 16px; font-weight: 800; text-decoration: none">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true" style="stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round"><path d="M15 18l-6-6 6-6"></path></svg>
+Início</a>
+</div>
+<form style="padding: 8px 20px 0; display: flex; flex-direction: column; gap: 14px">
+<h1 style="margin: 0; font-size: 28px; font-weight: 800; line-height: 1.15">Criar cadastro</h1>
+<div style="display: flex; flex-direction: column; gap: 6px">
+<label for="nome" style="font-size: 15px; font-weight: 800">Seu nome</label>
+<input id="nome" type="text" autocomplete="name" style="min-height: 52px; padding: 0 14px; border: 2px solid #E8DED3; border-radius: 12px; background: #FFFFFF; font-family: inherit; font-size: 17px; color: #2B2B2B; box-sizing: border-box">
+</div>
+<div style="display: flex; flex-direction: column; gap: 6px">
+<label for="email" style="font-size: 15px; font-weight: 800">E-mail</label>
+<input id="email" type="email" autocomplete="email" style="min-height: 52px; padding: 0 14px; border: 2px solid #E8DED3; border-radius: 12px; background: #FFFFFF; font-family: inherit; font-size: 17px; color: #2B2B2B; box-sizing: border-box">
+</div>
+<div style="display: flex; flex-direction: column; gap: 6px">
+<label for="senha" style="font-size: 15px; font-weight: 800">Senha <span style="font-weight: 700; color: #6B625A">(pelo menos 8 letras ou números)</span></label>
+<input id="senha" type="password" autocomplete="new-password" style="min-height: 52px; padding: 0 14px; border: 2px solid #E8DED3; border-radius: 12px; background: #FFFFFF; font-family: inherit; font-size: 17px; color: #2B2B2B; box-sizing: border-box">
+</div>
+<fieldset style="margin: 6px 0 0; padding: 0; border: 0; display: flex; flex-direction: column; gap: 10px">
+<legend style="padding: 0; margin-bottom: 8px; font-size: 20px; font-weight: 800">Você é:</legend>
+<template data-for="{{perfis}}" data-as="p">
+<label style="display: flex; align-items: center; gap: 12px; min-height: 76px; padding: 12px 14px; box-sizing: border-box; border-radius: 16px; cursor: pointer; background: {{p.bg}}; border: 2px solid {{p.border}}">
+<input type="radio" name="perfil" checked="{{p.checked}}" onChange="{{p.pick}}" style="width: 22px; height: 22px; margin: 0; flex-shrink: 0; accent-color: #B0472F">
+<span style="display: flex; flex-direction: column; gap: 2px">
+<span style="font-size: 18px; font-weight: 800">{{p.titulo}}</span>
+<span style="font-size: 14px; line-height: 1.35; color: #4A433D">{{p.texto}}</span>
+</span>
+</label>
+</template>
+<p style="margin: 0; font-size: 14px; color: #6B625A">Depois, dá para acrescentar outro perfil na mesma conta.</p>
+</fieldset>
+<label style="display: flex; gap: 12px; align-items: flex-start; padding: 14px 16px; border-radius: 16px; background: #FFFFFF; border: 1px solid #E8DED3; font-size: 16px; line-height: 1.45; cursor: pointer">
+<input type="checkbox" checked="{{termos}}" onChange="{{mudarTermos}}" style="width: 24px; height: 24px; margin: 0; flex-shrink: 0; accent-color: #B0472F">
+<span>Li e aceito os <a href="termos.html">termos de uso</a> e a <a href="privacidade.html">política de privacidade</a>.</span>
+</label>
+<a href="{{destino}}" style="display: flex; align-items: center; justify-content: center; min-height: 56px; border-radius: 16px; background: #B0472F; color: #FFFFFF; font-size: 18px; font-weight: 800; text-decoration: none">Continuar</a>
+<a href="{{destino}}" style="display: flex; align-items: center; justify-content: center; min-height: 50px; border-radius: 16px; border: 2px solid #E8DED3; color: #2B2B2B; font-size: 16px; font-weight: 800; text-decoration: none; box-sizing: border-box; margin-bottom: 28px">Criar com o Google</a>
+</form>
+</div>
+</template>
+<script type="application/json" id="props">{"$preview":{"width":390,"height":1250}}</script>
+<script type="text/x-dc-logic" id="logic">
+class Component extends DCLogic {
+  renderVals() {
+    const self = this;
+    const s = this.state || {};
+    const perfil = s.perfil || "profissional";
+    const lista = [
+      { id: "profissional", titulo: "Profissional", texto: "Procuro trabalho. É de graça, sempre.", destino: "Pro-Cadastro.dc.html" },
+      { id: "empregador", titulo: "Empregador", texto: "Quero contratar para a minha casa.", destino: "Morador-Condominio.dc.html" },
+      { id: "agencia", titulo: "Agência de empregos", texto: "Indico profissionais aos meus clientes.", destino: "Agencia-Cadastro.dc.html" }
+    ];
+    const perfis = lista.map(function (p) {
+      const on = p.id === perfil;
+      return Object.assign({}, p, {
+        checked: on,
+        bg: on ? "#FFFFFF" : "#FAF5EE",
+        border: on ? "#B0472F" : "#E8DED3",
+        pick: function () { self.setState({ perfil: p.id }); }
+      });
+    });
+    return {
+      perfis: perfis,
+      destino: lista.filter(function (p) { return p.id === perfil; })[0].destino,
+      termos: !!s.termos,
+      mudarTermos: function () { self.setState({ termos: !s.termos }); }
+    };
+  }
+}
+</script>
+<script src="runtime.js"></script>
+</body>
+</html>

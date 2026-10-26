@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Ajuda em Casa · Cadastro da agência</title>
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#B0472F">
+<link rel="icon" href="icone.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icone-192.png">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#B0472F}a:hover{color:#8A3522}
+</style>
+<link rel="stylesheet" href="prototipo.css">
+</head>
+<body>
+<div class="faixa">
+<span>Protótipo · dados de exemplo</span>
+<span class="faixa-acoes"><label>Modo <select id="faixa-modo"><option value="gratuito">Gratuito</option><option value="pago">Pago</option></select></label><a href="telas.html">Todas as telas</a></span>
+</div>
+<div id="app"></div>
+<template id="tpl">
+<div style="width: 390px; height: 2050px; box-sizing: border-box; background: #FAF5EE; font-family: 'Nunito', system-ui, sans-serif; color: #2B2B2B; display: flex; flex-direction: column">
+<div style="padding: 16px 12px 0">
+<a href="Cadastro.html" style="display: inline-flex; align-items: center; gap: 4px; min-height: 44px; padding: 0 8px; font-size: 16px; font-weight: 800; text-decoration: none">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true" style="stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round"><path d="M15 18l-6-6 6-6"></path></svg>
+Criar cadastro</a>
+</div>
+<section style="padding: 8px 20px 0; display: flex; flex-direction: column; gap: 12px">
+<h1 style="margin: 0; font-size: 28px; font-weight: 800; line-height: 1.15">Cadastro da agência</h1>
+<p style="margin: 0; padding: 14px 16px; border-radius: 16px; background: #E3EDE1; color: #2E4A2B; font-size: 16px; font-weight: 800; line-height: 1.4">A agência nunca cobra nada do profissional. O seu preço é cobrado de quem contrata.</p>
+</section>
+<form style="padding: 0 20px; display: flex; flex-direction: column; gap: 26px; margin-top: 22px">
+<fieldset style="margin: 0; padding: 0; border: 0; display: flex; flex-direction: column; gap: 12px">
+<legend style="padding: 0; margin-bottom: 12px; font-size: 21px; font-weight: 800">1. A agência</legend>
+<template data-for="{{campos}}" data-as="c">
+<div style="display: flex; flex-direction: column; gap: 6px">
+<label for="{{c.id}}" style="font-size: 15px; font-weight: 800">{{c.rotulo}}</label>
+<input id="{{c.id}}" type="text" placeholder="{{c.exemplo}}" style="min-height: 52px; padding: 0 14px; border: 2px solid #E8DED3; border-radius: 12px; background: #FFFFFF; font-family: inherit; font-size: 17px; color: #2B2B2B; box-sizing: border-box">
+</div>
+</template>
+</fieldset>
+<fieldset style="margin: 0; padding: 0; border: 0; display: flex; flex-direction: column; gap: 12px">
+<legend style="padding: 0; margin-bottom: 12px; font-size: 21px; font-weight: 800">2. O seu serviço</legend>
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px">
+<div style="display: flex; flex-direction: column; gap: 6px">
+<label for="preco" style="font-size: 15px; font-weight: 800">Preço (R$)</label>
+<input id="preco" type="number" min="0" placeholder="200" style="min-height: 52px; padding: 0 14px; border: 2px solid #E8DED3; border-radius: 12px; background: #FFFFFF; font-family: inherit; font-size: 17px; color: #2B2B2B; box-sizing: border-box; width: 100%">
+</div>
+<div style="display: flex; flex-direction: column; gap: 6px">
+<label for="garantia" style="font-size: 15px; font-weight: 800">Garantia (dias)</label>
+<input id="garantia" type="number" min="0" max="365" placeholder="60" style="min-height: 52px; padding: 0 14px; border: 2px solid #E8DED3; border-radius: 12px; background: #FFFFFF; font-family: inherit; font-size: 17px; color: #2B2B2B; box-sizing: border-box; width: 100%">
+</div>
+</div>
+<span style="font-size: 15px; font-weight: 800; margin-top: 4px">Quando você substitui alguém dentro da garantia:</span>
+<template data-for="{{regras}}" data-as="r">
+<label style="display: flex; align-items: center; gap: 12px; min-height: 64px; padding: 10px 14px; box-sizing: border-box; border-radius: 16px; cursor: pointer; background: {{r.bg}}; border: 2px solid {{r.border}}">
+<input type="radio" name="regra" checked="{{r.checked}}" onChange="{{r.pick}}" style="width: 22px; height: 22px; margin: 0; flex-shrink: 0; accent-color: #B0472F">
+<span style="display: flex; flex-direction: column; gap: 2px"><span style="font-size: 16px; font-weight: 800">{{r.titulo}}</span><span style="font-size: 14px; color: #4A433D">{{r.exemplo}}</span></span>
+</label>
+</template>
+<p style="margin: 0; font-size: 14px; line-height: 1.45; color: #6B625A">O preço, a garantia e a regra entram sozinhos nos textos de WhatsApp e nas indicações. Dá para mudar depois.</p>
+</fieldset>
+<fieldset style="margin: 0; padding: 0; border: 0; display: flex; flex-direction: column; gap: 12px">
+<legend style="padding: 0; margin-bottom: 6px; font-size: 21px; font-weight: 800">3. Confirme a identidade do responsável</legend>
+<button type="button" style="display: flex; align-items: center; gap: 14px; min-height: 76px; padding: 12px 16px; border: 2px dashed #C9B8A6; border-radius: 16px; background: #FFFFFF; font-family: inherit; text-align: left; cursor: pointer; color: #2B2B2B">
+<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#B0472F" aria-hidden="true" style="flex-shrink: 0; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round"><path d="M4 8h3l2-3h6l2 3h3v11H4z"></path><circle cx="12" cy="13" r="3.5"></circle></svg>
+<span style="display: flex; flex-direction: column; gap: 2px"><span style="font-size: 17px; font-weight: 800">Foto do rosto</span><span style="font-size: 14px; color: #6B625A">Do responsável pela agência</span></span>
+</button>
+<button type="button" style="display: flex; align-items: center; gap: 14px; min-height: 76px; padding: 12px 16px; border: 2px dashed #C9B8A6; border-radius: 16px; background: #FFFFFF; font-family: inherit; text-align: left; cursor: pointer; color: #2B2B2B">
+<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#B0472F" aria-hidden="true" style="flex-shrink: 0; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round"><rect x="3" y="5" width="18" height="14" rx="2"></rect><circle cx="9" cy="11" r="2.5"></circle><path d="M5.5 16.5c.6-1.6 1.9-2.5 3.5-2.5s2.9.9 3.5 2.5M15 10h3M15 13h3"></path></svg>
+<span style="display: flex; flex-direction: column; gap: 2px"><span style="font-size: 17px; font-weight: 800">Documento com foto</span><span style="font-size: 14px; color: #6B625A">RG ou CNH do responsável</span></span>
+</button>
+<p style="margin: 0; font-size: 14px; line-height: 1.45; color: #6B625A">Uma IA confere se o documento bate com o nome e o CPF preenchidos, e a administração confere o rosto. Enquanto isso, a agência não vê contatos nem publica vagas.</p>
+</fieldset>
+<template data-if="{{pago}}">
+<p style="margin: 0; padding: 14px 16px; border-radius: 16px; background: #F6E3DC; color: #6E2A1B; font-size: 15px; line-height: 1.45">O app está no modo pago. Para ver contatos de quem autorizou agências, você escolhe o <strong>Passe Agência (R$ 100 por 30 dias, contatos ilimitados)</strong> ou créditos avulsos. A sua carteira é sempre grátis.</p>
+</template>
+<template data-if="{{gratis}}">
+<p style="margin: 0; padding: 14px 16px; border-radius: 16px; background: #FFFFFF; border: 1px solid #E8DED3; font-size: 15px; line-height: 1.45">Hoje o app está no modo gratuito: a agência não paga nada.</p>
+</template>
+<label style="display: flex; gap: 12px; align-items: flex-start; padding: 14px 16px; border-radius: 16px; background: #FFFFFF; border: 1px solid #E8DED3; font-size: 16px; line-height: 1.45; cursor: pointer">
+<input type="checkbox" checked="{{termos}}" onChange="{{mudarTermos}}" style="width: 24px; height: 24px; margin: 0; flex-shrink: 0; accent-color: #B0472F">
+<span>Li e aceito os <a href="termos.html">termos de uso</a>, inclusive as regras das agências, e a <a href="privacidade.html">política de privacidade</a>.</span>
+</label>
+<a href="Agencia-Painel.html" style="display: flex; align-items: center; justify-content: center; min-height: 56px; border-radius: 16px; background: #B0472F; color: #FFFFFF; font-size: 18px; font-weight: 800; text-decoration: none; margin-bottom: 28px">Enviar para conferência</a>
+</form>
+</div>
+</template>
+<script type="application/json" id="props">{"modo":{"editor":"enum","options":["gratuito","pago"],"default":"gratuito","section":"Modo do app"},"$preview":{"width":390,"height":2050}}</script>
+<script type="text/x-dc-logic" id="logic">
+class Component extends DCLogic {
+  renderVals() {
+    const self = this;
+    const s = this.state || {};
+    const pago = (this.props.modo ?? "gratuito") === "pago";
+    const regra = s.regra || "continua";
+    return {
+      pago: pago,
+      gratis: !pago,
+      campos: [
+        { id: "nome-agencia", rotulo: "Nome da agência (aparece nas vagas)", exemplo: "Ex.: Agência Exemplo" },
+        { id: "responsavel", rotulo: "Nome completo do responsável", exemplo: "" },
+        { id: "documento", rotulo: "CPF ou CNPJ", exemplo: "" },
+        { id: "whatsapp", rotulo: "WhatsApp da agência", exemplo: "(87) 9 0000-0000" }
+      ],
+      regras: [
+        { id: "continua", titulo: "A garantia continua", exemplo: "Conta da primeira contratação. Ex.: trocou no dia 20 de 60, faltam 40." },
+        { id: "recomeca", titulo: "A garantia recomeça", exemplo: "A pessoa substituta ganha o prazo inteiro de novo." }
+      ].map(function (r) {
+        const on = r.id === regra;
+        return Object.assign({}, r, {
+          checked: on,
+          bg: on ? "#FFFFFF" : "#FAF5EE",
+          border: on ? "#B0472F" : "#E8DED3",
+          pick: function () { self.setState({ regra: r.id }); }
+        });
+      }),
+      termos: !!s.termos,
+      mudarTermos: function () { self.setState({ termos: !s.termos }); }
+    };
+  }
+}
+</script>
+<script src="runtime.js"></script>
+</body>
+</html>

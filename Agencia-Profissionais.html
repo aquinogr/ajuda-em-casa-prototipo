@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Ajuda em Casa · Profissionais da agência</title>
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#B0472F">
+<link rel="icon" href="icone.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icone-192.png">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#B0472F}a:hover{color:#8A3522}
+</style>
+<link rel="stylesheet" href="prototipo.css">
+</head>
+<body>
+<div class="faixa">
+<span>Protótipo · dados de exemplo</span>
+<span class="faixa-acoes"><label>Modo <select id="faixa-modo"><option value="gratuito">Gratuito</option><option value="pago">Pago</option></select></label><a href="telas.html">Todas as telas</a></span>
+</div>
+<div id="app"></div>
+<template id="tpl">
+<div style="width: 390px; height: 1900px; box-sizing: border-box; background: #FAF5EE; font-family: 'Nunito', system-ui, sans-serif; color: #2B2B2B; display: flex; flex-direction: column">
+<div style="padding: 16px 12px 0">
+<a href="Inicio.html" style="display: inline-flex; align-items: center; gap: 4px; min-height: 44px; padding: 0 8px; font-size: 16px; font-weight: 800; text-decoration: none">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true" style="stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round"><path d="M15 18l-6-6 6-6"></path></svg>
+Conta</a>
+</div>
+<section style="padding: 4px 20px 0; display: flex; flex-direction: column; gap: 12px">
+<div style="display: flex; align-items: center; justify-content: space-between; gap: 10px">
+<h1 style="margin: 0; font-size: 26px; font-weight: 800">Profissionais</h1>
+<button type="button" onClick="{{exportar}}" style="min-height: 44px; padding: 0 14px; border: 2px solid #4F7A4A; border-radius: 999px; background: #FFFFFF; color: #3D5F39; font-family: inherit; font-size: 14px; font-weight: 800; cursor: pointer">Exportar Excel</button>
+</div>
+<template data-if="{{exportado}}">
+<p role="status" style="margin: 0; padding: 10px 12px; border-radius: 12px; background: #E3EDE1; color: #2E4A2B; font-size: 14px; font-weight: 700">Arquivo gerado só com os contatos que você pode ver. A exportação fica registrada.</p>
+</template>
+<div role="group" aria-label="Lista" style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 4px; padding: 4px; border-radius: 14px; background: #EFE6DB">
+<template data-for="{{abas}}" data-as="t">
+<button type="button" onClick="{{t.pick}}" aria-pressed="{{t.pressed}}" style="min-height: 44px; border: 0; border-radius: 10px; font-family: inherit; font-size: 15px; font-weight: 800; cursor: pointer; background: {{t.bg}}; color: {{t.fg}}">{{t.label}}</button>
+</template>
+</div>
+<p style="margin: 0; font-size: 14px; line-height: 1.45; color: #6B625A">{{nota}}</p>
+</section>
+<template data-if="{{naCarteira}}">
+<section style="margin: 12px 20px 0; padding: 16px; border-radius: 18px; background: #FFFFFF; border: 2px dashed #C9B8A6; display: flex; flex-direction: column; gap: 10px">
+<template data-if="{{semConvite}}">
+<button type="button" onClick="{{abrirConvite}}" style="min-height: 48px; border: 0; border-radius: 14px; background: #B0472F; color: #FFFFFF; font-family: inherit; font-size: 16px; font-weight: 800; cursor: pointer">Cadastrar na minha carteira</button>
+</template>
+<template data-if="{{convidando}}">
+<div style="display: flex; flex-direction: column; gap: 10px">
+<label for="conv-nome" style="font-size: 15px; font-weight: 800">Nome da profissional</label>
+<input id="conv-nome" type="text" style="min-height: 48px; padding: 0 12px; border: 2px solid #E8DED3; border-radius: 12px; background: #FFFFFF; font-family: inherit; font-size: 16px; color: #2B2B2B; box-sizing: border-box">
+<label for="conv-whats" style="font-size: 15px; font-weight: 800">WhatsApp</label>
+<input id="conv-whats" type="tel" style="min-height: 48px; padding: 0 12px; border: 2px solid #E8DED3; border-radius: 12px; background: #FFFFFF; font-family: inherit; font-size: 16px; color: #2B2B2B; box-sizing: border-box">
+<button type="button" onClick="{{criarConvite}}" style="min-height: 48px; border: 0; border-radius: 14px; background: #B0472F; color: #FFFFFF; font-family: inherit; font-size: 16px; font-weight: 800; cursor: pointer">Criar convite</button>
+</div>
+</template>
+<template data-if="{{conviteCriado}}">
+<div style="display: flex; flex-direction: column; gap: 8px; font-size: 15px; line-height: 1.45">
+<span>Convite criado. Ela abre o link, faz o cadastro dela e confirma que aceita entrar na sua carteira:</span>
+<strong style="word-break: break-all">ajudaemcasa.com.br/convite/[código]</strong>
+<a href="https://wa.me/?text=Oi!%20Para%20entrar%20na%20minha%20carteira%20no%20Ajuda%20em%20Casa%2C%20fa%C3%A7a%20seu%20cadastro%20gr%C3%A1tis%20por%20este%20link%3A%20ajudaemcasa.com.br%2Fconvite%2F%5Bc%C3%B3digo%5D" style="display: flex; align-items: center; justify-content: center; min-height: 48px; border-radius: 14px; background: #4F7A4A; color: #FFFFFF; font-weight: 800; text-decoration: none">Enviar pelo WhatsApp</a>
+</div>
+</template>
+</section>
+</template>
+<div style="padding: 12px 20px 0; display: flex; flex-direction: column; gap: 12px">
+<template data-for="{{pessoas}}" data-as="p">
+<article style="background: #FFFFFF; border: 1px solid #E8DED3; border-radius: 20px; padding: 16px; display: flex; flex-direction: column; gap: 10px">
+<div style="display: flex; gap: 12px; align-items: center">
+<div aria-hidden="true" style="flex-shrink: 0; width: 56px; height: 56px; border-radius: 50%; background: #F6E3DC; color: #8A3522; font-size: 20px; font-weight: 800; display: flex; align-items: center; justify-content: center">{{p.iniciais}}</div>
+<div style="display: flex; flex-direction: column; gap: 1px; min-width: 0">
+<span style="font-size: 19px; font-weight: 800">{{p.nome}}</span>
+<span style="font-size: 14px; font-weight: 700; color: #4A433D">{{p.profissao}} · {{p.idade}} anos</span>
+<span style="font-size: 13px; color: #6B625A">{{p.origem}}</span>
+</div>
+</div>
+<template data-if="{{p.liberado}}">
+<div style="display: flex; flex-direction: column; gap: 4px; padding: 10px 12px; border-radius: 12px; background: #FAF5EE; font-size: 15px">
+<span><strong>WhatsApp:</strong> [telefone]</span>
+<span><strong>Endereço:</strong> {{p.endereco}}</span>
+</div>
+</template>
+<template data-if="{{p.bloqueado}}">
+<div style="display: flex; flex-direction: column; gap: 6px; padding: 10px 12px; border-radius: 12px; background: #FAF5EE; font-size: 15px">
+<span>Mora em {{p.bairro}}. Telefone e endereço aparecem com o Passe Agência ou 1 crédito.</span>
+<a href="Agencia-Painel.html" style="align-self: flex-start; display: inline-flex; align-items: center; min-height: 44px; font-weight: 800">Liberar contato</a>
+</div>
+</template>
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px">
+<a href="Agencia-Indicacoes.html" style="display: flex; align-items: center; justify-content: center; min-height: 46px; border-radius: 12px; background: #B0472F; color: #FFFFFF; font-size: 15px; font-weight: 800; text-decoration: none">Indicar</a>
+<a href="Agencia-Textos.html" style="display: flex; align-items: center; justify-content: center; min-height: 46px; border-radius: 12px; border: 2px solid #B0472F; color: #B0472F; font-size: 15px; font-weight: 800; text-decoration: none; box-sizing: border-box">Texto para WhatsApp</a>
+</div>
+</article>
+</template>
+</div>
+<nav aria-label="Menu da agência" style="margin-top: auto; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); background: #FFFFFF; border-top: 1px solid #E8DED3; padding: 8px 4px 22px">
+<a href="Agencia-Painel.html" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; min-height: 56px; font-size: 13px; font-weight: 700; color: #6B625A; text-decoration: none">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true" style="stroke-width: 2; stroke-linecap: round; stroke-linejoin: round"><rect x="3" y="3" width="7" height="7" rx="1.5"></rect><rect x="14" y="3" width="7" height="7" rx="1.5"></rect><rect x="3" y="14" width="7" height="7" rx="1.5"></rect><rect x="14" y="14" width="7" height="7" rx="1.5"></rect></svg>
+Painel</a>
+<a href="Agencia-Profissionais.html" aria-current="page" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; min-height: 56px; font-size: 13px; font-weight: 800; color: #B0472F; text-decoration: none">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true" style="stroke-width: 2; stroke-linecap: round; stroke-linejoin: round"><circle cx="9" cy="8" r="3.5"></circle><path d="M2.5 20c.8-3.6 3.4-5.5 6.5-5.5s5.7 1.9 6.5 5.5"></path><path d="M16 4.5a3.5 3.5 0 0 1 0 7"></path><path d="M18 14.8c1.9.7 3.1 2.4 3.5 5.2"></path></svg>
+Profissionais</a>
+<a href="Agencia-Indicacoes.html" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; min-height: 56px; font-size: 13px; font-weight: 700; color: #6B625A; text-decoration: none">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true" style="stroke-width: 2; stroke-linecap: round; stroke-linejoin: round"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg>
+Indicações</a>
+<a href="Agencia-Textos.html" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; min-height: 56px; font-size: 13px; font-weight: 700; color: #6B625A; text-decoration: none">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true" style="stroke-width: 2; stroke-linecap: round; stroke-linejoin: round"><path d="M21 12a8.5 8.5 0 0 1-12.6 7.4L3 21l1.6-5.2A8.5 8.5 0 1 1 21 12z"></path></svg>
+Textos</a>
+</nav>
+</div>
+</template>
+<script type="application/json" id="props">{"modo":{"editor":"enum","options":["gratuito","pago"],"default":"gratuito","section":"Modo do app"},"$preview":{"width":390,"height":1900}}</script>
+<script type="text/x-dc-logic" id="logic">
+class Component extends DCLogic {
+  renderVals() {
+    const self = this;
+    const s = this.state || {};
+    const pago = (this.props.modo ?? "gratuito") === "pago";
+    const aba = s.aba || "carteira";
+    const convite = s.convite || "nenhum";
+    const todas = [
+      { nome: "Marta Alves", profissao: "Babá", idade: 34, bairro: "Jardim Maravilha", grupo: "carteira", jaLiberado: true },
+      { nome: "Edna Melo", profissao: "Cuidadora de idosos", idade: 51, bairro: "José e Maria", grupo: "carteira", jaLiberado: true },
+      { nome: "Joana Silva", profissao: "Diarista · Empregada doméstica", idade: 38, bairro: "Vila Eduardo", grupo: "autorizado", jaLiberado: true },
+      { nome: "Rafael Souza", profissao: "Eletricista", idade: 29, bairro: "João de Deus", grupo: "autorizado", jaLiberado: false },
+      { nome: "Cida Rocha", profissao: "Diarista · Passadeira", idade: 45, bairro: "José e Maria", grupo: "autorizado", jaLiberado: false }
+    ];
+    const pessoas = todas
+      .filter(function (p) { return p.grupo === aba; })
+      .map(function (p) {
+        const liberado = p.grupo === "carteira" || !pago || p.jaLiberado;
+        return Object.assign({}, p, {
+          iniciais: p.nome.slice(0, 2).toUpperCase(),
+          origem: p.grupo === "carteira" ? "Na sua carteira" : "Autorizou agências",
+          endereco: "Rua [nome], [nº], " + p.bairro,
+          liberado: liberado,
+          bloqueado: !liberado
+        });
+      });
+    const abas = [
+      { id: "carteira", label: "Minha carteira (2)" },
+      { id: "autorizado", label: "Autorizados (3)" }
+    ].map(function (t) {
+      const on = t.id === aba;
+      return {
+        label: t.label,
+        pressed: on ? "true" : "false",
+        bg: on ? "#FFFFFF" : "transparent",
+        fg: on ? "#2B2B2B" : "#5E554D",
+        pick: function () { self.setState({ aba: t.id }); }
+      };
+    });
+    const exportar = function () {
+      const linhas = [["Nome", "Profissão", "Idade", "Telefone", "Endereço", "Origem"]].concat(
+        todas
+          .filter(function (p) { return p.grupo === "carteira" || !pago || p.jaLiberado; })
+          .map(function (p) { return [p.nome, p.profissao, String(p.idade), "[telefone]", "Rua [nome], [nº], " + p.bairro, p.grupo === "carteira" ? "Carteira" : "Autorizou agências"]; })
+      );
+      const csv = "﻿" + linhas.map(function (l) { return l.map(function (c) { return "\"" + c.replace(/"/g, "\"\"") + "\""; }).join(";"); }).join("\r\n");
+      try {
+        const url = URL.createObjectURL(new Blob([csv], { type: "text/csv;charset=utf-8" }));
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = "contatos-agencia-exemplo.csv";
+        link.click();
+        setTimeout(function () { URL.revokeObjectURL(url); }, 1000);
+      } catch (e) { /* download bloqueado na prévia */ }
+      self.setState({ exportado: true });
+    };
+    return {
+      abas: abas,
+      pessoas: pessoas,
+      naCarteira: aba === "carteira",
+      nota: aba === "carteira"
+        ? "Quem você cadastrou e aceitou entrar na sua carteira. Os contatos dela são sempre grátis para você."
+        : "Profissionais que marcaram \"Aceito ser indicado por agências\". Ninguém pode cobrar nada deles.",
+      semConvite: convite === "nenhum",
+      convidando: convite === "aberto",
+      conviteCriado: convite === "criado",
+      abrirConvite: function () { self.setState({ convite: "aberto" }); },
+      criarConvite: function () { self.setState({ convite: "criado" }); },
+      exportar: exportar,
+      exportado: !!s.exportado
+    };
+  }
+}
+</script>
+<script src="runtime.js"></script>
+</body>
+</html>

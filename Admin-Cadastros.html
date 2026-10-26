@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Ajuda em Casa · Cadastros</title>
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#B0472F">
+<link rel="icon" href="icone.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icone-192.png">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#B0472F}a:hover{color:#8A3522}
+</style>
+<link rel="stylesheet" href="prototipo.css">
+</head>
+<body>
+<div class="faixa">
+<span>Protótipo · dados de exemplo</span>
+<span class="faixa-acoes"><a href="telas.html">Todas as telas</a></span>
+</div>
+<div id="app"></div>
+<template id="tpl">
+<div style="box-sizing: border-box; min-height: 100vh; background: #FAF5EE; font-family: 'Nunito', system-ui, sans-serif; color: #2B2B2B">
+<header style="background: #FFFFFF; border-bottom: 1px solid #E8DED3">
+<div style="max-width: 1200px; margin: 0 auto; padding: 14px 24px; box-sizing: border-box; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px">
+<div style="display: flex; align-items: center; gap: 10px">
+<div style="width: 40px; height: 40px; border-radius: 12px; background: #C8553D; color: #FFFFFF; display: flex; align-items: center; justify-content: center">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true" style="stroke-width: 2; stroke-linecap: round; stroke-linejoin: round"><path d="M3 11l9-7 9 7"></path><path d="M5 10v10h14V10"></path><path d="M10 20v-5h4v5"></path></svg>
+</div>
+<span style="font-size: 19px; font-weight: 800">Ajuda em Casa</span>
+<span style="font-size: 15px; font-weight: 700; color: #6B625A">· Administração</span>
+</div>
+<nav aria-label="Administração" style="display: flex; flex-wrap: wrap; align-items: center; gap: 4px 18px; font-size: 15px">
+<a href="Admin.html" style="display: inline-flex; align-items: center; min-height: 44px; font-weight: 700">Painel</a>
+<a href="Admin-Cadastros.html" aria-current="page" style="display: inline-flex; align-items: center; min-height: 44px; font-weight: 800; color: #2B2B2B; text-decoration: none; border-bottom: 3px solid #B0472F">Cadastros</a>
+<a href="Admin-Log.html" style="display: inline-flex; align-items: center; min-height: 44px; font-weight: 700">Log</a>
+<span style="font-weight: 700">Administradora</span>
+<a href="index.html" style="display: inline-flex; align-items: center; min-height: 44px; font-weight: 800">Sair</a>
+</nav>
+</div>
+</header>
+<main style="max-width: 1200px; margin: 0 auto; padding: 28px 24px 48px; box-sizing: border-box; display: flex; flex-direction: column; gap: 18px">
+<div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px">
+<h1 style="margin: 0; font-size: 30px; font-weight: 800">Cadastros</h1>
+<button type="button" onClick="{{exportar}}" style="min-height: 48px; padding: 0 18px; border: 0; border-radius: 14px; background: #4F7A4A; color: #FFFFFF; font-family: inherit; font-size: 16px; font-weight: 800; cursor: pointer">Exportar Excel</button>
+</div>
+<template data-if="{{exportado}}">
+<p role="status" style="margin: 0; padding: 12px 14px; border-radius: 14px; background: #E3EDE1; color: #2E4A2B; font-size: 15px; font-weight: 700">Arquivo gerado com a lista desta aba. A exportação foi registrada no log.</p>
+</template>
+<div role="group" aria-label="Tipo de cadastro" style="display: flex; flex-wrap: wrap; gap: 8px">
+<template data-for="{{abas}}" data-as="t">
+<button type="button" onClick="{{t.pick}}" aria-pressed="{{t.pressed}}" style="min-height: 44px; padding: 0 18px; border-radius: 999px; font-family: inherit; font-size: 15px; font-weight: 800; cursor: pointer; background: {{t.bg}}; color: {{t.fg}}; border: 2px solid {{t.border}}">{{t.label}}</button>
+</template>
+</div>
+<div style="display: flex; flex-direction: column; gap: 6px; max-width: 420px">
+<label for="busca" style="font-size: 14px; font-weight: 800">Buscar pelo nome</label>
+<input id="busca" type="search" value="{{q}}" onChange="{{onQ}}" style="min-height: 46px; padding: 0 12px; border: 2px solid #E8DED3; border-radius: 12px; background: #FFFFFF; font-family: inherit; font-size: 16px; color: #2B2B2B; box-sizing: border-box">
+</div>
+<section style="padding: 8px 20px 20px; background: #FFFFFF; border: 1px solid #E8DED3; border-radius: 20px">
+<div style="overflow-x: auto">
+<table style="width: 100%; min-width: 760px; border-collapse: collapse; font-size: 15px">
+<thead>
+<tr style="text-align: left; color: #6B625A; font-size: 13px; text-transform: uppercase; letter-spacing: 0.04em">
+<template data-for="{{cabecalho}}" data-as="h">
+<th scope="col" style="padding: 12px 10px 8px 0; font-weight: 800">{{h.t}}</th>
+</template>
+<th scope="col" style="padding: 12px 0 8px; font-weight: 800"><span style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Ações</span></th>
+</tr>
+</thead>
+<tbody>
+<template data-for="{{linhas}}" data-as="l">
+<tr style="border-top: 1px solid #F0E8DE">
+<template data-for="{{l.celulas}}" data-as="c">
+<td style="padding: 12px 10px 12px 0; font-weight: {{c.peso}}">{{c.t}}</td>
+</template>
+<td style="padding: 12px 0; white-space: nowrap"><a href="Admin-Editar.html" style="display: inline-flex; align-items: center; min-height: 40px; font-weight: 800">Editar</a></td>
+</tr>
+</template>
+</tbody>
+</table>
+</div>
+<template data-if="{{vazio}}">
+<p style="margin: 12px 0 0; font-size: 15px; color: #6B625A">Ninguém com esse nome nesta aba.</p>
+</template>
+</section>
+<p style="margin: 0; font-size: 14px; color: #6B625A">Toda edição e toda exportação vão para o log, com quem fez e quando.</p>
+</main>
+</div>
+</template>
+<script type="application/json" id="props">{"$preview":{"width":1280,"height":1200}}</script>
+<script type="text/x-dc-logic" id="logic">
+class Component extends DCLogic {
+  renderVals() {
+    const self = this;
+    const s = this.state || {};
+    const aba = s.aba || "profissionais";
+    const q = s.q || "";
+    const sem = function (t) { return t.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase(); };
+    const dados = {
+      profissionais: {
+        cabecalho: ["Nome", "Profissão", "Telefone", "Bairro", "Idade", "Situação", "Carteira"],
+        linhas: [
+          ["Joana Silva", "Diarista · Empregada doméstica", "[telefone]", "Vila Eduardo", "38", "Ativo", "—"],
+          ["Marta Alves", "Babá", "[telefone]", "Jardim Maravilha", "34", "Ativo", "Agência Exemplo"],
+          ["Rafael Souza", "Eletricista", "[telefone]", "João de Deus", "29", "Em conferência", "—"],
+          ["Edna Melo", "Cuidadora de idosos", "[telefone]", "José e Maria", "51", "Ativo", "Agência Exemplo"],
+          ["Lúcia Lima", "Cozinheira", "[telefone]", "Rio Corrente", "44", "Recusado", "—"]
+        ]
+      },
+      empregadores: {
+        cabecalho: ["Nome", "E-mail", "Condomínio ou bairro", "Endereço", "Cadastro"],
+        linhas: [
+          ["Ana Costa", "ana@exemplo.com", "Buona Vita", "Alameda [nome], [nº]", "23/10/2026"],
+          ["Carlos Lima", "carlos@exemplo.com", "Terras Alphaville Petrolina", "Rua [nome], [nº]", "24/10/2026"],
+          ["Paulo Rocha", "paulo@exemplo.com", "Bairro Areia Branca", "—", "25/10/2026"]
+        ]
+      },
+      agencias: {
+        cabecalho: ["Agência", "Responsável", "WhatsApp", "Situação", "Preço e garantia"],
+        linhas: [
+          ["Agência Exemplo", "Rita [sobrenome]", "[telefone]", "Conferida", "R$ 200 · 60 dias"],
+          ["Agência Modelo", "[nome]", "[telefone]", "Em conferência", "R$ 150 · 30 dias"]
+        ]
+      }
+    };
+    const atual = dados[aba];
+    const linhas = atual.linhas
+      .filter(function (l) { return !q || sem(l[0]).indexOf(sem(q)) !== -1; })
+      .map(function (l) {
+        return { celulas: l.map(function (t, i) { return { t: t, peso: i === 0 ? "800" : "400" }; }) };
+      });
+    const abas = [
+      { id: "profissionais", label: "Profissionais (5)" },
+      { id: "empregadores", label: "Empregadores (3)" },
+      { id: "agencias", label: "Agências (2)" }
+    ].map(function (t) {
+      const on = t.id === aba;
+      return {
+        label: t.label,
+        pressed: on ? "true" : "false",
+        bg: on ? "#B0472F" : "#FFFFFF",
+        fg: on ? "#FFFFFF" : "#2B2B2B",
+        border: on ? "#B0472F" : "#E8DED3",
+        pick: function () { self.setState({ aba: t.id, q: "", exportado: false }); }
+      };
+    });
+    const exportar = function () {
+      const tabela = [atual.cabecalho].concat(atual.linhas);
+      const csv = "﻿" + tabela.map(function (l) { return l.map(function (c) { return "\"" + c.replace(/"/g, "\"\"") + "\""; }).join(";"); }).join("\r\n");
+      try {
+        const url = URL.createObjectURL(new Blob([csv], { type: "text/csv;charset=utf-8" }));
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = "cadastros-" + aba + ".csv";
+        link.click();
+        setTimeout(function () { URL.revokeObjectURL(url); }, 1000);
+      } catch (e) { /* download bloqueado na prévia */ }
+      self.setState({ exportado: true });
+    };
+    return {
+      abas: abas,
+      cabecalho: atual.cabecalho.map(function (t) { return { t: t }; }),
+      linhas: linhas,
+      vazio: linhas.length === 0,
+      q: q,
+      onQ: function (e) { self.setState({ q: e.target.value }); },
+      exportar: exportar,
+      exportado: !!s.exportado
+    };
+  }
+}
+</script>
+<script src="runtime.js"></script>
+</body>
+</html>

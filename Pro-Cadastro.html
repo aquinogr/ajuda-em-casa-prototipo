@@ -23,7 +23,7 @@ a{color:#B0472F}a:hover{color:#8A3522}
 </div>
 <div id="app"></div>
 <template id="tpl">
-<div style="width: 390px; height: 2800px; box-sizing: border-box; background: #FAF5EE; font-family: 'Nunito', system-ui, sans-serif; color: #2B2B2B; display: flex; flex-direction: column">
+<div style="width: 390px; height: 3450px; box-sizing: border-box; background: #FAF5EE; font-family: 'Nunito', system-ui, sans-serif; color: #2B2B2B; display: flex; flex-direction: column">
 <div style="padding: 16px 12px 0">
 <a href="index.html" style="display: inline-flex; align-items: center; gap: 4px; min-height: 44px; padding: 0 8px; font-size: 16px; font-weight: 800; text-decoration: none">
 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true" style="stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round"><path d="M15 18l-6-6 6-6"></path></svg>
@@ -53,7 +53,19 @@ Início</a>
 <label for="bairro" style="font-size: 15px; font-weight: 800">Bairro onde você mora</label>
 <input id="bairro" type="text" style="min-height: 52px; padding: 0 14px; border: 2px solid #E8DED3; border-radius: 12px; background: #FFFFFF; font-family: inherit; font-size: 17px; color: #2B2B2B; box-sizing: border-box">
 </div>
-<p style="margin: 0; font-size: 14px; line-height: 1.45; color: #6B625A">Os moradores veem só o seu primeiro nome e o seu bairro. O WhatsApp aparece só para quem liberar o seu contato, e você é avisado(a) quando isso acontece.</p>
+<div style="display: flex; flex-direction: column; gap: 6px">
+<label for="cpf" style="font-size: 15px; font-weight: 800">CPF</label>
+<input id="cpf" type="text" inputmode="numeric" placeholder="000.000.000-00" style="min-height: 52px; padding: 0 14px; border: 2px solid #E8DED3; border-radius: 12px; background: #FFFFFF; font-family: inherit; font-size: 17px; color: #2B2B2B; box-sizing: border-box">
+</div>
+<div style="display: flex; flex-direction: column; gap: 6px">
+<label for="nascimento" style="font-size: 15px; font-weight: 800">Data de nascimento</label>
+<input id="nascimento" type="date" style="min-height: 52px; padding: 0 14px; border: 2px solid #E8DED3; border-radius: 12px; background: #FFFFFF; font-family: inherit; font-size: 17px; color: #2B2B2B; box-sizing: border-box">
+</div>
+<div style="display: flex; flex-direction: column; gap: 6px">
+<label for="endereco" style="font-size: 15px; font-weight: 800">Endereço completo</label>
+<input id="endereco" type="text" autocomplete="street-address" placeholder="Rua, número, bairro" style="min-height: 52px; padding: 0 14px; border: 2px solid #E8DED3; border-radius: 12px; background: #FFFFFF; font-family: inherit; font-size: 17px; color: #2B2B2B; box-sizing: border-box">
+</div>
+<p style="margin: 0; font-size: 14px; line-height: 1.45; color: #6B625A">Os empregadores veem só o seu primeiro nome, a foto e o bairro. O WhatsApp aparece só para quem liberar o seu contato, e você é avisado(a). CPF, data de nascimento e endereço ficam com a administração; endereço e idade também aparecem para as agências que você autorizar.</p>
 </fieldset>
 <fieldset style="margin: 0; padding: 0; border: 0; display: flex; flex-direction: column; gap: 14px">
 <legend style="padding: 0; margin-bottom: 6px; font-size: 21px; font-weight: 800">2. O que você faz</legend>
@@ -106,7 +118,7 @@ Início</a>
 <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#B0472F" aria-hidden="true" style="flex-shrink: 0; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round"><rect x="3" y="5" width="18" height="14" rx="2"></rect><circle cx="9" cy="11" r="2.5"></circle><path d="M5.5 16.5c.6-1.6 1.9-2.5 3.5-2.5s2.9.9 3.5 2.5M15 10h3M15 13h3"></path></svg>
 <span style="display: flex; flex-direction: column; gap: 2px"><span style="font-size: 17px; font-weight: 800">Documento com foto</span><span style="font-size: 14px; color: #6B625A">RG ou CNH</span></span>
 </button>
-<p style="margin: 0; font-size: 14px; line-height: 1.45; color: #6B625A">A administração confere e apaga a foto do documento. Fica guardada só a data da conferência.</p>
+<p style="margin: 0; font-size: 14px; line-height: 1.45; color: #6B625A">Uma IA confere se o documento bate com o nome, o CPF e a data de nascimento que você preencheu. A foto do rosto é conferida pela administração. Você pode pedir revisão por uma pessoa. Depois da conferência, a foto do documento é apagada.</p>
 </fieldset>
 <fieldset style="margin: 0; padding: 0; border: 0; display: flex; flex-direction: column; gap: 12px">
 <legend style="padding: 0; margin-bottom: 6px; font-size: 21px; font-weight: 800">8. Certidão de antecedentes <span style="font-size: 15px; font-weight: 700; color: #6B625A">(opcional)</span></legend>
@@ -115,6 +127,18 @@ Início</a>
 <span style="display: flex; flex-direction: column; gap: 2px"><span style="font-size: 17px; font-weight: 800">Enviar certidão</span><span style="font-size: 14px; color: #6B625A">Ganha o selo "Antecedentes conferidos"</span></span>
 </button>
 <p style="margin: 0; font-size: 14px; line-height: 1.45; color: #6B625A">A certidão é gratuita e sai pela internet, no site da Polícia Federal.</p>
+</fieldset>
+<fieldset style="margin: 0; padding: 0; border: 0; display: flex; flex-direction: column; gap: 10px">
+<legend style="padding: 0; margin-bottom: 6px; font-size: 21px; font-weight: 800">9. Autorizações <span style="font-size: 15px; font-weight: 700; color: #6B625A">(opcional)</span></legend>
+<label style="display: flex; gap: 12px; align-items: flex-start; padding: 14px 16px; border-radius: 16px; background: #FFFFFF; border: 1px solid #E8DED3; font-size: 16px; line-height: 1.45; cursor: pointer">
+<input type="checkbox" checked="{{fotoPublica}}" onChange="{{mudarFoto}}" style="width: 24px; height: 24px; margin: 0; flex-shrink: 0; accent-color: #B0472F">
+<span>Autorizo minha foto, meu primeiro nome e minha profissão na página inicial do Ajuda em Casa, que qualquer pessoa pode ver. O telefone nunca aparece lá.</span>
+</label>
+<label style="display: flex; gap: 12px; align-items: flex-start; padding: 14px 16px; border-radius: 16px; background: #FFFFFF; border: 1px solid #E8DED3; font-size: 16px; line-height: 1.45; cursor: pointer">
+<input type="checkbox" checked="{{agencias}}" onChange="{{mudarAgencias}}" style="width: 24px; height: 24px; margin: 0; flex-shrink: 0; accent-color: #B0472F">
+<span>Aceito ser indicado(a) por agências de empregos. Elas poderão ver meu telefone, endereço e idade para me indicar a clientes. Nenhuma agência pode me cobrar nada.</span>
+</label>
+<p style="margin: 0; font-size: 14px; color: #6B625A">Dá para mudar quando quiser, em "Meu perfil".</p>
 </fieldset>
 <label style="display: flex; gap: 12px; align-items: flex-start; padding: 14px 16px; border-radius: 16px; background: #FFFFFF; border: 1px solid #E8DED3; font-size: 16px; line-height: 1.45; cursor: pointer">
 <input type="checkbox" checked="{{terms}}" onChange="{{toggleTerms}}" style="width: 24px; height: 24px; margin: 0; flex-shrink: 0; accent-color: #B0472F">
@@ -127,7 +151,7 @@ Início</a>
 </form>
 </div>
 </template>
-<script type="application/json" id="props">{"$preview":{"width":390,"height":2800}}</script>
+<script type="application/json" id="props">{"$preview":{"width":390,"height":3450}}</script>
 <script type="text/x-dc-logic" id="logic">
 class Component extends DCLogic {
   toggle(key, value) {
@@ -168,7 +192,11 @@ class Component extends DCLogic {
       dias: chips("dias", ["Seg", "Ter", "Qua", "Qui", "Sex", "Sáb", "Dom"]),
       catsCount: n === 0 ? "" : (n === 1 ? "1 marcada." : n + " marcadas."),
       terms: !!s.terms,
-      toggleTerms: function () { self.setState({ terms: !s.terms }); }
+      toggleTerms: function () { self.setState({ terms: !s.terms }); },
+      fotoPublica: !!s.fotoPublica,
+      mudarFoto: function () { self.setState({ fotoPublica: !s.fotoPublica }); },
+      agencias: !!s.agencias,
+      mudarAgencias: function () { self.setState({ agencias: !s.agencias }); }
     };
   }
 }

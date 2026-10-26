@@ -33,7 +33,10 @@ a{color:#B0472F}a:hover{color:#8A3522}
 <span style="font-size: 19px; font-weight: 800">Ajuda em Casa</span>
 <span style="font-size: 15px; font-weight: 700; color: #6B625A">· Administração</span>
 </div>
-<div style="display: flex; align-items: center; gap: 16px; font-size: 15px">
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 4px 16px; font-size: 15px">
+<a href="Admin.html" aria-current="page" style="display: inline-flex; align-items: center; min-height: 44px; font-weight: 800; color: #2B2B2B; text-decoration: none; border-bottom: 3px solid #B0472F">Painel</a>
+<a href="Admin-Cadastros.html" style="display: inline-flex; align-items: center; min-height: 44px; font-weight: 700">Cadastros</a>
+<a href="Admin-Log.html" style="display: inline-flex; align-items: center; min-height: 44px; font-weight: 700">Log</a>
 <span style="display: inline-flex; align-items: center; gap: 6px; padding: 4px 12px; border-radius: 999px; font-size: 14px; font-weight: 800; background: {{badgeBg}}; color: {{badgeFg}}">{{modoAtual}}</span>
 <span style="font-weight: 700">Administradora</span>
 <a href="index.html" style="display: inline-flex; align-items: center; min-height: 44px; font-weight: 800">Sair</a>
@@ -57,7 +60,17 @@ a{color:#B0472F}a:hover{color:#8A3522}
 </div>
 </section>
 </template>
+<div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px">
 <h1 style="margin: 0; font-size: 30px; font-weight: 800">Painel</h1>
+<div style="display: flex; flex-wrap: wrap; gap: 8px">
+<a href="Admin-Cadastros.html" style="display: inline-flex; align-items: center; min-height: 48px; padding: 0 16px; border-radius: 14px; border: 2px solid #E8DED3; background: #FFFFFF; color: #2B2B2B; font-size: 15px; font-weight: 800; text-decoration: none; box-sizing: border-box">Todos os cadastros</a>
+<a href="Admin-Log.html" style="display: inline-flex; align-items: center; min-height: 48px; padding: 0 16px; border-radius: 14px; border: 2px solid #E8DED3; background: #FFFFFF; color: #2B2B2B; font-size: 15px; font-weight: 800; text-decoration: none; box-sizing: border-box">Log</a>
+<button type="button" onClick="{{exportar}}" style="min-height: 48px; padding: 0 18px; border: 0; border-radius: 14px; background: #4F7A4A; color: #FFFFFF; font-family: inherit; font-size: 15px; font-weight: 800; cursor: pointer">Exportar Excel</button>
+</div>
+</div>
+<template data-if="{{exportado}}">
+<p role="status" style="margin: 0; padding: 12px 14px; border-radius: 14px; background: #E3EDE1; color: #2E4A2B; font-size: 15px; font-weight: 700">Arquivo gerado com todos os contatos: nome, profissão, endereço, idade e telefone. A exportação foi registrada no log.</p>
+</template>
 <section style="padding: 22px; background: #FFFFFF; border: 2px solid #E8DED3; border-radius: 22px; display: flex; flex-direction: column; gap: 16px">
 <div style="display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 10px">
 <h2 style="margin: 0; font-size: 22px; font-weight: 800">Modo do app</h2>
@@ -92,7 +105,14 @@ a{color:#B0472F}a:hover{color:#8A3522}
 <label for="meta" style="font-size: 15px; font-weight: 800">Avisar quando este número de moradores estiver cadastrado</label>
 <input id="meta" type="number" min="10" step="10" value="{{meta}}" onChange="{{onMeta}}" style="width: 140px; min-height: 48px; padding: 0 12px; border: 2px solid #E8DED3; border-radius: 12px; background: #FFFFFF; font-family: inherit; font-size: 16px; color: #2B2B2B">
 </div>
-<span style="font-size: 14px; line-height: 1.45; color: #6B625A; padding-bottom: 12px">Conta cada morador que entrou com Google e escolheu o condomínio ou bairro para ver os profissionais.</span>
+<span style="font-size: 14px; line-height: 1.45; color: #6B625A; padding-bottom: 12px">Conta cada morador que se cadastrou e escolheu o condomínio ou bairro para ver os profissionais.</span>
+</div>
+<div style="display: flex; flex-wrap: wrap; align-items: flex-end; gap: 12px; padding-top: 14px; border-top: 1px solid #F0E8DE">
+<div style="display: flex; flex-direction: column; gap: 6px">
+<label for="passe" style="font-size: 15px; font-weight: 800">Passe Agência no modo pago (R$ por 30 dias)</label>
+<input id="passe" type="number" min="1" value="{{passe}}" onChange="{{onPasse}}" style="width: 140px; min-height: 48px; padding: 0 12px; border: 2px solid #E8DED3; border-radius: 12px; background: #FFFFFF; font-family: inherit; font-size: 16px; color: #2B2B2B">
+</div>
+<span style="font-size: 14px; line-height: 1.45; color: #6B625A; padding-bottom: 12px">Contatos ilimitados de quem autorizou agências, sem renovação automática. A agência também pode comprar créditos avulsos.</span>
 </div>
 </section>
 <section aria-label="Números" style="display: flex; flex-wrap: wrap; gap: 14px">
@@ -156,10 +176,11 @@ a{color:#B0472F}a:hover{color:#8A3522}
 <span style="font-size: 17px; font-weight: 800">{{q.name}}</span>
 <span style="font-size: 14px; color: #4A433D">{{q.cat}}</span>
 <span style="font-size: 13px; color: #6B625A">Enviado {{q.sent}}</span>
+<span style="align-self: flex-start; margin-top: 4px; padding: 2px 10px; border-radius: 999px; font-size: 13px; font-weight: 800; background: {{q.iaBg}}; color: {{q.iaFg}}">{{q.ia}}</span>
 </div>
 <template data-if="{{q.pending}}">
 <div style="display: flex; flex-wrap: wrap; gap: 8px">
-<button type="button" style="min-height: 44px; padding: 0 14px; border: 2px solid #E8DED3; border-radius: 12px; background: #FFFFFF; color: #2B2B2B; font-family: inherit; font-size: 15px; font-weight: 800; cursor: pointer">Ver foto e documento</button>
+<button type="button" style="min-height: 44px; padding: 0 14px; border: 2px solid #E8DED3; border-radius: 12px; background: #FFFFFF; color: #2B2B2B; font-family: inherit; font-size: 15px; font-weight: 800; cursor: pointer">Ver rosto e documento</button>
 <button type="button" onClick="{{q.approve}}" style="min-height: 44px; padding: 0 16px; border: 0; border-radius: 12px; background: #4F7A4A; color: #FFFFFF; font-family: inherit; font-size: 15px; font-weight: 800; cursor: pointer">Aprovar</button>
 <button type="button" onClick="{{q.reject}}" style="min-height: 44px; padding: 0 16px; border: 2px solid #B0472F; border-radius: 12px; background: #FFFFFF; color: #B0472F; font-family: inherit; font-size: 15px; font-weight: 800; cursor: pointer">Recusar</button>
 </div>
@@ -169,7 +190,7 @@ a{color:#B0472F}a:hover{color:#8A3522}
 </template>
 </div>
 </template>
-<p style="margin: 0; font-size: 14px; color: #6B625A">Ao aprovar, a foto do documento é apagada e fica registrada só a data da conferência.</p>
+<p style="margin: 0; font-size: 14px; line-height: 1.45; color: #6B625A">A IA confere o documento com os dados preenchidos. Aqui vocês conferem o rosto e os casos em dúvida. Ao aprovar, a foto do documento é apagada. Tudo vai para o log.</p>
 </section>
 <section style="padding: 20px; background: #FFFFFF; border: 1px solid #E8DED3; border-radius: 20px; display: flex; flex-direction: column; gap: 12px">
 <h2 style="margin: 0; font-size: 21px; font-weight: 800">Pagamentos</h2>
@@ -258,7 +279,7 @@ a{color:#B0472F}a:hover{color:#8A3522}
 </main>
 </div>
 </template>
-<script type="application/json" id="props">{"alertaMeta":{"editor":"boolean","default":true,"section":"Prévia"},"$preview":{"width":1280,"height":2200}}</script>
+<script type="application/json" id="props">{"alertaMeta":{"editor":"boolean","default":true,"section":"Prévia"},"$preview":{"width":1280,"height":2450}}</script>
 <script type="text/x-dc-logic" id="logic">
 class Component extends DCLogic {
   setMark(key, id, value) {
@@ -325,12 +346,14 @@ class Component extends DCLogic {
     });
     const qs = s.queue || {};
     const queue = [
-      { id: "rafael", initials: "RA", name: "Rafael", cat: "Eletricista · Encanador", sent: "hoje, 09:12" },
-      { id: "marta", initials: "MA", name: "Marta", cat: "Babá · Cuidador(a) de idosos", sent: "ontem, 16:40" },
-      { id: "severino", initials: "SE", name: "Severino", cat: "Pedreiro · Pintor", sent: "ontem, 08:05" }
+      { id: "rafael", initials: "RA", name: "Rafael", cat: "Eletricista · Encanador", sent: "hoje, 09:12", ia: "IA: documento confere · falta o rosto", iaOk: true },
+      { id: "marta", initials: "MA", name: "Marta", cat: "Babá · Cuidador(a) de idosos", sent: "ontem, 16:40", ia: "IA em dúvida: nome parecido, mas não igual", iaOk: false },
+      { id: "agencia", initials: "AM", name: "Agência Modelo", cat: "Agência de empregos", sent: "ontem, 08:05", ia: "IA: documento confere · falta o rosto", iaOk: true }
     ].map(function (q) {
       const st = qs[q.id] || "pending";
       return Object.assign({}, q, {
+        iaBg: q.iaOk ? "#E3EDE1" : "#F6E3DC",
+        iaFg: q.iaOk ? "#3D5F39" : "#8A3522",
         pending: st === "pending",
         done: st !== "pending",
         doneText: st === "ok" ? "Aprovado: identidade conferida" : "Recusado: pedido de nova foto enviado",
@@ -401,7 +424,28 @@ class Component extends DCLogic {
         ? "[nº] profissionais saem da lista em até 2 dias se não confirmarem. O app já mandou o lembrete."
         : "No modo gratuito não há prazo: o cadastro do profissional fica ativo até ele pedir para sair.",
       reviews: reviews,
-      vagas: vagas
+      vagas: vagas,
+      passe: s.passe || "100",
+      onPasse: function (e) { self.setState({ passe: e.target.value }); },
+      exportado: !!s.exportado,
+      exportar: function () {
+        const linhas = [
+          ["Nome", "Profissão", "Endereço", "Idade", "Telefone", "Situação"],
+          ["Joana Silva", "Diarista · Empregada doméstica", "Rua [nome], [nº], Vila Eduardo", "38", "[telefone]", "Ativo"],
+          ["Marta Alves", "Babá", "Rua [nome], [nº], Jardim Maravilha", "34", "[telefone]", "Ativo"],
+          ["Rafael Souza", "Eletricista", "Rua [nome], [nº], João de Deus", "29", "[telefone]", "Em conferência"]
+        ];
+        const csv = "﻿" + linhas.map(function (l) { return l.map(function (c) { return "\"" + c.replace(/"/g, "\"\"") + "\""; }).join(";"); }).join("\r\n");
+        try {
+          const url = URL.createObjectURL(new Blob([csv], { type: "text/csv;charset=utf-8" }));
+          const link = document.createElement("a");
+          link.href = url;
+          link.download = "contatos-ajuda-em-casa.csv";
+          link.click();
+          setTimeout(function () { URL.revokeObjectURL(url); }, 1000);
+        } catch (e) { /* download bloqueado na prévia */ }
+        self.setState({ exportado: true });
+      }
     };
   }
 }

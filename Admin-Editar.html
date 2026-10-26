@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Ajuda em Casa · Editar cadastro</title>
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#B0472F">
+<link rel="icon" href="icone.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icone-192.png">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#B0472F}a:hover{color:#8A3522}
+</style>
+<link rel="stylesheet" href="prototipo.css">
+</head>
+<body>
+<div class="faixa">
+<span>Protótipo · dados de exemplo</span>
+<span class="faixa-acoes"><a href="telas.html">Todas as telas</a></span>
+</div>
+<div id="app"></div>
+<template id="tpl">
+<div style="box-sizing: border-box; min-height: 100vh; background: #FAF5EE; font-family: 'Nunito', system-ui, sans-serif; color: #2B2B2B">
+<header style="background: #FFFFFF; border-bottom: 1px solid #E8DED3">
+<div style="max-width: 1200px; margin: 0 auto; padding: 14px 24px; box-sizing: border-box; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px">
+<div style="display: flex; align-items: center; gap: 10px">
+<div style="width: 40px; height: 40px; border-radius: 12px; background: #C8553D; color: #FFFFFF; display: flex; align-items: center; justify-content: center">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true" style="stroke-width: 2; stroke-linecap: round; stroke-linejoin: round"><path d="M3 11l9-7 9 7"></path><path d="M5 10v10h14V10"></path><path d="M10 20v-5h4v5"></path></svg>
+</div>
+<span style="font-size: 19px; font-weight: 800">Ajuda em Casa</span>
+<span style="font-size: 15px; font-weight: 700; color: #6B625A">· Administração</span>
+</div>
+<nav aria-label="Administração" style="display: flex; flex-wrap: wrap; align-items: center; gap: 4px 18px; font-size: 15px">
+<a href="Admin.html" style="display: inline-flex; align-items: center; min-height: 44px; font-weight: 700">Painel</a>
+<a href="Admin-Cadastros.html" aria-current="page" style="display: inline-flex; align-items: center; min-height: 44px; font-weight: 800; color: #2B2B2B; text-decoration: none; border-bottom: 3px solid #B0472F">Cadastros</a>
+<a href="Admin-Log.html" style="display: inline-flex; align-items: center; min-height: 44px; font-weight: 700">Log</a>
+<span style="font-weight: 700">Administrador</span>
+<a href="index.html" style="display: inline-flex; align-items: center; min-height: 44px; font-weight: 800">Sair</a>
+</nav>
+</div>
+</header>
+<main style="max-width: 1200px; margin: 0 auto; padding: 20px 24px 48px; box-sizing: border-box; display: flex; flex-direction: column; gap: 18px">
+<a href="Admin-Cadastros.html" style="align-self: flex-start; display: inline-flex; align-items: center; gap: 4px; min-height: 44px; font-size: 16px; font-weight: 800; text-decoration: none">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true" style="stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round"><path d="M15 18l-6-6 6-6"></path></svg>
+Cadastros</a>
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px">
+<h1 style="margin: 0; font-size: 30px; font-weight: 800">{{titulo}}</h1>
+<span style="padding: 4px 12px; border-radius: 999px; background: #EFE6DB; color: #5E554D; font-size: 14px; font-weight: 800">Profissional</span>
+<span style="padding: 4px 12px; border-radius: 999px; font-size: 14px; font-weight: 800; background: {{situacaoBg}}; color: {{situacaoFg}}">{{situacaoTexto}}</span>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 20px; align-items: flex-start">
+<form style="flex: 999 1 560px; min-width: 0; padding: 20px; background: #FFFFFF; border: 1px solid #E8DED3; border-radius: 20px; display: flex; flex-direction: column; gap: 16px">
+<h2 style="margin: 0; font-size: 21px; font-weight: 800">Dados completos</h2>
+<div style="display: flex; flex-wrap: wrap; gap: 14px">
+<template data-for="{{campos}}" data-as="c">
+<div style="flex: 1 1 260px; min-width: 0; display: flex; flex-direction: column; gap: 6px">
+<label for="{{c.id}}" style="font-size: 14px; font-weight: 800">{{c.rotulo}}</label>
+<input id="{{c.id}}" type="{{c.tipo}}" value="{{c.valor}}" onChange="{{c.mudar}}" style="min-height: 46px; padding: 0 12px; border: 2px solid #E8DED3; border-radius: 12px; background: #FFFFFF; font-family: inherit; font-size: 16px; color: #2B2B2B; box-sizing: border-box; width: 100%">
+</div>
+</template>
+</div>
+<div style="display: flex; flex-direction: column; gap: 6px">
+<label for="experiencia" style="font-size: 14px; font-weight: 800">Experiência</label>
+<textarea id="experiencia" rows="3" style="padding: 10px 12px; border: 2px solid #E8DED3; border-radius: 12px; background: #FFFFFF; font-family: inherit; font-size: 16px; line-height: 1.45; color: #2B2B2B; resize: vertical; box-sizing: border-box">[Texto escrito pela profissional sobre a experiência dela]</textarea>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 14px">
+<div style="flex: 1 1 260px; display: flex; flex-direction: column; gap: 6px">
+<label for="situacao" style="font-size: 14px; font-weight: 800">Situação</label>
+<select id="situacao" value="{{situacao}}" onChange="{{mudarSituacao}}" style="min-height: 46px; padding: 0 10px; border: 2px solid #E8DED3; border-radius: 12px; background: #FFFFFF; font-family: inherit; font-size: 16px; color: #2B2B2B">
+<option value="em_conferencia">Em conferência</option>
+<option value="ativo">Ativo</option>
+<option value="recusado">Recusado</option>
+</select>
+</div>
+<div style="flex: 1 1 260px; display: flex; flex-direction: column; gap: 6px">
+<label for="carteira" style="font-size: 14px; font-weight: 800">Carteira de agência</label>
+<select id="carteira" value="{{carteira}}" onChange="{{mudarCarteira}}" style="min-height: 46px; padding: 0 10px; border: 2px solid #E8DED3; border-radius: 12px; background: #FFFFFF; font-family: inherit; font-size: 16px; color: #2B2B2B">
+<option value="">Nenhuma</option>
+<option value="exemplo">Agência Exemplo</option>
+<option value="modelo">Agência Modelo</option>
+</select>
+</div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 8px">
+<span style="font-size: 14px; font-weight: 800">Autorizações</span>
+<template data-for="{{autorizacoes}}" data-as="a">
+<label style="display: flex; align-items: center; gap: 10px; font-size: 15px; cursor: pointer; min-height: 40px">
+<input type="checkbox" checked="{{a.ligado}}" onChange="{{a.mudar}}" style="width: 20px; height: 20px; margin: 0; accent-color: #B0472F">
+{{a.texto}}</label>
+</template>
+</div>
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px">
+<button type="button" onClick="{{salvar}}" style="min-height: 48px; padding: 0 22px; border: 0; border-radius: 14px; background: #B0472F; color: #FFFFFF; font-family: inherit; font-size: 16px; font-weight: 800; cursor: pointer">Salvar alterações</button>
+<a href="Admin-Cadastros.html" style="display: inline-flex; align-items: center; min-height: 48px; padding: 0 12px; font-weight: 800">Cancelar</a>
+</div>
+<template data-if="{{salvo}}">
+<p role="status" style="margin: 0; padding: 12px 14px; border-radius: 14px; background: #E3EDE1; color: #2E4A2B; font-size: 15px; font-weight: 700">Alterações salvas. O log registrou o que mudou, com o valor de antes e o de depois.</p>
+</template>
+</form>
+<aside style="flex: 1 1 320px; min-width: 0; display: flex; flex-direction: column; gap: 16px">
+<section style="padding: 20px; background: #FFFFFF; border: 1px solid #E8DED3; border-radius: 20px; display: flex; flex-direction: column; gap: 10px">
+<h2 style="margin: 0; font-size: 19px; font-weight: 800">Conferência</h2>
+<span style="font-size: 15px">Documento: aprovado pela IA em 26/10</span>
+<span style="font-size: 15px">Rosto: aprovado por Administradora em 26/10</span>
+<span style="font-size: 15px">Antecedentes: não enviado</span>
+<button type="button" style="align-self: flex-start; min-height: 44px; padding: 0 14px; border: 2px solid #E8DED3; border-radius: 12px; background: #FFFFFF; color: #2B2B2B; font-family: inherit; font-size: 14px; font-weight: 800; cursor: pointer">Ver documentos enviados</button>
+</section>
+<section style="padding: 20px; background: #FFFFFF; border: 1px solid #E8DED3; border-radius: 20px; display: flex; flex-direction: column; gap: 10px">
+<h2 style="margin: 0; font-size: 19px; font-weight: 800">Histórico no log</h2>
+<template data-for="{{historico}}" data-as="h">
+<div style="display: flex; flex-direction: column; gap: 2px; padding: 10px 0; border-top: 1px solid #F0E8DE; font-size: 14px">
+<span style="font-weight: 800">{{h.quando}} · {{h.quem}}</span>
+<span style="color: #4A433D">{{h.oque}}</span>
+</div>
+</template>
+<a href="Admin-Log.html" style="display: inline-flex; align-items: center; min-height: 44px; font-weight: 800">Ver o log completo</a>
+</section>
+</aside>
+</div>
+</main>
+</div>
+</template>
+<script type="application/json" id="props">{"$preview":{"width":1280,"height":1500}}</script>
+<script type="text/x-dc-logic" id="logic">
+class Component extends DCLogic {
+  renderVals() {
+    const self = this;
+    const s = this.state || {};
+    const padrao = {
+      nome: "Joana Silva", publico: "Joana", whatsapp: "[telefone]", cpf: "[CPF]",
+      nascimento: "1988-03-14", endereco: "Rua [nome], [nº], Vila Eduardo", bairro: "Vila Eduardo",
+      categorias: "Diarista, Empregada doméstica", formas: "Diária, Mensal", dias: "Seg, Qua, Sex", cursos: ""
+    };
+    const dados = Object.assign({}, padrao, s.dados || {});
+    const mudar = function (id) {
+      return function (e) {
+        const d = Object.assign({}, dados);
+        d[id] = e.target.value;
+        self.setState({ dados: d, salvo: false });
+      };
+    };
+    const campos = [
+      ["nome", "Nome completo", "text"], ["publico", "Primeiro nome (aparece para o público)", "text"],
+      ["whatsapp", "WhatsApp", "tel"], ["cpf", "CPF", "text"], ["nascimento", "Data de nascimento", "date"],
+      ["endereco", "Endereço completo", "text"], ["bairro", "Bairro", "text"], ["categorias", "Profissões", "text"],
+      ["formas", "Formas de trabalho", "text"], ["dias", "Dias livres", "text"], ["cursos", "Cursos e certificações", "text"]
+    ].map(function (c) { return { id: c[0], rotulo: c[1], tipo: c[2], valor: dados[c[0]], mudar: mudar(c[0]) }; });
+    const situacao = s.situacao || "ativo";
+    const visual = {
+      em_conferencia: ["Em conferência", "#EFE6DB", "#5E554D"],
+      ativo: ["Ativo", "#E3EDE1", "#3D5F39"],
+      recusado: ["Recusado", "#F6E3DC", "#8A3522"]
+    }[situacao];
+    const autorizacoes = [
+      { id: "foto", texto: "Foto, primeiro nome e profissão na página inicial", padrao: true },
+      { id: "agencias", texto: "Aceita ser indicada por agências", padrao: true }
+    ].map(function (a) {
+      const ligado = s[a.id] === undefined ? a.padrao : s[a.id];
+      return { texto: a.texto, ligado: ligado, mudar: function () { const p = { salvo: false }; p[a.id] = !ligado; self.setState(p); } };
+    });
+    return {
+      titulo: dados.nome || "Sem nome",
+      campos: campos,
+      situacao: situacao,
+      situacaoTexto: visual[0],
+      situacaoBg: visual[1],
+      situacaoFg: visual[2],
+      mudarSituacao: function (e) { self.setState({ situacao: e.target.value, salvo: false }); },
+      carteira: s.carteira || "",
+      mudarCarteira: function (e) { self.setState({ carteira: e.target.value, salvo: false }); },
+      autorizacoes: autorizacoes,
+      salvar: function () { self.setState({ salvo: true }); },
+      salvo: !!s.salvo,
+      historico: [
+        { quando: "26/10 14:02", quem: "IA (gpt-5.6-luna)", oque: "Conferência do documento: aprovado" },
+        { quando: "26/10 15:10", quem: "Administradora", oque: "Conferência do rosto: aprovado" },
+        { quando: "26/10 16:40", quem: "Administrador", oque: "Edição: WhatsApp e endereço" },
+        { quando: "26/10 17:05", quem: "Agência Exemplo", oque: "Viu o WhatsApp (autorizou agências)" }
+      ]
+    };
+  }
+}
+</script>
+<script src="runtime.js"></script>
+</body>
+</html>
